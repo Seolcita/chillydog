@@ -1,3 +1,5 @@
+import { Button, Card } from '@seolcita/s-storybook';
+
 export const TestComponent = () => {
-  return <div>Hello, World</div>;
+  return <></>;
 };

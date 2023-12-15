@@ -4,13 +4,14 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '../styles/Global';
 import { theme } from '../styles/Theme';
 import * as S from './_app.styled';
+import { Header } from '../components/Header/Header';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <S.Layout>
-        <S.Nav>Navigation</S.Nav>
+        <Header />
         <S.Container>
           <Component {...pageProps} />
         </S.Container>
