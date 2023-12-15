@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
-import { Typography } from '@seolcita/s-storybook';
+import { Typography } from 'sk-storybook';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ReactElement } from 'react';
 
 export const Logo = (): ReactElement => {

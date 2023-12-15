@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ReactElement } from 'react';
 import { Logo } from '../Logo/Logo';
-import { Button } from '@seolcita/s-storybook';
+import { Button } from 'sk-storybook';
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 
 export const NavigationBar = (): ReactElement => {

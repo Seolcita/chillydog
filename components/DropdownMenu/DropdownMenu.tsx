@@ -9,7 +9,7 @@ import {
 import Image from 'next/image';
 
 import * as S from './DropdownMenu.styles';
-import { Typography } from '@seolcita/s-storybook';
+import { Typography } from 'sk-storybook';
 
 export interface DropdownItem {
   avatarPath: string;

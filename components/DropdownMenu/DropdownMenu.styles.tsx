@@ -1,4 +1,4 @@
-import { Color } from '@seolcita/s-storybook';
+import { Color } from 'sk-storybook';
 import styled, { css } from 'styled-components';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
