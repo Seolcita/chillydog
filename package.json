@@ -11,7 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "sk-storybook": "^0.0.1",
+    "sk-storybook": "^0.0.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.0",
