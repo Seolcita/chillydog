@@ -14,11 +14,14 @@ export const Logo = (): ReactElement => {
         width={50}
         height={50}
       />
-      <Box marginLeft='1rem'>
-        <Typography variant='headingS' color='white' fontWeight='bold'>
-          Chilly Dog
-        </Typography>
-      </Box>
+      <Typography
+        variant='headingS'
+        color='white'
+        fontWeight='bold'
+        margin={['none', 'lg']}
+      >
+        Chilly Dog
+      </Typography>
     </Box>
   );
 };
