@@ -11,6 +11,12 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "sk-storybook": "^0.0.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.8",
     "@types/styled-components": "^5.1.32",
     "install": "^0.13.0",
     "next": "14.0.3",

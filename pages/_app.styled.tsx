@@ -6,7 +6,7 @@ export const Layout = styled.div`
   max-width: 144rem;
   display: flex;
   flex-direction: column;
-  background-color: red; //TODO: remove after development
+  background-color: brown; //TODO: remove after development
   margin: auto;
 `;
 
@@ -16,27 +16,20 @@ export const Container = styled.div`
   background-color: pink; //TODO: remove after development
   height: 100vh;
   display: flex;
-  justify-content: center;
-  padding: 0 2rem;
+  padding: 0 4rem;
 
   @media ${device.xs} {
-    max-width: 59.9rem;
+    max-width: 599px;
+    padding: 0 2rem;
   }
 
   @media ${device.sm} {
-    max-width: 95.9rem;
+    max-width: 960px;
   }
 
   @media ${device.md} {
-    max-width: 150rem;
+    max-width: 1500px;
   }
-`;
-
-//TODO: It is placeholder. Remove this after creating Nav component
-export const Nav = styled.div`
-  display: flex;
-  flex-grow: 1;
-  background-color: green;
 `;
 
 //TODO: It is placeholder. Remove this after creating Footer component
