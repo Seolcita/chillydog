@@ -9,7 +9,6 @@ type MenuListContainerProps = {
 };
 
 type ListItemProps = {
-  // highlighted: boolean;
   off: boolean;
 };
 
