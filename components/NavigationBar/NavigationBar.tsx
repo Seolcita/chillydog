@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { ReactElement } from 'react';
-import { Logo } from '../Logo/Logo';
+import { ReactElement, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { Button } from 'sk-storybook';
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 
@@ -25,11 +25,18 @@ export const NavigationBar = (): ReactElement => {
     {
       avatarPath: '/images/logo/logo.png',
       label: 'Logout',
-      url: '/logout',
+      url: '/api/auth/signout',
     },
   ];
 
-  const isLoggedIn = false;
+  const { data: session, status: sessionStatus } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (sessionStatus === 'authenticated') {
+      setIsLoggedIn(true);
+    }
+  }, [sessionStatus]);
 
   return (
     <nav>
@@ -37,7 +44,12 @@ export const NavigationBar = (): ReactElement => {
         <DropdownMenu items={dropdownItems} menuLabel='Menu' />
       ) : (
         <Link href='/auth/signin'>
-          <Button size='s' textColor='white' ariaLabel='login button'>
+          <Button
+            size='s'
+            textColor='warning'
+            bgColor='white'
+            ariaLabel='login button'
+          >
             Login
           </Button>
         </Link>
