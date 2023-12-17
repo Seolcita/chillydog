@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { device } from '../styles/Breakpoints';
+import { headerHight } from '../components/Header/Header.style';
 
 export const Layout = styled.div`
   width: 100%;
@@ -10,11 +11,12 @@ export const Layout = styled.div`
   margin: auto;
 `;
 
+const calcContainerHeight = 100 - headerHight;
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
   background-color: pink; //TODO: remove after development
-  height: 100vh;
+  height: ${calcContainerHeight}vh;
   display: flex;
   padding: 0 4rem;
 

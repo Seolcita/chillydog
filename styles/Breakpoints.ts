@@ -5,7 +5,7 @@ interface Size {
   lg: string;
 }
 
-const size = {
+export const size = {
   sm: 600,
   md: 960,
   lg: 1500,
