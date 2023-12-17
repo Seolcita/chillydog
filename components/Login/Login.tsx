@@ -4,8 +4,7 @@ import { BuiltInProviderType } from 'next-auth/providers/index';
 import { Button, Card, Typography } from 'sk-storybook';
 
 import * as S from './Login.styles';
-import { useWindowSize } from '../../hooks/use-window-resize';
-import { DeviceType, useDeviceType } from '../../hooks/use-device-type';
+import { useWindowSize, DeviceType } from '../../hooks/use-window-resize';
 
 interface LoginProps {
   providers:
@@ -14,8 +13,8 @@ interface LoginProps {
 }
 
 const Login = ({ providers }: LoginProps): ReactElement => {
-  const width = useWindowSize();
-  const isMobile = useDeviceType(width) === DeviceType.MOBILE;
+  const { deviceType } = useWindowSize();
+  const isMobile = deviceType === DeviceType.MOBILE;
 
   return (
     <S.LoginContainer>
