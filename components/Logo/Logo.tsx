@@ -10,11 +10,11 @@ export const Logo = (): ReactElement => {
       <Image
         src='/images/logo/logo.png'
         alt='An logo image'
-        width={50}
-        height={50}
+        width={45}
+        height={45}
       />
       <Typography
-        variant='headingS'
+        variant='headingXS'
         color='white'
         fontWeight='bold'
         margin={['none', 'lg']}

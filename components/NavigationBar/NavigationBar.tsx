@@ -29,14 +29,14 @@ export const NavigationBar = (): ReactElement => {
     },
   ];
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return (
     <nav>
       {isLoggedIn ? (
         <DropdownMenu items={dropdownItems} menuLabel='Menu' />
       ) : (
-        <Link href='/login'>
+        <Link href='/auth/signin'>
           <Button size='s' textColor='white' ariaLabel='login button'>
             Login
           </Button>
