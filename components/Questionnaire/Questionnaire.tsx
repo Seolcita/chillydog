@@ -30,7 +30,7 @@ export const Questionnaire = ({
           <Typography
             variant='headingXS'
             fontWeight='bold'
-            margin={['xl', 'none', 'lg']}
+            margin={['lg', 'none', 'lg']}
           >
             {question}
           </Typography>

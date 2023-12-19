@@ -7,7 +7,7 @@ const NameScreen = (): ReactElement => {
 
   return (
     <>
-      <Questionnaire currentStep={3} question={question} form={<NameForm />} />
+      <Questionnaire currentStep={1} question={question} form={<NameForm />} />
     </>
   );
 };

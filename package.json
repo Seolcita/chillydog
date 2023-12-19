@@ -17,7 +17,6 @@
     "@mui/icons-material": "^5.15.0",
     "@mui/material": "^5.15.0",
     "@mui/styled-engine-sc": "^6.0.0-alpha.8",
-    "@next/font": "^14.0.4",
     "@types/next-auth": "^3.15.0",
     "@types/styled-components": "^5.1.32",
     "@types/yup": "^0.32.0",
