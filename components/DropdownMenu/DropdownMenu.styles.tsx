@@ -1,5 +1,4 @@
-import { Color } from 'sk-storybook';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import ColorMap from '../../styles/Color';
