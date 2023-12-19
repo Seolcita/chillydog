@@ -22,7 +22,6 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1;
-  font-family: ${({ theme }) => theme.fonts.poppins};
   background-color:grey; //TODO: remove or update after development
   width: 100%;
 }
@@ -44,7 +43,7 @@ li {
 input,
 textarea,
 select {
-  font: inherit;
+  font-family: inherit;
 }
 
 a {

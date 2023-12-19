@@ -46,8 +46,8 @@ export const NavigationBar = (): ReactElement => {
         <Link href='/auth/signin'>
           <Button
             size='s'
-            textColor='white'
-            bgColor='primary'
+            textColor='black'
+            bgColor='white'
             ariaLabel='login button'
             hasShadow={false}
           >

@@ -22,19 +22,19 @@ export const Questionnaire = ({
         ariaLabel={`questionnaire card step ${currentStep}`}
         tabIndex={0}
         width={50}
-        height={40}
         isPadded
+        isInteractive={false}
       >
         <S.Contents tabIndex={0}>
           <ProgressBar totalSteps={6} currentStep={currentStep} />
           <Typography
             variant='headingXS'
             fontWeight='bold'
-            margin={['xl', 'none']}
+            margin={['xl', 'none', 'lg']}
           >
             {question}
           </Typography>
-          <Box marginTop='2rem'>{form}</Box>
+          <Box>{form}</Box>
         </S.Contents>
       </Card>
     </S.Container>
