@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { NameForm } from '../../components/Screens/Name/NameForm';
 
-export const NameScreen = (): ReactElement => {
+const NameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
 
   return (
@@ -11,3 +11,5 @@ export const NameScreen = (): ReactElement => {
     </>
   );
 };
+
+export default NameScreen;
