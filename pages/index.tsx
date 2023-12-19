@@ -1,8 +1,9 @@
+import { ReactElement } from 'react';
+import NameScreen from './questionnaires/name';
+
 //TODO: It is placeholder. It will be replaced.
-export default function Home() {
-  return (
-    <>
-      <h1>HI</h1>
-    </>
-  );
-}
+const Home = (): ReactElement => {
+  return <NameScreen />;
+};
+
+export default Home;
