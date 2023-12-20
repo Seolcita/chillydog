@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { Button, Select } from 'sk-storybook';
 
-import * as S from './HeavyCoatForm.styles';
+import * as S from './ColdAdaptForm.styles';
 
 export type Option = {
   label: string;
@@ -14,7 +14,7 @@ const options: Option[] = [
   { label: 'No', value: false },
 ];
 
-export const HeavyCoatForm = (): ReactElement => {
+export const ColdAdaptForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
 
   const handleSubmit = (event: React.SyntheticEvent) => {
@@ -37,7 +37,7 @@ export const HeavyCoatForm = (): ReactElement => {
           />
         </Box>
         <Button
-          ariaLabel={`Dog's coat type submit button`}
+          ariaLabel={`Dog's cold adaptability submit button`}
           size='s'
           bgColor='black'
           textColor='white'

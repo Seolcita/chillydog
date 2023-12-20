@@ -7,3 +7,10 @@ export const FlexCenter = styled.div`
   height: 100%;
   width: 100%;
 `;
+
+export const QuestionnaireFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  justify-content: start;
+`;
