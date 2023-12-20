@@ -34,14 +34,14 @@ export const DogSizeForm = (): ReactElement => {
     <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
         <Box marginTop={'1rem'}>
-          {/* <Select
+          <Select
             value={value}
             options={options}
             onChange={(opt: Option) => setValue(opt)}
             height={4.5}
             fullWidth
             color='primary'
-          /> */}
+          />
         </Box>
         <Button
           ariaLabel={`Dog's submit button`}
