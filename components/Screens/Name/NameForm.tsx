@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef } from 'react';
+import { ReactElement } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Button, Typography } from 'sk-storybook';
@@ -65,7 +65,7 @@ export const NameForm = (): ReactElement => {
       <Button
         ariaLabel='Dog name submit button'
         size='s'
-        bgColor='primary'
+        bgColor='black'
         textColor='white'
         hasShadow={false}
         disabled={isSubmitting || !!errors.name}
