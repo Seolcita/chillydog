@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Container } from '../DogSize/DogSizeForm.styles';
+import { QuestionnaireFormContainer } from '../../common-styles';
 
-export const FormContainer = styled(Container)`
+export const Container = styled(QuestionnaireFormContainer)`
   height: 15rem;
 `;

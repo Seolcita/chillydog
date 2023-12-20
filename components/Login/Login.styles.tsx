@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ColorMap from '../../styles/Color';
-import { FlexCenter } from '../../styles/Utils';
 import { device } from '../../styles/Breakpoints';
+import { FlexCenter } from '../common-styles';
 
 export const LoginContainer = styled(FlexCenter)``;
 

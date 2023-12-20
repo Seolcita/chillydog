@@ -24,7 +24,7 @@ export const HeavyCoatForm = (): ReactElement => {
   };
 
   return (
-    <S.FormContainer>
+    <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
         <Box marginTop={'1rem'}>
           <Select
@@ -49,6 +49,6 @@ export const HeavyCoatForm = (): ReactElement => {
           Next
         </Button>
       </form>
-    </S.FormContainer>
+    </S.Container>
   );
 };
