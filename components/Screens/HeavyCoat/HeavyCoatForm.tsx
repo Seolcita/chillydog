@@ -2,13 +2,7 @@ import { Box } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { Button, Select } from 'sk-storybook';
 
-import * as S from './DogSizeForm.styles';
-
-enum DogSize {
-  SMALL = 'SMALL',
-  MEDIUM = 'MEDIUM',
-  LARGE = 'LARGE',
-}
+import * as S from './HeavyCoatForm.styles';
 
 export type Option = {
   label: string;
@@ -16,12 +10,11 @@ export type Option = {
 };
 
 const options: Option[] = [
-  { label: 'Small', value: DogSize.SMALL },
-  { label: 'Medium', value: DogSize.MEDIUM },
-  { label: 'Large', value: DogSize.LARGE },
+  { label: 'Yes', value: true },
+  { label: 'No', value: false },
 ];
 
-export const DogSizeForm = (): ReactElement => {
+export const HeavyCoatForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
 
   const handleSubmit = (event: React.SyntheticEvent) => {
@@ -31,7 +24,7 @@ export const DogSizeForm = (): ReactElement => {
   };
 
   return (
-    <S.Container>
+    <S.FormContainer>
       <form onSubmit={(event) => handleSubmit(event)}>
         <Box marginTop={'1rem'}>
           <Select
@@ -44,18 +37,18 @@ export const DogSizeForm = (): ReactElement => {
           />
         </Box>
         <Button
-          ariaLabel={`Dog's submit button`}
+          ariaLabel={`Dog's coat type submit button`}
           size='s'
           bgColor='black'
           textColor='white'
           hasShadow={false}
-          disabled={!value?.value} //TODO: make disabled when it is loading
+          disabled={value?.value === undefined} //TODO: make disabled when it is loading
           fullWidth
           margin={['xl', 'none']}
         >
           Next
         </Button>
       </form>
-    </S.Container>
+    </S.FormContainer>
   );
 };
