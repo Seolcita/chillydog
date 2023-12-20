@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import * as S from './NameForm.styled';
-import { theme } from '../../../styles/Theme';
+import { titillium } from '../../../styles/Fonts';
 
 const schema = yup.object().shape({
   name: yup.string().min(2).max(20).required('Required'),
@@ -52,7 +52,7 @@ export const NameForm = (): ReactElement => {
         type='text'
         onBlur={handleBlur}
         $error={hasError}
-        className={theme.fonts.titillium.className}
+        className={titillium.className}
       />
       {hasError && (
         <S.ErrorText $isVisible={hasError}>

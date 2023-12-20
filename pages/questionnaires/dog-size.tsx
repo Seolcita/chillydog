@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
-import DogSizeForm from '../../components/Screens/DogSize/DogSizeForm';
+import { DogSizeForm } from '../../components/Screens/DogSize/DogSizeForm';
 
 const DogSizeScreen = (): ReactElement => {
   const question = `Q. What is your dog's size?`;

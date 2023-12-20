@@ -21,7 +21,7 @@ const options: Option[] = [
   { label: 'Large', value: DogSize.LARGE },
 ];
 
-const DogSizeForm = (): ReactElement => {
+export const DogSizeForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
 
   const handleSubmit = (event: React.SyntheticEvent) => {
@@ -59,5 +59,3 @@ const DogSizeForm = (): ReactElement => {
     </S.Container>
   );
 };
-
-export default DogSizeForm;
