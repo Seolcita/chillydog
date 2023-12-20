@@ -12,7 +12,7 @@ enum DogSize {
 
 export type Option = {
   label: string;
-  value: string | number;
+  value: string | number | boolean;
 };
 
 const options: Option[] = [
