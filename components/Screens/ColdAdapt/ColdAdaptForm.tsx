@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { ReactElement, useState } from 'react';
+import { ReactElement, SyntheticEvent, useState } from 'react';
 import { Button, Select } from 'sk-storybook';
 
 import * as S from './ColdAdaptForm.styles';
@@ -17,7 +17,7 @@ const options: Option[] = [
 export const ColdAdaptForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = (event: SyntheticEvent) => {
     //TODO: Implement logic for onSubmit
     event.preventDefault();
     console.log(value?.value);

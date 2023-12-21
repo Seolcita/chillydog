@@ -21,12 +21,12 @@ export const Questionnaire = ({
       <Card
         ariaLabel={`questionnaire card step ${currentStep}`}
         tabIndex={0}
-        width={50}
+        width={45}
         isPadded
         isInteractive={false}
       >
         <S.Contents tabIndex={0}>
-          <ProgressBar totalSteps={6} currentStep={currentStep} />
+          <ProgressBar totalSteps={5} currentStep={currentStep} />
           <Typography
             variant='headingXS'
             fontWeight='bold'
