@@ -108,45 +108,53 @@ export const WeatherCard = (): ReactElement => {
 
   return (
     <>
-      <S.Container tabIndex={0} aria-label='Weather display card'>
-        {weatherData && weatherType ? (
-          <>
-            <S.ImageContainer>
-              {<iframe src={WeatherImageUrlMap[weatherType]} />}
-            </S.ImageContainer>
-            <S.TextContainer>
-              <Typography variant='textM' color='white'>
-                {weatherData.city}
+      {weatherData && weatherType ? (
+        <S.Container tabIndex={0} aria-label='Weather display card'>
+          <S.ImageContainer tabIndex={0} aria-label='Weather Image'>
+            {<iframe src={WeatherImageUrlMap[weatherType]} />}
+          </S.ImageContainer>
+          <S.TextContainer>
+            <Typography variant='textM' color='white' aria-label='city'>
+              {weatherData.city}
+            </Typography>
+            <S.Temperature>
+              {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
+              <Typography
+                variant='headingM'
+                fontWeight='bold'
+                color='white'
+                margin={['none', 'md', 'none', 'none']}
+                aria-label='temperature in celsius'
+              >
+                {convertTempUnit({
+                  temp: weatherData.temperature,
+                  unit: 'celsius',
+                })}
               </Typography>
-              <S.Temperature>
-                {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
-                <Typography
-                  variant='headingM'
-                  fontWeight='bold'
-                  color='white'
-                  margin={['none', 'md', 'none', 'none']}
-                >
-                  {convertTempUnit({
-                    temp: weatherData.temperature,
-                    unit: 'celsius',
-                  })}
-                </Typography>
-                <Typography variant='headingXS' color='white'>
-                  {convertTempUnit({
-                    temp: weatherData.temperature,
-                    unit: 'fahrenheit',
-                  })}
-                </Typography>
-              </S.Temperature>
-              <Typography variant='textL' color='white'>
-                {weatherData.description}
+              <Typography
+                variant='headingXS'
+                color='white'
+                aria-label='temperature in fahrenheit'
+              >
+                {convertTempUnit({
+                  temp: weatherData.temperature,
+                  unit: 'fahrenheit',
+                })}
               </Typography>
-            </S.TextContainer>
-          </>
-        ) : (
-          <div>Loading</div>
-        )}
-      </S.Container>
+            </S.Temperature>
+            <Typography
+              variant='textL'
+              color='white'
+              aria-label='weather description'
+            >
+              {weatherData.description}
+            </Typography>
+          </S.TextContainer>
+        </S.Container>
+      ) : (
+        // TODO: updated loading once it is available from storybook
+        <div>Loading</div>
+      )}
     </>
   );
 };
