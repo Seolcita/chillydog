@@ -11,7 +11,6 @@ async function handler(req: Request, res: Response) {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`;
 
-  // console.log(url);
   const response = await fetch(url);
   const data = await response.json();
 
