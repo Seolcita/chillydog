@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { device } from '../../styles/Breakpoints';
 
 export const Container = styled.section`
-  background-color: grey;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@ export const Container = styled.section`
   padding: 2.5rem;
   min-width: 20rem;
   width: 20rem;
+  height: 22rem;
   background: rgb(110, 159, 255);
   background: linear-gradient(
     140deg,
@@ -17,6 +18,13 @@ export const Container = styled.section`
     rgba(48, 113, 251, 0.8351934523809523) 33%,
     rgba(0, 86, 147, 0.913624824929972) 84%
   );
+
+  @media ${device.xs} {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 15rem;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -25,6 +33,10 @@ export const ImageContainer = styled.div`
     border: none;
     width: 13rem;
     height: 13rem;
+  }
+
+  @media ${device.xs} {
+    margin-top: 0rem;
   }
 `;
 

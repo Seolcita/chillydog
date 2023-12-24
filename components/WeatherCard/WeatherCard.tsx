@@ -3,9 +3,11 @@ import { WeatherData, fetchWeatherData } from '../../hooks/use-weather';
 import { Typography } from 'sk-storybook';
 
 import * as S from './WeatherCard.styles';
+import * as s from '../common-styles';
+import { DeviceType } from '../../hooks/use-window-resize';
 
-interface WeatherImageUrl {
-  [key: string]: string;
+interface WeatherCardProps {
+  deviceType: DeviceType;
 }
 
 interface ConvertTempUnit {
@@ -13,21 +15,7 @@ interface ConvertTempUnit {
   unit: string;
 }
 
-const weatherImageUrl: WeatherImageUrl = {
-  clearSky:
-    'https://lottie.host/embed/34f95797-7b62-4017-814f-2fba90bc2632/18abGxkmN2.json',
-  fewClouds:
-    'https://lottie.host/embed/9004c757-5538-4a39-8abe-e5a19d85d7b6/mgrqxJVmXH.json',
-  scatteredClouds: '',
-  brokenClouds: '',
-  showerRain: '',
-  rain: '',
-  thunderstorm: '',
-  snow: '',
-  mist: '',
-};
-
-enum WeatherType {
+export enum WeatherType {
   THUNDERSTORM = 'THUNDERSTORM',
   DRIZZLE = 'DRIZZLE',
   RAIN = 'RAIN',
@@ -37,7 +25,7 @@ enum WeatherType {
   OTHERS = 'OTHERS',
 }
 
-const getWeatherType = (weatherId: number): WeatherType => {
+export const getWeatherType = (weatherId: number): WeatherType => {
   if (200 <= weatherId && weatherId < 300) {
     return WeatherType.THUNDERSTORM;
   } else if (300 <= weatherId && weatherId < 400) {
@@ -72,7 +60,8 @@ const WeatherImageUrlMap: Record<WeatherType, string> = {
     'https://lottie.host/embed/90377a45-61fd-4f4d-ad0d-bc0ca88a6eb1/py1ZqqSkx0.json',
 };
 
-export const WeatherCard = (): ReactElement => {
+export const WeatherCard = ({ deviceType }: WeatherCardProps): ReactElement => {
+  const isMobile = deviceType === DeviceType.MOBILE;
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const city = 'calgary';
 
@@ -110,13 +99,20 @@ export const WeatherCard = (): ReactElement => {
     <>
       {weatherData && weatherType ? (
         <S.Container tabIndex={0} aria-label='Weather display card'>
+          <s.Visibility $isVisible={isMobile}>
+            <Typography variant='headingS' color='white' aria-label='city'>
+              {weatherData.city}
+            </Typography>
+          </s.Visibility>
           <S.ImageContainer tabIndex={0} aria-label='Weather Image'>
             {<iframe src={WeatherImageUrlMap[weatherType]} />}
           </S.ImageContainer>
           <S.TextContainer>
-            <Typography variant='textM' color='white' aria-label='city'>
-              {weatherData.city}
-            </Typography>
+            <s.Visibility $isVisible={!isMobile}>
+              <Typography variant='textM' color='white' aria-label='city'>
+                {weatherData.city}
+              </Typography>
+            </s.Visibility>
             <S.Temperature>
               {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
               <Typography
