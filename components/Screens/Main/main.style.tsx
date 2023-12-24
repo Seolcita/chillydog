@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { device } from '../../styles/Breakpoints';
-import { FlexCenter } from '../../components/common-styles';
+import { device } from '../../../styles/Breakpoints';
+import { FlexCenter } from '../../../components/common-styles';
 
 export const Wrapper = styled(FlexCenter)`
   align-items: start;
