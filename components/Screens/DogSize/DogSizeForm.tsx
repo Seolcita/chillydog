@@ -4,7 +4,7 @@ import { Button, Select } from 'sk-storybook';
 
 import * as S from './DogSizeForm.styles';
 
-enum DogSize {
+export enum DogSize {
   SMALL = 'SMALL',
   MEDIUM = 'MEDIUM',
   LARGE = 'LARGE',

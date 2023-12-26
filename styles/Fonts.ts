@@ -7,7 +7,7 @@ export const roboto = Roboto({
 
 export const titillium = Titillium_Web({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['200', '300', '400', '600', '700', '900'],
 });
 
 export const dancingScript = Dancing_Script({

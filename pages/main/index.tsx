@@ -1,15 +1,12 @@
 import { ReactElement } from 'react';
-import { WeatherCard } from '../../components/WeatherCard/WeatherCard';
-import { FlexCenter } from '../../components/common-styles';
+
+import Main from '../../components/Screens/Main/Main';
 
 const MainPage = (): ReactElement => {
-  return (
-    //TODO: Set layout
-    <FlexCenter>
-      <WeatherCard />
-    </FlexCenter>
-  );
+  return <Main />;
 };
 
 export default MainPage;
 export { MainPage };
+
+//TODO: set getServerSideProps
