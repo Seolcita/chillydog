@@ -43,6 +43,7 @@ const ResultCard = ({
               }}
               priority={true}
               draggable={false}
+              tabIndex={0}
             />
             <Typography variant='textM' fontWeight='bold'>
               {name}
