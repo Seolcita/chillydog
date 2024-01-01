@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { ReactElement, useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
+// import { useSession } from 'next-auth/react';
 import { Button } from 'sk-storybook';
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
+import UserContext from '../../context/user.context';
 
 export const NavigationBar = (): ReactElement => {
   // TODO: Replaced it with data from backend
@@ -29,14 +30,17 @@ export const NavigationBar = (): ReactElement => {
     },
   ];
 
-  const { data: session, status: sessionStatus } = useSession();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const { data: session, status: sessionStatus } = useSession();
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (sessionStatus === 'authenticated') {
-      setIsLoggedIn(true);
-    }
-  }, [sessionStatus]);
+  // useEffect(() => {
+  //   if (sessionStatus === 'authenticated') {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, [sessionStatus]);
+
+  const userCtx = useContext(UserContext);
+  const isLoggedIn = userCtx.user !== null;
 
   return (
     <nav>
