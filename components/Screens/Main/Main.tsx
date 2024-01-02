@@ -41,7 +41,7 @@ const Main = (): ReactElement => {
           />
         </S.ResultSection>
         <S.WeatherSection>
-          <WeatherCard deviceType={deviceType} />
+          {/* <WeatherCard deviceType={deviceType} /> */}
         </S.WeatherSection>
       </S.MainLayout>
     </S.Wrapper>

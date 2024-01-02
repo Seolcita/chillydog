@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext, useEffect } from 'react';
 
 import Main from '../../components/Screens/Main/Main';
 
