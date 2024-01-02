@@ -1,23 +1,12 @@
-import { ReactElement, useContext } from 'react';
-import { ClientSafeProvider, LiteralUnion, signIn } from 'next-auth/react';
-import { BuiltInProviderType } from 'next-auth/providers/index';
+import { ReactElement } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 
 import * as S from './Login.styles';
 import { useWindowSize, DeviceType } from '../../hooks/use-window-resize';
-import axios from 'axios';
-import UserContext from '../../context/user.context';
-
-// interface LoginProps {
-//   providers:
-//     | Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>
-//     | never[];
-// }
 
 const Login = (): ReactElement => {
   const { deviceType } = useWindowSize();
   const isMobile = deviceType === DeviceType.MOBILE;
-  const userCtx = useContext(UserContext);
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:3001/api/auth/google/login';
@@ -44,7 +33,6 @@ const Login = (): ReactElement => {
             </Typography>
             <Button
               size='l'
-              // onClick={() => signIn(provider.id)}
               onClick={handleLogin}
               textColor='white'
               ariaLabel='Login button'

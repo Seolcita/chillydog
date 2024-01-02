@@ -1,27 +1,51 @@
-'client-side';
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext, useEffect } from 'react';
 import UserContext from '../../context/user.context';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
-export const SigninSuccess = (props: any): ReactElement => {
+export interface User {
+  id: string;
+  email: string;
+}
+
+export interface SigninSuccessGetServerSideProps {
+  user: User | null;
+}
+
+export const SigninSuccess = ({
+  user,
+}: SigninSuccessGetServerSideProps): ReactElement => {
+  const router = useRouter();
   const userCtx = useContext(UserContext);
-  console.log('props🫠', props);
-  if (props.user) {
-    userCtx.setUser(props.user);
-  }
-  const user = userCtx.user;
-  console.log(user);
-  return <div>SigninSuccess: {user && user.email}</div>;
+
+  useEffect(() => {
+    if (user) {
+      userCtx.setUser(user);
+      router.push('/');
+    } else {
+      router.push('/auth/signin');
+    }
+  }, [user, router, userCtx]);
+
+  return <>Loading...</>; //TODO: Add loading spinner
 };
 
 export async function getServerSideProps(context: any) {
-  const { token } = context.query;
-  console.log('token', token);
+  const { req } = context;
+  const cookies = req.headers.cookie;
+
+  const cookiesArray = cookies.split('; ');
+
+  const accessTokenCookie = cookiesArray.find((cookie: string) =>
+    cookie.startsWith('access_token=')
+  );
 
   try {
     return axios
-      .get(`http://localhost:3001/api/auth/verifyToken`, {
-        headers: { Authorization: `Bearer ${token}` },
+      .get(`http://localhost:3001/api/auth/profile`, {
+        headers: {
+          Cookie: accessTokenCookie,
+        },
       })
       .then((res) => {
         console.log('res', res.data);
@@ -32,12 +56,6 @@ export async function getServerSideProps(context: any) {
           },
         };
       });
-    // const user = {
-    //   id: 'user-id',
-    //   email: 'user@example.com',
-    // };
-
-    // return { props: { user: response.data.user || null } };
   } catch (error) {
     console.error('API request failed', error);
     return { props: { user: null } };

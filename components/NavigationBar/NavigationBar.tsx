@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ReactElement, useContext, useEffect, useState } from 'react';
-// import { useSession } from 'next-auth/react';
 import { Button } from 'sk-storybook';
+
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 import UserContext from '../../context/user.context';
 
@@ -29,15 +29,6 @@ export const NavigationBar = (): ReactElement => {
       url: '/api/auth/signout',
     },
   ];
-
-  // const { data: session, status: sessionStatus } = useSession();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   if (sessionStatus === 'authenticated') {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, [sessionStatus]);
 
   const userCtx = useContext(UserContext);
   const isLoggedIn = userCtx.user !== null;
