@@ -5,18 +5,25 @@ import ResultCard from '../../ResultCard/ResultCard';
 import { Typography } from 'sk-storybook';
 import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 import * as s from '../../common-styles';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Main = (): ReactElement => {
   const { deviceType } = useWindowSize();
   const isMobile = deviceType === DeviceType.MOBILE;
+  const router = useRouter();
   // MOCK Data TODO: use data from BE once it is ready.
-  const name = 'Cookie';
-  const result = {
-    title: 'Unsafe potential, depending on breed',
-    description: 'Keep an eye on your pet outdoors',
-    point: 3,
+  // const name = 'Cookie';
+  // const result = {
+  //   title: 'Unsafe potential, depending on breed',
+  //   description: 'Keep an eye on your pet outdoors',
+  //   point: 3,
+  // };
+  // const avatarName = 'borderCollie';
+
+  const handleClick = async () => {
+    router.push('/questionnaires/name');
   };
-  const avatarName = 'borderCollie';
 
   return (
     <S.Wrapper>
@@ -27,18 +34,16 @@ const Main = (): ReactElement => {
               Reports
             </Typography>
           </s.Visibility>
-          <ResultCard
+          {/* <ResultCard
             name={name}
             result={result}
             avatarName={avatarName}
             deviceType={deviceType}
-          />
-          <ResultCard
-            name={name}
-            result={result}
-            avatarName={avatarName}
-            deviceType={deviceType}
-          />
+          /> */}
+          {/* If owner did not register dog, ask to register dog. */}
+          <div>
+            <button onClick={handleClick}>Create a dog profile</button>
+          </div>
         </S.ResultSection>
         <S.WeatherSection>
           {/* <WeatherCard deviceType={deviceType} /> */}

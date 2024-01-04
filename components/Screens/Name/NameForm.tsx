@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Button, Typography } from 'sk-storybook';
@@ -7,6 +7,10 @@ import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import * as S from './NameForm.styled';
 import { titillium } from '../../../styles/Fonts';
+import axios from 'axios';
+import UserContext from '../../../context/user.context';
+import { Questionnaire } from '../../Questionnaire/Questionnaire';
+import { QuestionnaireScreenName } from '../../../hooks/use-decide-screen';
 
 const schema = yup.object().shape({
   name: yup.string().min(2).max(20).required('Required'),
@@ -17,9 +21,36 @@ interface FormValues {
 }
 
 export const NameForm = (): ReactElement => {
+  const [nextScreen, setNextScreen] = useState<string | null>(null);
+  const userContext = useContext(UserContext);
   const onSubmit = async ({ name }: FormValues) => {
-    //TODO: Implement logic for onSubmit
-    console.log(name);
+    try {
+      if (userContext.user) {
+        await axios
+          .post('http://localhost:3001/api/dog/name', {
+            name,
+            userId: userContext.user.id,
+          })
+          .then((res) => {
+            console.log('🥎🐶', res.data);
+            // userContext.setUser(res.data);
+            // setNextScreen(
+            //   QuestionnaireScreenName[
+            //     res.data.screens.nameScreen
+            //       .nextScreen as keyof typeof QuestionnaireScreenName
+            //   ]
+            // );
+          })
+          .catch((error) => {
+            console.error('An error occurred:', error); //TODO: Handle error - Toast message
+          });
+      } else {
+        console.log('no user');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // TODO: Handle error - Toast message
+    }
   };
 
   const {
