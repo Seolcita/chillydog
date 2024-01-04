@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
 import { User } from '../entities/user.entities';
-import { QuestionnaireScreenName } from '../entities/questionnaire.entities';
 
 interface UserContextValue {
   user: User | null;
