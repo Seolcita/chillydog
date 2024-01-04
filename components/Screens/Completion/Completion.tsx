@@ -2,10 +2,10 @@ import { MouseEvent, ReactElement } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 
-import * as S from './Complete.styled';
+import * as S from './Completion.styled';
 import { FlexCenter } from '../../common-styles';
 
-export const Complete = (): ReactElement => {
+export const Completion = (): ReactElement => {
   const router = useRouter();
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();

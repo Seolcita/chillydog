@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
-import { Complete } from '../../components/Screens/Complete/Complete';
+import { Completion } from '../../components/Screens/Completion/Completion';
 const CompleteScreen = (): ReactElement => {
-  return <Complete />;
+  return <Completion />;
 };
 
 export default CompleteScreen;

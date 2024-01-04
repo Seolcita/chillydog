@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
   KeyboardEvent,
   ReactElement,
   SyntheticEvent,
+  useContext,
   useRef,
   useState,
 } from 'react';
@@ -11,8 +13,13 @@ import { Button } from 'sk-storybook';
 import * as S from './AvartarSelectionForm.styled';
 import { dogAvatars } from './Avatars';
 import { Box } from '@mui/material';
+import UserContext from '../../../context/user.context';
+import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import { Dog } from '../../../entities/dog.entities';
 
-interface SelectedAvatar {
+export interface SelectedAvatar {
   name: string;
   src: string;
 }
@@ -23,12 +30,43 @@ export const AvatarSelectionForm = (): ReactElement => {
     src: '',
   });
   const [highlightIndex, setHighlightIndex] = useState<number>();
+  const userContext = useContext(UserContext);
+  const router = useRouter();
+  const dogId = router.query.dogId;
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     //TODO: Implement logic for onSubmit
     event.stopPropagation();
     event.preventDefault();
     console.log(selectedAvatar);
+
+    try {
+      if (
+        userContext.user &&
+        selectedAvatar.name !== '' &&
+        selectedAvatar.src !== ''
+      ) {
+        await axios
+          .post('http://localhost:3001/api/dog/avatar-selection', {
+            dogId,
+            selectedAvatar,
+            userId: userContext.user.id,
+          })
+          .then((res) => {
+            const dog: Dog = res.data;
+            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
+            router.push(nextScreenUrl);
+          })
+          .catch((error) => {
+            console.error('An error occurred:', error); //TODO: Handle error - Toast message
+          });
+      } else {
+        console.log('no user');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // TODO: Handle error - Toast message
+    }
   };
 
   const handleKeyDown = (

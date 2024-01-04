@@ -9,6 +9,8 @@ export enum QuestionnaireScreenName {
   DOG_SIZE_SCREEN = 'DOG_SIZE_SCREEN',
   HEAVY_COAT_SCREEN = 'HEAVY_COAT_SCREEN',
   COLD_ADAPT_SCREEN = 'COLD_ADAPT_SCREEN',
+  AVATAR_SELECTION_SCREEN = 'AVATAR_SELECTION_SCREEN',
+  COMPLETION_SCREEN = 'COMPLETION_SCREEN',
 }
 
 export interface QuestionnaireScreenFields {
@@ -23,4 +25,5 @@ export interface QuestionnaireScreen {
   dogSizeScreen: QuestionnaireScreenFields;
   heavyCoatScreen: QuestionnaireScreenFields;
   coldAdaptScreen: QuestionnaireScreenFields;
+  avatarSelectionScreen: QuestionnaireScreenFields;
 }

@@ -1,3 +1,4 @@
+import { SelectedAvatar } from '../components/Screens/AvatarSelection/AvatarSelectionForm';
 import { QuestionnaireScreenName } from './questionnaire.entities';
 
 export enum DogSize {
@@ -13,6 +14,7 @@ export interface Dog {
   dogSize: DogSize;
   heavyCoat: boolean;
   coldAdapt: boolean;
+  avatar: SelectedAvatar;
   registrationStatus: string;
   screens?: Screen[];
   nextScreen?: QuestionnaireScreenName | null;
