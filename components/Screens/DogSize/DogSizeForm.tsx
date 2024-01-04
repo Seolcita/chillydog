@@ -1,14 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import { Button, Select } from 'sk-storybook';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import * as S from './DogSizeForm.styles';
-
-export enum DogSize {
-  SMALL = 'SMALL',
-  MEDIUM = 'MEDIUM',
-  LARGE = 'LARGE',
-}
+import UserContext from '../../../context/user.context';
+import { Dog, DogSize } from '../../../entities/dog.entities';
+import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
 
 export type Option = {
   label: string;
@@ -23,11 +23,37 @@ const options: Option[] = [
 
 export const DogSizeForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
+  const userContext = useContext(UserContext);
+  const router = useRouter();
+  const dogId = router.query.dogId;
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     //TODO: Implement logic for onSubmit
     event.preventDefault();
     console.log(value?.value);
+    try {
+      if (userContext.user && value?.value) {
+        await axios
+          .post('http://localhost:3001/api/dog/dog-size', {
+            dogId,
+            dogSize: value.value,
+            userId: userContext.user.id,
+          })
+          .then((res) => {
+            const dog: Dog = res.data;
+            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
+            router.push(nextScreenUrl);
+          })
+          .catch((error) => {
+            console.error('An error occurred:', error); //TODO: Handle error - Toast message
+          });
+      } else {
+        console.log('no user');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // TODO: Handle error - Toast message
+    }
   };
 
   return (

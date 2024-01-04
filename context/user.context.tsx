@@ -1,9 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
-
-export interface User {
-  id: string;
-  email: string;
-}
+import { User } from '../entities/user.entities';
 
 interface UserContextValue {
   user: User | null;

@@ -1,5 +1,5 @@
-import { DogSize } from '../components/Screens/DogSize/DogSizeForm';
 import { WeatherType } from '../components/WeatherCard/WeatherCard';
+import { DogSize } from '../entities/dog.entities';
 
 export interface Factors {
   dogSize: DogSize;

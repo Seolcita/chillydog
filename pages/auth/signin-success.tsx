@@ -2,11 +2,7 @@ import { ReactElement, useContext, useEffect } from 'react';
 import UserContext from '../../context/user.context';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-
-export interface User {
-  id: string;
-  email: string;
-}
+import { User } from '../../entities/user.entities';
 
 export interface SigninSuccessGetServerSideProps {
   user: User | null;
