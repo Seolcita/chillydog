@@ -32,7 +32,7 @@ export const HeavyCoatForm = (): ReactElement => {
     console.log(value?.value);
 
     try {
-      if (userContext.user && value?.value) {
+      if (userContext.user && value?.value !== undefined) {
         await axios
           .post('http://localhost:3001/api/dog/heavy-coat', {
             dogId,
