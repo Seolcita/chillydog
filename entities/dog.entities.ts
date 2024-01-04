@@ -11,6 +11,7 @@ export interface Dog {
   ownerId: string;
   name: string;
   dogSize: DogSize;
+  heavyCoat: boolean;
   registrationStatus: string;
   screens?: Screen[];
   nextScreen?: QuestionnaireScreenName | null;
