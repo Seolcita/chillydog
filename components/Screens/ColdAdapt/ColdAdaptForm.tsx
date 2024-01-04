@@ -1,8 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement, SyntheticEvent, useState } from 'react';
+import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
 import { Button, Select } from 'sk-storybook';
 
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
+import { Dog } from '../../../entities/dog.entities';
 import * as S from './ColdAdaptForm.styles';
+import UserContext from '../../../context/user.context';
 
 export type Option = {
   label: string;
@@ -16,11 +22,37 @@ const options: Option[] = [
 
 export const ColdAdaptForm = (): ReactElement => {
   const [value, setValue] = useState<Option | undefined>();
+  const userContext = useContext(UserContext);
+  const router = useRouter();
+  const dogId = router.query.dogId;
 
-  const handleSubmit = (event: SyntheticEvent) => {
-    //TODO: Implement logic for onSubmit
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     console.log(value?.value);
+
+    try {
+      if (userContext.user && value?.value !== undefined) {
+        await axios
+          .post('http://localhost:3001/api/dog/cold-adapt', {
+            dogId,
+            coldAdapt: value.value,
+            userId: userContext.user.id,
+          })
+          .then((res) => {
+            const dog: Dog = res.data;
+            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
+            router.push(nextScreenUrl);
+          })
+          .catch((error) => {
+            console.error('An error occurred:', error); //TODO: Handle error - Toast message
+          });
+      } else {
+        console.log('no user');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // TODO: Handle error - Toast message
+    }
   };
 
   return (

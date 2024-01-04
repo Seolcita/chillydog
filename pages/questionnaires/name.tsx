@@ -6,9 +6,7 @@ const NameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
 
   return (
-    <>
-      <Questionnaire currentStep={1} question={question} form={<NameForm />} />
-    </>
+    <Questionnaire currentStep={1} question={question} form={<NameForm />} />
   );
 };
 
