@@ -7,7 +7,7 @@ const AvatarSelectionScreen = (): ReactElement => {
 
   return (
     <Questionnaire
-      currentStep={5}
+      currentStep={6}
       question={question}
       form={<AvatarSelectionForm />}
     />

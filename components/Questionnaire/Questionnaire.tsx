@@ -26,7 +26,7 @@ export const Questionnaire = ({
         isInteractive={false}
       >
         <S.Contents tabIndex={0}>
-          <ProgressBar totalSteps={5} currentStep={currentStep} />
+          <ProgressBar totalSteps={6} currentStep={currentStep} />
           <Typography
             variant='headingXS'
             fontWeight='bold'
