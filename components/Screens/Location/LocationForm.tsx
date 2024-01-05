@@ -17,7 +17,7 @@ import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-
 import cities from '../../../utils/city.list.json';
 
 interface City {
-  id: string;
+  id: number;
   name: string;
   state: string;
   country: string;
@@ -27,7 +27,7 @@ interface City {
   };
 }
 
-const cityList: City[] = cities;
+const cityList = cities as City[];
 
 const schema = yup.object().shape({
   cityName: yup

@@ -1,6 +1,6 @@
 declare module './city.list.json' {
   export interface City {
-    id: string;
+    id: number;
     name: string;
     state: string;
     country: string;
