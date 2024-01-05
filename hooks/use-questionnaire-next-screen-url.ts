@@ -6,6 +6,7 @@ export const QuestionnaireScreenMap: Record<QuestionnaireScreenName, string> = {
   DOG_SIZE_SCREEN: 'dog-size',
   HEAVY_COAT_SCREEN: 'heavy-coat',
   COLD_ADAPT_SCREEN: 'cold-adapt',
+  LOCATION_SCREEN: 'location',
   AVATAR_SELECTION_SCREEN: 'avatar-selection',
   COMPLETION_SCREEN: 'completion',
 };
