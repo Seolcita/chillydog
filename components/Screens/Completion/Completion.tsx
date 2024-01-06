@@ -11,7 +11,6 @@ import userContext from '../../../context/user.context';
 export const Completion = (): ReactElement => {
   const router = useRouter();
   const { user } = useContext(UserContext);
-
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     user && router.push(`/main?userId=${user.id}`);

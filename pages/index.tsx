@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
 import MainPage from './main';
+import Login from '../components/Login/Login';
 
 //TODO: It is placeholder. It will be replaced
 const Home = (): ReactElement => {
-  return <MainPage />;
+  return <Login />;
 };
 
 export default Home;

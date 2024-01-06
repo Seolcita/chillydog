@@ -17,7 +17,7 @@ export const SigninSuccess = ({
   useEffect(() => {
     if (user) {
       userCtx.setUser(user);
-      router.push('/');
+      router.push(`/main?userId=${user.id}`);
     } else {
       router.push('/auth/signin');
     }
