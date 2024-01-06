@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import * as S from './Completion.styled';
 import { FlexCenter } from '../../common-styles';
 import UserContext from '../../../context/user.context';
-import userContext from '../../../context/user.context';
 
 export const Completion = (): ReactElement => {
   const router = useRouter();

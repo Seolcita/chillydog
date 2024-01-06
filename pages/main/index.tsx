@@ -23,7 +23,6 @@ const MainPage = ({ user }: MainPageGetServerSideProps): ReactElement => {
 export default MainPage;
 export { MainPage };
 
-// TODO: set getServerSideProps
 export async function getServerSideProps(context: any) {
   const { userId } = context.query;
 
