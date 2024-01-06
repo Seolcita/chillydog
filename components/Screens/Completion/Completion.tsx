@@ -1,15 +1,18 @@
-import { MouseEvent, ReactElement } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { MouseEvent, ReactElement, useContext } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 
 import * as S from './Completion.styled';
 import { FlexCenter } from '../../common-styles';
+import UserContext from '../../../context/user.context';
 
 export const Completion = (): ReactElement => {
   const router = useRouter();
+  const { user } = useContext(UserContext);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    router.push('/');
+    user && router.push(`/main?userId=${user.id}`);
   };
 
   return (

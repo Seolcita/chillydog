@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { LocationForm } from '../../components/Screens/Location/LocationForm';
-import { GetServerSideProps } from 'next';
 
 export const LocationScreen = (): ReactElement => {
   const question = `Q. Which city is your dog living?`;

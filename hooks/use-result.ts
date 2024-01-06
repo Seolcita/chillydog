@@ -34,10 +34,14 @@ export const useResult = ({
     weatherType === WeatherType.OTHERS ||
     humidity > 60;
   const wetWeatherPoint = isWetWeather ? 2 : 0;
-  let weatherAndSizePoint = 0;
 
-  const totalPoints =
-    coldAdaptPoint + heavyCoatPoint + wetWeatherPoint + weatherAndSizePoint;
+  console.log('coldAdaptPoint', coldAdaptPoint);
+  console.log('heavyCoatPoint', heavyCoatPoint);
+  console.log('isWetWeather', isWetWeather);
+  console.log('wetWeatherPoint', wetWeatherPoint);
+  console.log('weatherType', weatherType);
+
+  let weatherAndSizePoint = 0;
 
   // weather & size
   if (dogSize === DogSize.SMALL) {
@@ -129,5 +133,9 @@ export const useResult = ({
     }
   };
 
+  console.log('weatherAndSizePoint', weatherAndSizePoint);
+  const totalPoints =
+    coldAdaptPoint + heavyCoatPoint + wetWeatherPoint + weatherAndSizePoint;
+  console.log('totalPoints', totalPoints);
   return result(totalPoints);
 };
