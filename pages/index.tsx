@@ -7,3 +7,5 @@ const Home = (): ReactElement => {
 };
 
 export default Home;
+// If user is logged in redirect to /user/:id
+// If user is not logged in redirect to /login

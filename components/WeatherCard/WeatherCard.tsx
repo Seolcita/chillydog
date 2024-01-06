@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import { Typography } from 'sk-storybook';
 
 import * as S from './WeatherCard.styles';
@@ -7,6 +7,7 @@ import { DeviceType } from '../../hooks/use-window-resize';
 import axios from 'axios';
 import { ConvertTempUnit, WeatherData } from '../../entities/weather.entities';
 import { WeatherImageUrlMap, getWeatherType } from '../../hooks/use-weather';
+import UserContext from '../../context/user.context';
 
 interface WeatherCardProps {
   deviceType: DeviceType;
@@ -15,7 +16,9 @@ interface WeatherCardProps {
 export const WeatherCard = ({ deviceType }: WeatherCardProps): ReactElement => {
   const isMobile = deviceType === DeviceType.MOBILE;
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
-  const city = 'calgary'; //TODO: replace data from backend
+  // const city = 'calgary'; //TODO: replace data from backend
+  const { user } = useContext(UserContext);
+  const city = user?.location || 'calgary';
 
   useEffect(() => {
     const loadWeatherData = async () => {

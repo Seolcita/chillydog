@@ -1,4 +1,5 @@
-import { ReactElement } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { ReactElement, useContext } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
 import * as S from './main.style';
 import ResultCard from '../../ResultCard/ResultCard';
@@ -7,6 +8,8 @@ import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 import * as s from '../../common-styles';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import UserContext from '../../../context/user.context';
+import { User } from '../../../entities/user.entities';
 
 const Main = (): ReactElement => {
   const { deviceType } = useWindowSize();
@@ -60,4 +63,30 @@ const Main = (): ReactElement => {
 export default Main;
 export { Main };
 
-//TODO: set getServerSideProps
+// export async function getServerSideProps(context: any) {
+//   const { user, setUser } = useContext(UserContext);
+
+//   if (!user) {
+//     return {
+//       redirect: {
+//         destination: '/auth/signin',
+//         permanent: false,
+//       },
+//     };
+//   }
+
+//   console.log('USER 🥎');
+//   try {
+//     const res = await axios
+//       .get(`http://localhost:3001/api/user?userId=${user.id}`)
+//       .then((res) => {
+//         console.log('res ⭐️', res.data);
+//         setUser(res.data);
+//       });
+
+//     return { props: {} };
+//   } catch (error) {
+//     console.log('error 🚨', error);
+//     return { props: {} };
+//   }
+// }
