@@ -6,32 +6,37 @@ import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 import UserContext from '../../context/user.context';
 
 export const NavigationBar = (): ReactElement => {
-  // TODO: Replaced it with data from backend
-  const dropdownItems: DropdownItem[] = [
-    {
-      avatarPath: '/images/logo/logo.png',
-      label: 'Seol',
+  const { user } = useContext(UserContext);
+  const isLoggedIn = user !== null;
+
+  const dropdownItems: DropdownItem[] = [];
+  if (isLoggedIn) {
+    const userProfile = {
+      avatarPath: user.photoUrl,
+      avatarName: 'login',
+      label: user.firstName,
       url: '/my-profile',
-    },
-    {
+    };
+    dropdownItems.push(userProfile);
+
+    if (user.dogs !== undefined && user.dogs.length > 0) {
+      const dogsDropdownItems: DropdownItem[] = user.dogs.map((dog) => ({
+        avatarPath: dog.avatar.src,
+        avatarName: dog.avatar.name,
+        label: dog.name,
+        url: `/dog/${dog.id}`,
+      }));
+      dropdownItems.push(...dogsDropdownItems);
+    }
+
+    const logout = {
       avatarPath: '/images/logo/logo.png',
-      label: 'Cookie',
-      url: '/cookie',
-    },
-    {
-      avatarPath: '/images/logo/logo.png',
-      label: 'Add dog',
-      url: '/add-dog',
-    },
-    {
-      avatarPath: '/images/logo/logo.png',
+      avatarName: 'logout',
       label: 'Logout',
       url: '/auth/signout',
-    },
-  ];
-
-  const userCtx = useContext(UserContext);
-  const isLoggedIn = userCtx.user !== null;
+    };
+    dropdownItems.push(logout);
+  }
 
   return (
     <nav>

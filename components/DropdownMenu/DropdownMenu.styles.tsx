@@ -35,7 +35,9 @@ export const MenuListContainer = styled.ul<MenuListContainerProps>`
   justify-content: center;
   position: absolute;
   right: 0;
-  width: 25rem;
+  top: 5.5rem;
+  width: 20rem;
+  z-index: 10;
 
   padding: 1rem;
   border-radius: 0.4rem;
