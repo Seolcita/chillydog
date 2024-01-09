@@ -3,24 +3,22 @@ import { ReactElement, useContext, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { Option } from '../../../../entities/questionnaire.entities';
 import UserContext from '../../../../context/user.context';
-import { DogSizeForm } from '../../../../components/Screens/DogSize/DogSizeForm';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
-import { DogSize } from '../../../../entities/dog.entities';
-import { Option } from '../../../../entities/questionnaire.entities';
+import { HeavyCoatForm } from '../../../../components/Screens/HeavyCoat/HeavyCoatForm';
 
-const DogSizeInitialValueMap: Record<DogSize, Option> = {
-  [DogSize.SMALL]: { label: 'Small', value: DogSize.SMALL },
-  [DogSize.MEDIUM]: { label: 'Medium', value: DogSize.MEDIUM },
-  [DogSize.LARGE]: { label: 'Large', value: DogSize.LARGE },
+const HeavyCoatInitialValueMap: Record<string, Option> = {
+  true: { label: 'Yes', value: true },
+  false: { label: 'No', value: false },
 };
 
-const EditDogSizeScreen = (): ReactElement => {
-  const question = `Q. What is your dog's size?`;
+const EditHeavyCoatScreen = (): ReactElement => {
+  const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
+  const { user, setUser } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
-  const { user, setUser } = useContext(UserContext);
   const dog =
     user?.dogs !== undefined &&
     user?.dogs.length > 0 &&
@@ -29,19 +27,20 @@ const EditDogSizeScreen = (): ReactElement => {
   if (!dog) {
     return <div>Loading...</div>; // TODO: Handle properly
   }
-
   const [value, setValue] = useState<Option | undefined>(
-    DogSizeInitialValueMap[dog.dogSize]
+    HeavyCoatInitialValueMap[dog.heavyCoat.toString()]
   );
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
+    //TODO: Implement logic for onSubmit
     event.preventDefault();
     console.log(value?.value);
-    if (user && value?.value) {
+
+    if (user && value?.value !== undefined) {
       await axios
-        .put('http://localhost:3001/api/dog/dog-size/edit', {
+        .put('http://localhost:3001/api/dog/heavy-coat/edit', {
           dogId,
-          dogSize: value.value,
+          heavyCoat: value.value,
           userId: user.id,
         })
         .then((res) => {
@@ -54,7 +53,7 @@ const EditDogSizeScreen = (): ReactElement => {
           console.error('An error occurred:', error);
         });
     } else {
-      // TODO: Handle error - Toast message
+      //TODO: Handle error - Toast message
       console.log('no user');
     }
   };
@@ -64,7 +63,7 @@ const EditDogSizeScreen = (): ReactElement => {
       edit
       question={question}
       form={
-        <DogSizeForm
+        <HeavyCoatForm
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
@@ -74,7 +73,7 @@ const EditDogSizeScreen = (): ReactElement => {
   );
 };
 
-export default EditDogSizeScreen;
+export default EditHeavyCoatScreen;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
