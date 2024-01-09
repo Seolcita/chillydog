@@ -4,6 +4,7 @@ import { Button } from 'sk-storybook';
 
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 import UserContext from '../../context/user.context';
+import { RegistrationStatus } from '../../entities/questionnaire.entities';
 
 export const NavigationBar = (): ReactElement => {
   const { user } = useContext(UserContext);
@@ -20,12 +21,16 @@ export const NavigationBar = (): ReactElement => {
     dropdownItems.push(userProfile);
 
     if (user.dogs !== undefined && user.dogs.length > 0) {
-      const dogsDropdownItems: DropdownItem[] = user.dogs.map((dog) => ({
-        avatarPath: dog.avatar.src,
-        avatarName: dog.avatar.name,
-        label: dog.name,
-        url: `/dog/${dog.id}`,
-      }));
+      const dogsDropdownItems: DropdownItem[] = user.dogs
+        .filter(
+          (dog) => dog.registrationStatus === RegistrationStatus.COMPLETED
+        )
+        .map((dog) => ({
+          avatarPath: dog.avatar.src,
+          avatarName: dog.avatar.name,
+          label: dog.name,
+          url: `/dog/${dog.id}`,
+        }));
       dropdownItems.push(...dogsDropdownItems);
     }
 
