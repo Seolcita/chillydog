@@ -5,17 +5,13 @@ import { Button, Select } from 'sk-storybook';
 
 import * as S from './DogSizeForm.styles';
 import { DogSize } from '../../../entities/dog.entities';
+import { Option } from '../../../entities/questionnaire.entities';
 
 interface DogSizeFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
   setValue: React.Dispatch<React.SetStateAction<Option | undefined>>;
   value: Option | undefined;
 }
-
-export type Option = {
-  label: string;
-  value: string | number | boolean;
-};
 
 const options: Option[] = [
   { label: 'Small', value: DogSize.SMALL },

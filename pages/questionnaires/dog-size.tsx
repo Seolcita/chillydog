@@ -5,13 +5,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
-import {
-  DogSizeForm,
-  Option,
-} from '../../components/Screens/DogSize/DogSizeForm';
+import { DogSizeForm } from '../../components/Screens/DogSize/DogSizeForm';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { Dog } from '../../entities/dog.entities';
 import UserContext from '../../context/user.context';
+import { Option } from '../../entities/questionnaire.entities';
 
 const DogSizeScreen = (): ReactElement => {
   const question = `Q. What is your dog's size?`;

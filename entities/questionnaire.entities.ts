@@ -28,3 +28,8 @@ export interface QuestionnaireScreen {
   coldAdaptScreen: QuestionnaireScreenFields;
   avatarSelectionScreen: QuestionnaireScreenFields;
 }
+
+export type Option = {
+  label: string;
+  value: string | number | boolean;
+};
