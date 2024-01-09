@@ -13,6 +13,7 @@ import { Typography } from 'sk-storybook';
 
 export interface DropdownItem {
   avatarPath: string;
+  avatarName: string;
   label: string;
   url?: string;
   onClick?: VoidFunction;
@@ -27,6 +28,7 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [off, setOff] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
+  const noScale = ['corgi', 'husky', 'login', 'logout'];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -73,7 +75,7 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
       </S.ProfileButton>
       {isOpen && (
         <S.MenuListContainer role='menu' aria-label={menuLabel} isOpen={isOpen}>
-          {items.map((item, index) => (
+          {items.map((item) => (
             <S.ListItem
               key={item.label}
               role='menuitem'
@@ -87,6 +89,11 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
                       src={item.avatarPath}
                       width={40}
                       height={40}
+                      style={{
+                        transform: `scale(${
+                          noScale.includes(item.avatarName) ? 1 : 1.6
+                        }`,
+                      }}
                       alt='avatar'
                     />
                     <Typography variant='textS' fontWeight='bold'>

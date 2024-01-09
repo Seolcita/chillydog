@@ -61,7 +61,7 @@ const Main = (): ReactElement => {
               Reports
             </Typography>
           </s.Visibility>
-          {weatherData &&
+          {/* {weatherData &&
           weatherType &&
           user?.dogs !== undefined &&
           user.dogs.length > 0 ? (
@@ -86,7 +86,7 @@ const Main = (): ReactElement => {
             })
           ) : (
             <>Add dog</>
-          )}
+          )} */}
           <div>
             <button onClick={handleClick}>Create a dog profile</button>
           </div>

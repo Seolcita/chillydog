@@ -5,6 +5,7 @@ export interface User {
   email: string;
   lastName: string;
   firstName: string;
+  photoUrl: string;
   location?: string;
   dogs?: Dog[];
 }
