@@ -86,7 +86,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </Typography>
               </S.Texts>
               <S.EditIconButton
-                onClick={() => router.push(`/dog/${dog.id}/edit`)}
+                onClick={() => router.push(`/dog/${dog.id}/edit/dog-size`)}
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
@@ -106,7 +106,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </Typography>
               </S.Texts>
               <S.EditIconButton
-                onClick={() => router.push(`/dog/${dog.id}/edit`)}
+                onClick={() => router.push(`/dog/${dog.id}/edit/cold-adapt`)}
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
@@ -126,7 +126,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </Typography>
               </S.Texts>
               <S.EditIconButton
-                onClick={() => router.push(`/dog/${dog.id}/edit`)}
+                onClick={() => router.push(`/dog/${dog.id}/edit/heavy-coat`)}
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
