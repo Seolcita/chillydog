@@ -5,16 +5,28 @@ import { ProgressBar } from '../ProgressBar/ProgressBar';
 import * as S from './Questionnaire.styles';
 import { Box } from '@mui/material';
 
-interface QuestionnaireProps {
-  currentStep: number;
+interface BaseQuestionnaireProps {
   question: string;
   form: ReactNode;
 }
+
+interface CurrentStepProps extends BaseQuestionnaireProps {
+  currentStep: number;
+  edit?: never;
+}
+
+interface EditProps extends BaseQuestionnaireProps {
+  edit: boolean;
+  currentStep?: never;
+}
+
+type QuestionnaireProps = CurrentStepProps | EditProps;
 
 export const Questionnaire = ({
   currentStep,
   question,
   form,
+  edit,
 }: QuestionnaireProps): ReactElement => {
   return (
     <S.Container>
@@ -26,7 +38,9 @@ export const Questionnaire = ({
         isInteractive={false}
       >
         <S.Contents tabIndex={0}>
-          <ProgressBar totalSteps={6} currentStep={currentStep} />
+          {currentStep && !edit && (
+            <ProgressBar totalSteps={6} currentStep={currentStep} />
+          )}
           <Typography
             variant='headingXS'
             fontWeight='bold'
