@@ -1,60 +1,27 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
+import { ReactElement } from 'react';
 import { Button, Select } from 'sk-storybook';
 
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
-import { Dog } from '../../../entities/dog.entities';
 import * as S from './ColdAdaptForm.styles';
-import UserContext from '../../../context/user.context';
+import { Option } from '../../../entities/questionnaire.entities';
 
-export type Option = {
-  label: string;
-  value: string | number | boolean;
-};
+interface ColdAdaptFormProps {
+  handleSubmit: (event: React.SyntheticEvent) => void;
+  setValue: React.Dispatch<React.SetStateAction<Option | undefined>>;
+  value: Option | undefined;
+}
 
 const options: Option[] = [
   { label: 'Yes', value: true },
   { label: 'No', value: false },
 ];
 
-export const ColdAdaptForm = (): ReactElement => {
-  const [value, setValue] = useState<Option | undefined>();
-  const userContext = useContext(UserContext);
-  const router = useRouter();
-  const dogId = router.query.dogId;
-
-  const handleSubmit = async (event: SyntheticEvent) => {
-    event.preventDefault();
-    console.log(value?.value);
-
-    try {
-      if (userContext.user && value?.value !== undefined) {
-        await axios
-          .post('http://localhost:3001/api/dog/cold-adapt', {
-            dogId,
-            coldAdapt: value.value,
-            userId: userContext.user.id,
-          })
-          .then((res) => {
-            const dog: Dog = res.data;
-            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
-            router.push(nextScreenUrl);
-          })
-          .catch((error) => {
-            console.error('An error occurred:', error); //TODO: Handle error - Toast message
-          });
-      } else {
-        console.log('no user');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-      // TODO: Handle error - Toast message
-    }
-  };
-
+export const ColdAdaptForm = ({
+  handleSubmit,
+  setValue,
+  value,
+}: ColdAdaptFormProps): ReactElement => {
   return (
     <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
