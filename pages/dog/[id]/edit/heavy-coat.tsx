@@ -32,7 +32,6 @@ const EditHeavyCoatScreen = (): ReactElement => {
   );
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
-    //TODO: Implement logic for onSubmit
     event.preventDefault();
     console.log(value?.value);
 

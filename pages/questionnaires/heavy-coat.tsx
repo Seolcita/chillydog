@@ -18,7 +18,6 @@ const HeavyCoatScreen = (): ReactElement => {
   const dogId = router.query.dogId;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
-    //TODO: Implement logic for onSubmit
     event.preventDefault();
     console.log(value?.value);
 
