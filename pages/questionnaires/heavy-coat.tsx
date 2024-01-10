@@ -13,7 +13,7 @@ import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-nex
 const HeavyCoatScreen = (): ReactElement => {
   const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
   const [value, setValue] = useState<Option | undefined>();
-  const userContext = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
 
@@ -21,12 +21,12 @@ const HeavyCoatScreen = (): ReactElement => {
     event.preventDefault();
     console.log(value?.value);
 
-    if (userContext.user && value?.value !== undefined) {
+    if (user && value?.value !== undefined) {
       await axios
         .post('http://localhost:3001/api/dog/heavy-coat', {
           dogId,
           heavyCoat: value.value,
-          userId: userContext.user.id,
+          userId: user.id,
         })
         .then((res) => {
           const dog: Dog = res.data;

@@ -1,21 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { Option } from '../../../../entities/questionnaire.entities';
+
 import UserContext from '../../../../context/user.context';
-import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
-import { ColdAdaptForm } from '../../../../components/Screens/ColdAdapt/ColdAdaptForm';
+import {
+  AvatarSelectionForm,
+  SelectedAvatar,
+} from '../../../../components/Screens/AvatarSelection/AvatarSelectionForm';
 import { User } from '../../../../entities/user.entities';
+import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 
-const ColdAdaptInitialValueMap: Record<string, Option> = {
-  true: { label: 'Yes', value: true },
-  false: { label: 'No', value: false },
-};
-
-const EditColdAdaptScreen = (): ReactElement => {
-  const question = `Q. Is your dog acclimated to cold?`;
+const EditAvatarSelectionScreen = (): ReactElement => {
+  const question = `Choose your dog's avatar`;
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
@@ -28,19 +25,21 @@ const EditColdAdaptScreen = (): ReactElement => {
     return <div>Loading...</div>; // TODO: Handle properly
   }
 
-  const [value, setValue] = useState<Option | undefined>(
-    ColdAdaptInitialValueMap[dog.coldAdapt.toString()]
-  );
+  const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
+    name: dog.avatar.name,
+    src: dog.avatar.src,
+  });
 
   const handleSubmit = async (event: SyntheticEvent) => {
+    event.stopPropagation();
     event.preventDefault();
-    console.log(value?.value);
+    console.log(selectedAvatar);
 
-    if (user && value?.value !== undefined) {
+    if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
       await axios
-        .put('http://localhost:3001/api/dog/cold-adapt/edit', {
+        .put('http://localhost:3001/api/dog/avatar-selection/edit', {
           dogId,
-          coldAdapt: value.value,
+          selectedAvatar,
           userId: user.id,
         })
         .then((res) => {
@@ -63,20 +62,14 @@ const EditColdAdaptScreen = (): ReactElement => {
       edit
       question={question}
       form={
-        <ColdAdaptForm
+        <AvatarSelectionForm
           handleSubmit={handleSubmit}
-          setValue={setValue}
-          value={value}
+          setValue={setSelectedAvatar}
+          value={selectedAvatar}
         />
       }
     />
   );
 };
 
-export default EditColdAdaptScreen;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    props: {},
-  };
-};
+export default EditAvatarSelectionScreen;
