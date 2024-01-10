@@ -1,11 +1,35 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../common-styles';
 import ColorMap from '../../../styles/Color';
 
-export const Container = styled.div`
+export const ProfileContainer = styled(FlexCenter)`
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+`;
+
+export const UserContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
+  width: 100%;
+  margin: 2rem 0rem 3rem;
+`;
+
+export const DogContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
 `;
 
 export const Content = styled.div`
@@ -27,7 +51,7 @@ export const Texts = styled.div`
   flex-grow: 1;
 `;
 
-export const EditIconButton = styled.button`
+export const Button = styled.button`
   width: 3rem;
   height: 3rem;
   display: flex;
@@ -36,7 +60,7 @@ export const EditIconButton = styled.button`
   border: none;
   background-color: transparent;
   transition: color 0.4s ease-in-out;
-  margin-left: 4rem;
+  margin-left: 1rem;
   border-radius: 50%;
 
   &:hover {
@@ -57,20 +81,13 @@ export const AvatarContainer = styled.div`
   justify-content: center;
 `;
 
-export const ChangeAvatarButton = styled(EditIconButton)`
-  margin-left: 1rem;
-  margin-bottom: 2.5rem;
-  border-radius: 50%;
-  background-color: ${ColorMap['grey'].extraLight};
-`;
-
 export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 2rem;
+  right: 2rem;
   background-color: transparent;
   border: none;
   width: 2.5rem;

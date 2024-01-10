@@ -41,13 +41,13 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
           ariaLabel='Dog Profile Card'
         >
           <S.Container>
+            <S.CloseButton
+              onClick={() => router.push(`/main?userId=${user?.id}`)}
+              aria-label='Dog profile close button'
+            >
+              <CancelIcon fontSize='large' />
+            </S.CloseButton>
             <S.AvatarContainer>
-              <S.CloseButton
-                onClick={() => router.push(`/main?userId=${user?.id}`)}
-                aria-label='Dog profile close button'
-              >
-                <CancelIcon fontSize='large' />
-              </S.CloseButton>
               <Image
                 src={`/images/avatars/${dog.avatar.name}.png`}
                 width={80}

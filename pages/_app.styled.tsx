@@ -15,7 +15,7 @@ const calcContainerHeight = 100 - headerHight;
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
-  background-color: pink; //TODO: remove after development
+  background-color: black; //TODO: remove after development
   height: ${calcContainerHeight}vh;
   display: flex;
   padding: 0 4rem;

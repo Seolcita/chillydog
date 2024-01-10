@@ -122,7 +122,7 @@ export const useResult = ({
         description: 'Use cation',
         point,
       };
-    } else if (point > 5) {
+    } else if (point >= 5) {
       return {
         title: 'Potentially life-threatening cold',
         description: 'Avoid prolonged outdoor activity',
