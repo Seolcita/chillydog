@@ -7,6 +7,7 @@ import * as S from './DogProfile.styles';
 import { DogSize } from '../../../entities/dog.entities';
 import { FlexCenter } from '../../common-styles';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useRouter } from 'next/router';
 
 interface DogProfileProps {
@@ -40,19 +41,35 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
           ariaLabel='Dog Profile Card'
         >
           <S.Container>
-            <Image
-              src={`/images/avatars/${dog.avatar.name}.png`}
-              width={80}
-              height={80}
-              alt={`${dog.name} avatar`}
-              style={{
-                borderRadius: '10rem',
-                transform: 'scale(1.8)',
-                margin: ' 2rem auto 1.5rem',
-              }}
-              priority={true}
-              draggable={false}
-            />
+            <S.AvatarContainer>
+              <S.CloseButton
+                onClick={() => router.push(`/main?userId=${user?.id}`)}
+                aria-label='Dog profile close button'
+              >
+                <CancelIcon fontSize='large' />
+              </S.CloseButton>
+              <Image
+                src={`/images/avatars/${dog.avatar.name}.png`}
+                width={80}
+                height={80}
+                alt={`${dog.name} avatar`}
+                style={{
+                  borderRadius: '10rem',
+                  transform: 'scale(1.8)',
+                  margin: ' 2rem  0rem',
+                }}
+                priority={true}
+                draggable={false}
+              />
+              <S.ChangeAvatarButton
+                onClick={() =>
+                  router.push(`/dog/${dog.id}/edit/avatar-selection`)
+                }
+                aria-label='Change avatar button'
+              >
+                <DriveFileRenameOutlineIcon fontSize='large' />
+              </S.ChangeAvatarButton>
+            </S.AvatarContainer>
 
             <S.Content>
               <Typography
@@ -67,6 +84,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
               </S.Texts>
               <S.EditIconButton
                 onClick={() => router.push(`/dog/${dog.id}/edit/name`)}
+                aria-label='Edit dog name button'
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
@@ -87,6 +105,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
               </S.Texts>
               <S.EditIconButton
                 onClick={() => router.push(`/dog/${dog.id}/edit/dog-size`)}
+                aria-label='Edit dog size button'
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
@@ -107,6 +126,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
               </S.Texts>
               <S.EditIconButton
                 onClick={() => router.push(`/dog/${dog.id}/edit/cold-adapt`)}
+                aria-label='Edit cold adapt button'
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
@@ -127,6 +147,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
               </S.Texts>
               <S.EditIconButton
                 onClick={() => router.push(`/dog/${dog.id}/edit/heavy-coat`)}
+                aria-label='Edit heavy coat button'
               >
                 <DriveFileRenameOutlineIcon fontSize='large' />
               </S.EditIconButton>
