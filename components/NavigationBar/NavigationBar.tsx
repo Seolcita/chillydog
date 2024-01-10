@@ -16,7 +16,7 @@ export const NavigationBar = (): ReactElement => {
       avatarPath: user.photoUrl,
       avatarName: 'login',
       label: user.firstName,
-      url: '/my-profile',
+      url: '/user/profile',
     };
     dropdownItems.push(userProfile);
 
