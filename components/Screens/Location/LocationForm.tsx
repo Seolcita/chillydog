@@ -16,6 +16,11 @@ import { Dog } from '../../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
 import cities from '../../../utils/city.list.json';
 
+interface LocationFormProps {
+  onSubmit: (values: FormValues) => void;
+  initialValueLocation?: string;
+}
+
 interface City {
   id: number;
   name: string;
@@ -41,42 +46,14 @@ const schema = yup.object().shape({
     }),
 });
 
-interface FormValues {
+export interface FormValues {
   cityName: string;
 }
 
-export const LocationForm = (): ReactElement => {
-  const userContext = useContext(UserContext);
-  const router = useRouter();
-  const dogId = router.query.dogId;
-
-  const onSubmit = async ({ cityName }: FormValues) => {
-    try {
-      if (userContext.user) {
-        await axios
-          .post('http://localhost:3001/api/dog/location', {
-            dogId,
-            location: cityName,
-            userId: userContext.user.id,
-          })
-          .then((res) => {
-            const dog: Dog = res.data;
-            console.log('dog', dog);
-            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
-            router.push(nextScreenUrl);
-          })
-          .catch((error) => {
-            console.error('An error occurred:', error); //TODO: Handle error - Toast message
-          });
-      } else {
-        console.log('no user');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-      // TODO: Handle error - Toast message
-    }
-  };
-
+export const LocationForm = ({
+  onSubmit,
+  initialValueLocation,
+}: LocationFormProps): ReactElement => {
   const {
     values,
     errors,
@@ -87,7 +64,7 @@ export const LocationForm = (): ReactElement => {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      cityName: '',
+      cityName: initialValueLocation ?? '',
     },
     validationSchema: schema,
     onSubmit,

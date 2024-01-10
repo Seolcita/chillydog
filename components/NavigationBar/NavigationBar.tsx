@@ -21,6 +21,16 @@ export const NavigationBar = (): ReactElement => {
     dropdownItems.push(userProfile);
 
     if (user.dogs !== undefined && user.dogs.length > 0) {
+      const userLocation = {
+        avatarPath: '/images/others/location.jpeg',
+        avatarName: 'location',
+        label: 'Update Location',
+        url: `/dog/${user.dogs[0].id}/edit/location`,
+      };
+      dropdownItems.push(userLocation);
+    }
+
+    if (user.dogs !== undefined && user.dogs.length > 0) {
       const dogsDropdownItems: DropdownItem[] = user.dogs
         .filter(
           (dog) => dog.registrationStatus === RegistrationStatus.COMPLETED

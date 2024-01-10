@@ -36,7 +36,7 @@ export const MenuListContainer = styled.ul<MenuListContainerProps>`
   position: absolute;
   right: 0;
   top: 5.5rem;
-  width: 20rem;
+  width: 23rem;
   z-index: 10;
 
   padding: 1rem;
@@ -68,6 +68,3 @@ export const ListItemContents = styled.div`
     margin-right: 1.5rem;
   }
 `;
-
-// background-color: ${({ off, highlighted }) =>
-//     !off && highlighted && ColorMap['grey'].extraLight};
