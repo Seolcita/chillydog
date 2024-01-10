@@ -28,7 +28,7 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [off, setOff] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
-  const noScale = ['corgi', 'husky', 'login', 'logout'];
+  const noScale = ['corgi', 'husky', 'login', 'logout', 'location'];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -91,7 +91,11 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
                       height={40}
                       style={{
                         transform: `scale(${
-                          noScale.includes(item.avatarName) ? 1 : 1.6
+                          noScale.includes(item.avatarName)
+                            ? item.avatarName === 'location'
+                              ? 0.8
+                              : 1
+                            : 1.6
                         }`,
                       }}
                       alt='avatar'
