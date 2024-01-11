@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { device } from '../styles/Breakpoints';
-import { headerHight } from '../components/Header/Header.style';
 
 export const Layout = styled.div`
   width: 100%;
@@ -18,7 +17,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 4rem;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 200vh;
+  overflow: visible;
 
   @media ${device.xs} {
     max-width: 599px;

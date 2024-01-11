@@ -36,7 +36,7 @@ export const Contents = styled.div`
   display: flex;
   border-radius: 0.5rem;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
 `;
 
 export const AvatarBox = styled.div`

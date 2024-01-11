@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import ColorMap from '../../../styles/Color';
 
+export const ProfileContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
+  padding: 2rem;
 `;
 
 export const Content = styled.div`

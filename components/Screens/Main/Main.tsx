@@ -6,16 +6,11 @@ import { Card } from 'sk-storybook';
 import axios from 'axios';
 
 import * as S from './main.style';
-import * as s from '../../common-styles';
-import ResultCard from '../../ResultCard/ResultCard';
-import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
+import { useWindowSize } from '../../../hooks/use-window-resize';
 import UserContext from '../../../context/user.context';
 import { WeatherData } from '../../../entities/weather.entities';
-import { useResult } from '../../../hooks/use-result';
 import { getWeatherType } from '../../../hooks/use-weather';
-import { Dog, DogSize } from '../../../entities/dog.entities';
-import { RegistrationStatus } from '../../../entities/questionnaire.entities';
-import Image from 'next/image';
+import { Dog } from '../../../entities/dog.entities';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import { InprogressCards } from '../../InprogressCards/InprogressCards';
 

@@ -2,17 +2,16 @@ import styled from 'styled-components';
 import { FlexCenter } from '../../common-styles';
 import ColorMap from '../../../styles/Color';
 
-export const ProfileContainer = styled(FlexCenter)`
-  flex-direction: column;
+export const ProfileContainer = styled.div`
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 2rem;
 `;
 
 export const UserContainer = styled.div`

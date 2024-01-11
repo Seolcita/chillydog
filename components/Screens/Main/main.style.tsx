@@ -5,6 +5,7 @@ import { FlexCenter } from '../../../components/common-styles';
 export const Wrapper = styled(FlexCenter)`
   align-items: start;
   margin-top: 5rem;
+  height: 100%;
 `;
 
 export const MainLayout = styled.main`
