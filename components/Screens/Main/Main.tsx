@@ -66,18 +66,18 @@ const Main = (): ReactElement => {
         </S.WeatherSection>
         <S.CardsContainer>
           {/* TODO: make !hasDogs after development*/}
-          {hasDogs && (
-            <S.CardsSection>
-              <Card
-                tabIndex={0}
-                isPadded
-                isInteractive={false}
-                ariaLabel='Create dog profile card'
-              >
-                <button onClick={handleClick}>Create a dog profile</button>
-              </Card>
-            </S.CardsSection>
-          )}
+          {/* {!hasDogs && ( */}
+          <S.CardsSection>
+            <Card
+              tabIndex={0}
+              isPadded
+              isInteractive={false}
+              ariaLabel='Create dog profile card'
+            >
+              <button onClick={handleClick}>Create a dog profile</button>
+            </Card>
+          </S.CardsSection>
+          {/* )} */}
 
           {hasDogs && hasWeatherInfo && (
             <S.CardsSection>
@@ -91,7 +91,10 @@ const Main = (): ReactElement => {
 
           {hasDogs && (
             <S.CardsSection>
-              <InprogressCards dogs={user.dogs as Dog[]} />
+              <InprogressCards
+                dogs={user.dogs as Dog[]}
+                deviceType={deviceType}
+              />
             </S.CardsSection>
           )}
         </S.CardsContainer>

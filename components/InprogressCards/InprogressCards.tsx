@@ -1,24 +1,44 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Dog } from '../../entities/dog.entities';
 import { RegistrationStatus } from '../../entities/questionnaire.entities';
 import Image from 'next/image';
-import { Button, Card, Typography } from 'sk-storybook';
+import { Card, Typography } from 'sk-storybook';
 
 import * as S from './InprogressCards.style';
+import * as s from '../common-styles';
 import { useRouter } from 'next/router';
 import { QuestionnaireScreenMap } from '../../hooks/use-questionnaire-next-screen-url';
+import { DeviceType } from '../../hooks/use-window-resize';
 
 interface InprogressCardsProps {
   dogs: Dog[];
+  deviceType: DeviceType;
 }
 
 export const InprogressCards = ({
   dogs,
+  deviceType,
 }: InprogressCardsProps): ReactElement => {
   const router = useRouter();
+  const isMobile = deviceType === DeviceType.MOBILE;
+
   const handleClick = async (dog: Dog) => {
     const nextScreen = dog.nextScreen && QuestionnaireScreenMap[dog.nextScreen];
     router.push(`/questionnaires/${nextScreen}?dogId=${dog.id}`);
+  };
+
+  const CompleteProfileButton = (dog: Dog, isVisible: boolean): ReactNode => {
+    return (
+      <s.Visibility $isVisible={isVisible}>
+        {/* TODO: Improve button style */}
+        <S.CompleteButton
+          onClick={() => handleClick(dog)}
+          aria-label='Complete Profile button'
+        >
+          Complete Profile
+        </S.CompleteButton>
+      </s.Visibility>
+    );
   };
 
   return (
@@ -51,19 +71,19 @@ export const InprogressCards = ({
                     tabIndex={0}
                   />
                   <S.TextBox>
-                    <Typography
-                      variant='textM'
-                      color='black'
-                    >{`Creating ${dog.name}'s profile status is`}</Typography>
-                    <Typography variant='textM' color='black'>
-                      IN PROGRESS.
+                    <Typography variant='textM' color='black' fontWeight='bold'>
+                      Creating <S.Span>{dog.name}</S.Span> profile status is
+                      <S.Span> IN PROGRESS</S.Span>
                     </Typography>
-                    {/* TODO:Create ProgressBar component */}
-                    {/* <div>ProgressBar</div> */}
+                    <S.ProgressBar
+                      value={(dog.completedStep / dog.totalSteps) * 100}
+                      max='100'
+                    />
+
+                    {CompleteProfileButton(dog, isMobile)}
                   </S.TextBox>
-                  <button onClick={() => handleClick(dog)}>
-                    Complete Profile
-                  </button>
+
+                  {CompleteProfileButton(dog, !isMobile)}
                 </S.Contents>
               </Card>
             </S.CardContainer>

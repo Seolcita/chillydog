@@ -16,7 +16,7 @@ export const Completion = (): ReactElement => {
   };
 
   return (
-    <FlexCenter>
+    <S.Container>
       <Card
         ariaLabel={`questionnaire completed`}
         tabIndex={0}
@@ -49,6 +49,6 @@ export const Completion = (): ReactElement => {
           </Button>
         </S.Contents>
       </Card>
-    </FlexCenter>
+    </S.Container>
   );
 };
