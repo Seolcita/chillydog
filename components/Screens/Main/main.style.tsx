@@ -33,7 +33,6 @@ export const CardsSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 2rem;
 `;
 
 export const WeatherSection = styled.section`
