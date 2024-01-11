@@ -3,7 +3,6 @@ import { Button, Card, Typography } from 'sk-storybook';
 
 import * as S from './Login.styles';
 import { useWindowSize, DeviceType } from '../../hooks/use-window-resize';
-import { Box } from '@mui/material';
 
 const Login = (): ReactElement => {
   const { deviceType } = useWindowSize();

@@ -14,7 +14,6 @@ export const Contents = styled.div`
   border-radius: 0.5rem;
   width: 100%;
   padding: 1rem 2rem;
-  // margin-bottom: 2rem;
 `;
 
 export const TextBox = styled.div`
