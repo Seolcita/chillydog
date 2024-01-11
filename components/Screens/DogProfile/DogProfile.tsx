@@ -32,7 +32,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
   console.log('dogProfile🐶', dog);
 
   return (
-    <FlexCenter>
+    <S.ProfileContainer>
       {dog && dog.registrationStatus === RegistrationStatus.COMPLETED ? (
         <Card
           tabIndex={0}
@@ -157,6 +157,6 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
       ) : (
         <>Loading...</>
       )}
-    </FlexCenter>
+    </S.ProfileContainer>
   );
 };

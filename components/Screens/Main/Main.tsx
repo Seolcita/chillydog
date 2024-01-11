@@ -2,25 +2,27 @@
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
 import { useRouter } from 'next/router';
-import { Typography } from 'sk-storybook';
+import { Card } from 'sk-storybook';
 import axios from 'axios';
 
 import * as S from './main.style';
-import * as s from '../../common-styles';
-import ResultCard from '../../ResultCard/ResultCard';
-import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
+import { useWindowSize } from '../../../hooks/use-window-resize';
 import UserContext from '../../../context/user.context';
 import { WeatherData } from '../../../entities/weather.entities';
-import { useResult } from '../../../hooks/use-result';
 import { getWeatherType } from '../../../hooks/use-weather';
-import { DogSize } from '../../../entities/dog.entities';
+import { Dog } from '../../../entities/dog.entities';
+import { ResultCards } from '../../ResultCard/ResultCards';
+import { InprogressCards } from '../../InprogressCards/InprogressCards';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const { deviceType } = useWindowSize();
-  const isMobile = deviceType === DeviceType.MOBILE;
   const router = useRouter();
   const { user } = useContext(UserContext);
+  const weatherType = weatherData && getWeatherType(weatherData.weatherId);
+  const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;
+  const hasWeatherInfo = weatherData && weatherType;
+
   const city = user?.location ?? null;
 
   useEffect(() => {
@@ -46,8 +48,6 @@ const Main = (): ReactElement => {
     return () => clearInterval(intervalId);
   }, [city]);
 
-  const weatherType = weatherData && getWeatherType(weatherData.weatherId);
-
   const handleClick = async () => {
     router.push('/questionnaires/name');
   };
@@ -55,44 +55,8 @@ const Main = (): ReactElement => {
   return (
     <S.Wrapper>
       <S.MainLayout>
-        <S.ResultSection>
-          <s.Visibility $isVisible={!isMobile}>
-            <Typography variant='headingM' margin={['none', 'none', 'lg']}>
-              Reports
-            </Typography>
-          </s.Visibility>
-          {weatherData &&
-          weatherType &&
-          user?.dogs !== undefined &&
-          user.dogs.length > 0 ? (
-            user?.dogs?.map((dog) => {
-              const result = useResult({
-                dogSize: dog.dogSize as DogSize,
-                coldAdapt: dog.coldAdapt,
-                heavyCoat: dog.heavyCoat,
-                weatherType: weatherType,
-                temp: weatherData.temperature,
-                humidity: weatherData.humidity,
-              });
-              return (
-                <ResultCard
-                  key={dog.id}
-                  name={dog.name}
-                  result={result}
-                  avatarName={dog.avatar.name}
-                  deviceType={deviceType}
-                />
-              );
-            })
-          ) : (
-            <>Add dog</>
-          )}
-          <div>
-            <button onClick={handleClick}>Create a dog profile</button>
-          </div>
-        </S.ResultSection>
         <S.WeatherSection>
-          {user?.location && weatherData && weatherType && (
+          {user?.location && hasWeatherInfo && (
             <WeatherCard
               deviceType={deviceType}
               weatherData={weatherData}
@@ -100,6 +64,40 @@ const Main = (): ReactElement => {
             />
           )}
         </S.WeatherSection>
+        <S.CardsContainer>
+          {/* TODO: make !hasDogs after development*/}
+          {/* {!hasDogs && ( */}
+          <S.CardsSection>
+            <Card
+              tabIndex={0}
+              isPadded
+              isInteractive={false}
+              ariaLabel='Create dog profile card'
+            >
+              <button onClick={handleClick}>Create a dog profile</button>
+            </Card>
+          </S.CardsSection>
+          {/* )} */}
+
+          {hasDogs && hasWeatherInfo && (
+            <S.CardsSection>
+              <ResultCards
+                dogs={user.dogs as Dog[]}
+                weatherData={weatherData}
+                weatherType={weatherType}
+              />
+            </S.CardsSection>
+          )}
+
+          {hasDogs && (
+            <S.CardsSection>
+              <InprogressCards
+                dogs={user.dogs as Dog[]}
+                deviceType={deviceType}
+              />
+            </S.CardsSection>
+          )}
+        </S.CardsContainer>
       </S.MainLayout>
     </S.Wrapper>
   );

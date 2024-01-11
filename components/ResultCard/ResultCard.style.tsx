@@ -8,16 +8,6 @@ interface TitleProps {
   $deviceType: DeviceType;
 }
 
-export const setCardSize = (deviceType: DeviceType): number => {
-  if (deviceType === DeviceType.MOBILE) {
-    return 60;
-  } else if (deviceType === DeviceType.TABLET) {
-    return 40;
-  } else {
-    return 60;
-  }
-};
-
 export const setFontSize = (deviceType: DeviceType): string => {
   if (deviceType === DeviceType.MOBILE) {
     return '2rem';
@@ -38,28 +28,15 @@ export const titleColorMap: Record<number, string> = {
 
 export const CardContainer = styled.div`
   display: flex;
-  justify-content: start;
-  margin: 2rem 3rem 0 0;
   width: 100%;
-
-  @media ${device.xs} {
-    margin: 2rem 0 0;
-  }
-
-  @media ${device.sm} {
-    margin: 2rem 2rem 0 0;
-  }
-
-  @media ${device.md} {
-    margin: 2rem 3rem 0 0;
-  }
+  margin-bottom: 2rem;
 `;
 
 export const Contents = styled.div`
   display: flex;
   border-radius: 0.5rem;
-  padding: 0 1rem;
   width: 100%;
+  padding: 0rem 2rem;
 `;
 
 export const AvatarBox = styled.div`
@@ -73,11 +50,11 @@ export const ResultBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 2rem;
+  padding: 0 3.5rem;
   width: 100%;
 
   @media ${device.xs} {
-    padding: 0 0 0 2rem;
+    padding: 0 0 0 2.5rem;
   }
 `;
 

@@ -1,12 +1,9 @@
 import { ReactElement, useContext } from 'react';
 import UserContext from '../../../context/user.context';
-import { Button, Card, Typography } from 'sk-storybook';
+import { Card, Typography } from 'sk-storybook';
 import Image from 'next/image';
 import { RegistrationStatus } from '../../../entities/questionnaire.entities';
 import * as S from './UserProfile.styles';
-import { DogSize } from '../../../entities/dog.entities';
-import { FlexCenter } from '../../common-styles';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
@@ -49,6 +46,7 @@ export const UserProfile = (): ReactElement => {
         isInteractive={false}
         isPadded={true}
         ariaLabel='Dog Profile Card'
+        margin={['xl', 'none']}
       >
         {user ? (
           <S.Wrapper>

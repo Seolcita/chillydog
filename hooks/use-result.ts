@@ -98,7 +98,7 @@ export const useResult = ({
   }
 
   const result = (point: number): Result => {
-    if (point === 1) {
+    if (point <= 1) {
       return {
         title: 'No evidence of risk',
         description: 'Have fun outside!',

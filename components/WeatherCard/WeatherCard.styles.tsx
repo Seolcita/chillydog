@@ -3,14 +3,12 @@ import { device } from '../../styles/Breakpoints';
 
 export const Container = styled.section`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
+  width: 100%;
+  height: 15rem;
   padding: 2.5rem;
-  min-width: 20rem;
-  width: 20rem;
-  height: 22rem;
   background: rgb(110, 159, 255);
   background: linear-gradient(
     140deg,
@@ -18,17 +16,14 @@ export const Container = styled.section`
     rgba(48, 113, 251, 0.8351934523809523) 33%,
     rgba(0, 86, 147, 0.913624824929972) 84%
   );
+  border-radius: 0.5rem;
 
   @media ${device.xs} {
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    height: 15rem;
+    height: 18rem;
   }
 `;
 
 export const ImageContainer = styled.div`
-  margin-top: -8rem;
   & > iframe {
     border: none;
     width: 13rem;
@@ -44,7 +39,6 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
 `;
 
 export const Temperature = styled.div`

@@ -3,7 +3,9 @@ import ColorMap from '../../styles/Color';
 import { device } from '../../styles/Breakpoints';
 import { FlexCenter } from '../common-styles';
 
-export const LoginContainer = styled(FlexCenter)``;
+export const LoginContainer = styled(FlexCenter)`
+  height: 100vh;
+`;
 
 export const CardContents = styled(FlexCenter)`
   @media ${device.xs} {

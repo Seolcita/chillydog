@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { device } from '../styles/Breakpoints';
-import { headerHight } from '../components/Header/Header.style';
 
 export const Layout = styled.div`
   width: 100%;
@@ -11,14 +10,16 @@ export const Layout = styled.div`
   margin: auto;
 `;
 
-const calcContainerHeight = 100 - headerHight;
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
-  background-color: black; //TODO: remove after development
-  height: ${calcContainerHeight}vh;
+  background-color: pink; //TODO: remove after development
   display: flex;
+  justify-content: center;
   padding: 0 4rem;
+  min-height: 100vh;
+  max-height: 200vh;
+  overflow: visible;
 
   @media ${device.xs} {
     max-width: 599px;

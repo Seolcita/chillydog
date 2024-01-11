@@ -49,7 +49,7 @@ export const WeatherCard = ({
     <>
       {weatherData && weatherType ? (
         <S.Container tabIndex={0} aria-label='Weather display card'>
-          <s.Visibility $isVisible={isMobile}>
+          <s.Visibility $isVisible={!isMobile}>
             <Typography variant='headingS' color='white' aria-label='city'>
               {weatherData.city}
             </Typography>
@@ -58,8 +58,8 @@ export const WeatherCard = ({
             {<iframe src={WeatherImageUrlMap[weatherType]} />}
           </S.ImageContainer>
           <S.TextContainer>
-            <s.Visibility $isVisible={!isMobile}>
-              <Typography variant='textM' color='white' aria-label='city'>
+            <s.Visibility $isVisible={isMobile}>
+              <Typography variant='headingXS' color='white' aria-label='city'>
                 {weatherData.city}
               </Typography>
             </s.Visibility>
