@@ -4,41 +4,38 @@ import { FlexCenter } from '../../../components/common-styles';
 
 export const Wrapper = styled(FlexCenter)`
   align-items: start;
-  margin-top: 10rem;
-  width: 100%;
+  margin-top: 5rem;
 `;
 
 export const MainLayout = styled.main`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  width: 70%;
+  width: 100%;
 
   @media ${device.xs} {
-    width: 100%;
-    flex-direction: column-reverse;
+    max-width: 50rem;
   }
 
   @media ${device.sm} {
-    width: 90%;
-  }
-
-  @media ${device.md} {
-    width: 70%;
+    min-width: 50rem;
+    max-width: 60rem;
   }
 `;
 
-export const ResultSection = styled.section`
+export const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const CardsSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 2rem;
 `;
 
 export const WeatherSection = styled.section`
   display: flex;
-  padding-top: 7rem;
-
-  @media ${device.xs} {
-    padding-top: 0;
-  }
+  margin-bottom: 2rem;
 `;

@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 import { Result } from '../../hooks/use-result';
 import * as S from './ResultCard.style';
-import { setCardSize, titleColorMap } from './ResultCard.style';
+import { titleColorMap } from './ResultCard.style';
 import { titillium } from '../../styles/Fonts';
-import { DeviceType, useWindowSize } from '../../hooks/use-window-resize';
+import { DeviceType } from '../../hooks/use-window-resize';
 
 interface ResultCardProps {
   name: string;
@@ -23,13 +23,7 @@ const ResultCard = ({
 }: ResultCardProps): ReactElement => {
   return (
     <S.CardContainer>
-      <Card
-        ariaLabel='result card'
-        isPadded
-        tabIndex={0}
-        isInteractive={false}
-        width={setCardSize(deviceType)}
-      >
+      <Card ariaLabel='result card' isPadded tabIndex={0} isInteractive={false}>
         <S.Contents>
           <S.AvatarBox>
             <Image
