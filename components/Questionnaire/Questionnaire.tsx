@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode, useContext } from 'react';
 import { Card, Typography } from 'sk-storybook';
 import { Box } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import * as S from './Questionnaire.styles';
@@ -35,13 +36,19 @@ export const Questionnaire = ({
   dogId,
 }: QuestionnaireProps): ReactElement => {
   const { user } = useContext(UserContext);
+  const router = useRouter();
 
   //TODO: Handle this properly
   if (!user) {
     return <div>loading...</div>;
   }
+  const isLocationScreen = router.pathname.includes('/edit/location');
 
-  const redirectUrl = edit ? `/dog/${dogId}` : `/main?userId=${user.id}`;
+  const editRedirectUrl = isLocationScreen
+    ? `/main?userId=${user.id}`
+    : `/dog/${dogId}`;
+
+  const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user.id}`;
 
   return (
     <S.Container>
