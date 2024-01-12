@@ -62,6 +62,7 @@ const EditDogSizeScreen = (): ReactElement => {
   return (
     <Questionnaire
       edit
+      dogId={dogId as string}
       question={question}
       form={
         <DogSizeForm

@@ -10,31 +10,31 @@ import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-nex
 
 const NameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
-  const userContext = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const router = useRouter();
 
+  //TODO: Handle this properly
+  if (!user) {
+    return <div>loading...</div>;
+  }
+
   const onSubmit = async ({ name }: FormValues) => {
-    try {
-      if (userContext.user) {
-        await axios
-          .post('http://localhost:3001/api/dog/name', {
-            name,
-            userId: userContext.user.id,
-          })
-          .then((res) => {
-            const dog: Dog = res.data;
-            const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
-            router.push(nextScreenUrl);
-          })
-          .catch((error) => {
-            console.error('An error occurred:', error); //TODO: Handle error - Toast message
-          });
-      } else {
-        console.log('no user');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-      // TODO: Handle error - Toast message
+    if (user) {
+      await axios
+        .post('http://localhost:3001/api/dog/name', {
+          name,
+          userId: user.id,
+        })
+        .then((res) => {
+          const dog: Dog = res.data;
+          const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
+          router.push(nextScreenUrl);
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error); //TODO: Handle error - Toast message
+        });
+    } else {
+      console.log('no user');
     }
   };
 

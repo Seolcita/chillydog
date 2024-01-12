@@ -78,7 +78,7 @@ export const AvatarSelectionForm = ({
         textColor='white'
         hasShadow={false}
         fullWidth
-        margin={['xl', 'none', 'sm']}
+        margin={['xl', 'none', 'none', 'none']}
       >
         Next
       </Button>

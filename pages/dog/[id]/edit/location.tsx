@@ -40,6 +40,7 @@ export const EditLocationScreen = (): ReactElement => {
   return (
     <Questionnaire
       edit
+      dogId={dogId as string}
       question={question}
       form={
         user && (

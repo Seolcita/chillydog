@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FlexCenter } from '../../common-styles';
 import ColorMap from '../../../styles/Color';
 
 export const ProfileContainer = styled.div`
