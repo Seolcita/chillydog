@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Button, Typography } from 'sk-storybook';
@@ -73,7 +73,7 @@ export const NameForm = ({
         hasShadow={false}
         disabled={isSubmitting || !!errors.name}
         fullWidth
-        margin={['xl', 'none']}
+        margin={['xl', 'none', 'none', 'none']}
       >
         Next
       </Button>

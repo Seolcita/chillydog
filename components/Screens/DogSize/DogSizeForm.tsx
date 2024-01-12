@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement } from 'react';
 import { Button, Select } from 'sk-storybook';
 
 import * as S from './DogSizeForm.styles';
@@ -45,7 +45,7 @@ export const DogSizeForm = ({
           hasShadow={false}
           disabled={!value?.value} //TODO: make disabled when it is loading
           fullWidth
-          margin={['xl', 'none']}
+          margin={['xl', 'none', 'none', 'none']}
         >
           Next
         </Button>

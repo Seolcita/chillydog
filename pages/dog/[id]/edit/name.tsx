@@ -48,6 +48,7 @@ export const EditNameScreen = (): ReactElement => {
   return (
     <Questionnaire
       edit
+      dogId={dogId as string}
       question={question}
       form={<NameForm onSubmit={onSubmit} initialValueName={dog.name} />}
     />

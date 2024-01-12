@@ -13,6 +13,7 @@ import { getWeatherType } from '../../../hooks/use-weather';
 import { Dog } from '../../../entities/dog.entities';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import { InprogressCards } from '../../InprogressCards/InprogressCards';
+import { Box } from '@mui/material';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
@@ -66,18 +67,20 @@ const Main = (): ReactElement => {
         </S.WeatherSection>
         <S.CardsContainer>
           {/* TODO: make !hasDogs after development*/}
-          {/* {!hasDogs && ( */}
-          <S.CardsSection>
-            <Card
-              tabIndex={0}
-              isPadded
-              isInteractive={false}
-              ariaLabel='Create dog profile card'
-            >
-              <button onClick={handleClick}>Create a dog profile</button>
-            </Card>
-          </S.CardsSection>
-          {/* )} */}
+          {hasDogs && (
+            <Box marginBottom={'2rem'}>
+              <S.CardsSection>
+                <Card
+                  tabIndex={0}
+                  isPadded
+                  isInteractive={false}
+                  ariaLabel='Create dog profile card'
+                >
+                  <button onClick={handleClick}>Create a dog profile</button>
+                </Card>
+              </S.CardsSection>
+            </Box>
+          )}
 
           {hasDogs && hasWeatherInfo && (
             <S.CardsSection>

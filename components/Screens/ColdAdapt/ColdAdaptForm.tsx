@@ -43,7 +43,7 @@ export const ColdAdaptForm = ({
           hasShadow={false}
           disabled={value?.value === undefined} //TODO: make disabled when it is loading
           fullWidth
-          margin={['xl', 'none']}
+          margin={['xl', 'none', 'none', 'none']}
         >
           Next
         </Button>

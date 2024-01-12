@@ -1,9 +1,11 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useContext } from 'react';
 import { Card, Typography } from 'sk-storybook';
+import { Box } from '@mui/material';
 
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import * as S from './Questionnaire.styles';
-import { Box } from '@mui/material';
+import { CloseButton } from '../CloseButton/CloseButton';
+import UserContext from '../../context/user.context';
 
 interface BaseQuestionnaireProps {
   question: string;
@@ -13,11 +15,14 @@ interface BaseQuestionnaireProps {
 interface CurrentStepProps extends BaseQuestionnaireProps {
   currentStep: number;
   edit?: never;
+  dogId?: never;
 }
 
 interface EditProps extends BaseQuestionnaireProps {
+  dogId: string;
   edit: boolean;
   currentStep?: never;
+  userId?: never;
 }
 
 type QuestionnaireProps = CurrentStepProps | EditProps;
@@ -27,7 +32,17 @@ export const Questionnaire = ({
   question,
   form,
   edit,
+  dogId,
 }: QuestionnaireProps): ReactElement => {
+  const { user } = useContext(UserContext);
+
+  //TODO: Handle this properly
+  if (!user) {
+    return <div>loading...</div>;
+  }
+
+  const redirectUrl = edit ? `/dog/${dogId}` : `/main?userId=${user.id}`;
+
   return (
     <S.Container>
       <Card
@@ -37,6 +52,10 @@ export const Questionnaire = ({
         isPadded
         isInteractive={false}
       >
+        <CloseButton
+          redirectUrl={redirectUrl}
+          ariaLabel='Close button for questionnaire'
+        />
         <S.Contents tabIndex={0}>
           {currentStep && !edit && (
             <ProgressBar totalSteps={6} currentStep={currentStep} />
@@ -44,7 +63,7 @@ export const Questionnaire = ({
           <Typography
             variant='headingXS'
             fontWeight='bold'
-            margin={['lg', 'none', 'lg']}
+            margin={['sm', 'none', 'lg']}
           >
             {question}
           </Typography>

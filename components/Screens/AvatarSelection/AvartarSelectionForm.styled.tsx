@@ -9,6 +9,7 @@ type AvatarBoxProps = {
 export const AvatarsContainer = styled(FlexCenter)`
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 `;
 
 export const AvatarsButton = styled.div`

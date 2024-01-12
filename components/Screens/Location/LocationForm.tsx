@@ -1,19 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Button, Typography } from 'sk-storybook';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import UserContext from '../../../context/user.context';
-import { Questionnaire } from '../../Questionnaire/Questionnaire';
 
 import * as S from '../Name/NameForm.styled';
 import { titillium } from '../../../styles/Fonts';
-import { useRouter } from 'next/router';
-import { Dog } from '../../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../../hooks/use-questionnaire-next-screen-url';
 import cities from '../../../utils/city.list.json';
 
 interface LocationFormProps {
@@ -102,7 +96,7 @@ export const LocationForm = ({
         hasShadow={false}
         disabled={isSubmitting || !!errors.cityName}
         fullWidth
-        margin={['xl', 'none']}
+        margin={['xl', 'none', 'none', 'none']}
       >
         Next
       </Button>
