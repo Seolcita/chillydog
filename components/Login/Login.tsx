@@ -19,7 +19,6 @@ const Login = (): ReactElement => {
         height={isMobile ? 45 : 30}
         width={isMobile ? 30 : 65}
         isInteractive={false}
-        isPadded
         ariaLabel='login section'
       >
         <S.CardContents>

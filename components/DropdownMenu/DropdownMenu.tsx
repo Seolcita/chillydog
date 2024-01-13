@@ -28,7 +28,7 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [off, setOff] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
-  const noScale = ['corgi', 'husky', 'login', 'logout', 'location'];
+  const noScale = ['corgi', 'husky', 'login', 'logout', 'location', 'logout'];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
