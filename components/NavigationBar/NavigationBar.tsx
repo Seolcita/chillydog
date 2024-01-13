@@ -45,7 +45,7 @@ export const NavigationBar = (): ReactElement => {
     }
 
     const logout = {
-      avatarPath: '/images/logo/logo.png',
+      avatarPath: '/images/others/logout.png',
       avatarName: 'logout',
       label: 'Logout',
       url: '/auth/signout',

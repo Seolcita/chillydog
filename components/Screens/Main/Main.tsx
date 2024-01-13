@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
-import { useRouter } from 'next/router';
-import { Card } from 'sk-storybook';
 import axios from 'axios';
 
 import * as S from './main.style';
@@ -13,12 +11,13 @@ import { getWeatherType } from '../../../hooks/use-weather';
 import { Dog } from '../../../entities/dog.entities';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import { InprogressCards } from '../../InprogressCards/InprogressCards';
-import { Box } from '@mui/material';
+import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
+import { FlexCenter } from '../../common-styles';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const { deviceType } = useWindowSize();
-  const router = useRouter();
+
   const { user } = useContext(UserContext);
   const weatherType = weatherData && getWeatherType(weatherData.weatherId);
   const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;
@@ -49,60 +48,48 @@ const Main = (): ReactElement => {
     return () => clearInterval(intervalId);
   }, [city]);
 
-  const handleClick = async () => {
-    router.push('/questionnaires/name');
-  };
-
   return (
-    <S.Wrapper>
-      <S.MainLayout>
-        <S.WeatherSection>
-          {user?.location && hasWeatherInfo && (
-            <WeatherCard
-              deviceType={deviceType}
-              weatherData={weatherData}
-              weatherType={weatherType}
-            />
-          )}
-        </S.WeatherSection>
-        <S.CardsContainer>
-          {/* TODO: make !hasDogs after development*/}
-          {hasDogs && (
-            <Box marginBottom={'2rem'}>
-              <S.CardsSection>
-                <Card
-                  tabIndex={0}
-                  isPadded
-                  isInteractive={false}
-                  ariaLabel='Create dog profile card'
-                >
-                  <button onClick={handleClick}>Create a dog profile</button>
-                </Card>
-              </S.CardsSection>
-            </Box>
-          )}
+    <>
+      {!hasDogs ? (
+        <FlexCenter>
+          <CreateDogProfile />
+        </FlexCenter>
+      ) : (
+        <S.Wrapper>
+          <S.MainLayout>
+            <S.WeatherSection>
+              {user?.location && hasWeatherInfo && (
+                <WeatherCard
+                  deviceType={deviceType}
+                  weatherData={weatherData}
+                  weatherType={weatherType}
+                />
+              )}
+            </S.WeatherSection>
+            <S.CardsContainer>
+              {hasDogs && hasWeatherInfo && (
+                <S.CardsSection>
+                  <ResultCards
+                    dogs={user.dogs as Dog[]}
+                    weatherData={weatherData}
+                    weatherType={weatherType}
+                  />
+                </S.CardsSection>
+              )}
 
-          {hasDogs && hasWeatherInfo && (
-            <S.CardsSection>
-              <ResultCards
-                dogs={user.dogs as Dog[]}
-                weatherData={weatherData}
-                weatherType={weatherType}
-              />
-            </S.CardsSection>
-          )}
-
-          {hasDogs && (
-            <S.CardsSection>
-              <InprogressCards
-                dogs={user.dogs as Dog[]}
-                deviceType={deviceType}
-              />
-            </S.CardsSection>
-          )}
-        </S.CardsContainer>
-      </S.MainLayout>
-    </S.Wrapper>
+              {hasDogs && (
+                <S.CardsSection>
+                  <InprogressCards
+                    dogs={user.dogs as Dog[]}
+                    deviceType={deviceType}
+                  />
+                </S.CardsSection>
+              )}
+            </S.CardsContainer>
+          </S.MainLayout>
+        </S.Wrapper>
+      )}
+    </>
   );
 };
 
