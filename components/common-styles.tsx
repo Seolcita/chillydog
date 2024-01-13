@@ -1,14 +1,17 @@
 import styled from 'styled-components';
+import { headerHight } from './Header/Header.style';
 
 export interface VisibilityProps {
   $isVisible: boolean;
 }
 
+const height = `calc(100vh - ${headerHight}rem)`;
+
 export const FlexCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: ${height};
   width: 100%;
 `;
 

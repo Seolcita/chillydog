@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../common-styles';
+import { headerHight } from '../Header/Header.style';
+
+export const Wrap = styled(FlexCenter)``;
 
 export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -5rem;
 `;
 
 export const Contents = styled.section`

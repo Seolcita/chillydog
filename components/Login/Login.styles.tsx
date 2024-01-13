@@ -3,9 +3,7 @@ import ColorMap from '../../styles/Color';
 import { device } from '../../styles/Breakpoints';
 import { FlexCenter } from '../common-styles';
 
-export const LoginContainer = styled(FlexCenter)`
-  height: 100vh;
-`;
+export const LoginContainer = styled(FlexCenter)``;
 
 export const CardContents = styled(FlexCenter)`
   @media ${device.xs} {
@@ -22,8 +20,8 @@ export const LoginImage = styled(FlexCenter)`
 
   & > iframe {
     border: none;
-    width: 80%;
-    height: 70%;
+    width: 60%;
+    height: 50%;
     margin-bottom: -2.5rem;
   }
 `;

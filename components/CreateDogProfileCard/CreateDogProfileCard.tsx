@@ -11,27 +11,29 @@ export const CreateDogProfile = (): ReactElement => {
   };
 
   return (
-    <S.CardContainer>
-      <Card
-        tabIndex={0}
-        isPadded
-        isInteractive={false}
-        ariaLabel='Create dog profile card'
-        width={30}
-      >
-        <S.Contents>
-          <iframe src='https://lottie.host/embed/aea7d986-6070-4116-9bfd-53f2de7a3e3a/J5rYKAGYgF.json'></iframe>
-          <Button
-            bgColor='black'
-            textColor='white'
-            size='s'
-            ariaLabel='Create Dog Profile Button'
-            onClick={handleClick}
-          >
-            Create a dog profile
-          </Button>
-        </S.Contents>
-      </Card>
-    </S.CardContainer>
+    <S.Wrap>
+      <S.CardContainer>
+        <Card
+          tabIndex={0}
+          isPadded
+          isInteractive={false}
+          ariaLabel='Create dog profile card'
+          width={30}
+        >
+          <S.Contents>
+            <iframe src='https://lottie.host/embed/aea7d986-6070-4116-9bfd-53f2de7a3e3a/J5rYKAGYgF.json'></iframe>
+            <Button
+              bgColor='black'
+              textColor='white'
+              size='s'
+              ariaLabel='Create Dog Profile Button'
+              onClick={handleClick}
+            >
+              Create a dog profile
+            </Button>
+          </S.Contents>
+        </Card>
+      </S.CardContainer>
+    </S.Wrap>
   );
 };

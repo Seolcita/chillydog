@@ -12,7 +12,6 @@ import { Dog } from '../../../entities/dog.entities';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import { InprogressCards } from '../../InprogressCards/InprogressCards';
 import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
-import { FlexCenter } from '../../common-styles';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
@@ -51,9 +50,7 @@ const Main = (): ReactElement => {
   return (
     <>
       {!hasDogs ? (
-        <FlexCenter>
-          <CreateDogProfile />
-        </FlexCenter>
+        <CreateDogProfile />
       ) : (
         <S.Wrapper>
           <S.MainLayout>

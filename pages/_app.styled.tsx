@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { device } from '../styles/Breakpoints';
+import { headerHight } from '../components/Header/Header.style';
 
 export const Layout = styled.div`
   width: 100%;
@@ -10,6 +11,8 @@ export const Layout = styled.div`
   margin: auto;
 `;
 
+const bodyHeight = `calc(100vh - ${headerHight}rem)`;
+
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
@@ -17,7 +20,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 4rem;
-  min-height: 100vh;
+  min-height: ${bodyHeight};
   max-height: 200vh;
   overflow: visible;
 
