@@ -15,10 +15,3 @@ export const Header = styled.header`
     padding: 0 2rem;
   }
 `;
-
-export const IconsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import * as S from './CreateDogProfileButton.style';
+import * as S from './CreateDogProfileButton.styles';
 import { useRouter } from 'next/router';
 
 export const CreateDogProfileButton = (): ReactElement => {

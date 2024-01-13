@@ -12,10 +12,7 @@ export const Header = (): ReactElement => {
       <Link href='/'>
         <Logo />
       </Link>
-      <S.IconsContainer>
-        <CreateDogProfileButton />
-        <NavigationBar />
-      </S.IconsContainer>
+      <NavigationBar />
     </S.Header>
   );
 };

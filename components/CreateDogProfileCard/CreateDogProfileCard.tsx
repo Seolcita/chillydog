@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Button, Card } from 'sk-storybook';
 import { useRouter } from 'next/router';
-import * as S from './CreateDogProfileCard.style';
+import * as S from './CreateDogProfileCard.styles';
 import { Box } from '@mui/material';
 
 export const CreateDogProfile = (): ReactElement => {

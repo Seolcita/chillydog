@@ -5,6 +5,8 @@ import { Button } from 'sk-storybook';
 import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
 import UserContext from '../../context/user.context';
 import { RegistrationStatus } from '../../entities/questionnaire.entities';
+import { CreateDogProfileButton } from '../CreateDogProfileButton/CreateDogProfileButton';
+import * as S from './NavigationBar.styles';
 
 export const NavigationBar = (): ReactElement => {
   const { user } = useContext(UserContext);
@@ -56,7 +58,10 @@ export const NavigationBar = (): ReactElement => {
   return (
     <nav>
       {isLoggedIn ? (
-        <DropdownMenu items={dropdownItems} menuLabel='Menu' />
+        <S.IconsContainer>
+          <CreateDogProfileButton />
+          <DropdownMenu items={dropdownItems} menuLabel='Menu' />
+        </S.IconsContainer>
       ) : (
         <Link href='/auth/signin'>
           <Button
