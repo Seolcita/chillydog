@@ -8,6 +8,7 @@ import {
 } from '../../../../components/Screens/Location/LocationForm';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
+import withAuth from '../../../../components/HOC/withAuth';
 
 export const EditLocationScreen = (): ReactElement => {
   const question = `Q. Which city is your dog living?`;
@@ -54,4 +55,4 @@ export const EditLocationScreen = (): ReactElement => {
   );
 };
 
-export default EditLocationScreen;
+export default withAuth(EditLocationScreen);

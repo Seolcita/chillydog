@@ -10,6 +10,7 @@ import {
 } from '../../../../components/Screens/AvatarSelection/AvatarSelectionForm';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
+import withAuth from '../../../../components/HOC/withAuth';
 
 const EditAvatarSelectionScreen = (): ReactElement => {
   const question = `Choose your dog's avatar`;
@@ -73,4 +74,4 @@ const EditAvatarSelectionScreen = (): ReactElement => {
   );
 };
 
-export default EditAvatarSelectionScreen;
+export default withAuth(EditAvatarSelectionScreen);

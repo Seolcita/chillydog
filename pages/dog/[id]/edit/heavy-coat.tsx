@@ -8,6 +8,7 @@ import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { HeavyCoatForm } from '../../../../components/Screens/HeavyCoat/HeavyCoatForm';
+import withAuth from '../../../../components/HOC/withAuth';
 
 const HeavyCoatInitialValueMap: Record<string, Option> = {
   true: { label: 'Yes', value: true },
@@ -73,7 +74,7 @@ const EditHeavyCoatScreen = (): ReactElement => {
   );
 };
 
-export default EditHeavyCoatScreen;
+export default withAuth(EditHeavyCoatScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
