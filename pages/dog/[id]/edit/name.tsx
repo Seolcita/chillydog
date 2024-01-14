@@ -8,6 +8,7 @@ import UserContext from '../../../../context/user.context';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { User } from '../../../../entities/user.entities';
+import withAuth from '../../../../components/HOC/withAuth';
 
 export const EditNameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
@@ -54,4 +55,5 @@ export const EditNameScreen = (): ReactElement => {
     />
   );
 };
-export default EditNameScreen;
+
+export default withAuth(EditNameScreen);

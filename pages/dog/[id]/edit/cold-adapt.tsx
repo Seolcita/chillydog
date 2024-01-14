@@ -8,6 +8,7 @@ import UserContext from '../../../../context/user.context';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { ColdAdaptForm } from '../../../../components/Screens/ColdAdapt/ColdAdaptForm';
 import { User } from '../../../../entities/user.entities';
+import withAuth from '../../../../components/HOC/withAuth';
 
 const ColdAdaptInitialValueMap: Record<string, Option> = {
   true: { label: 'Yes', value: true },
@@ -74,7 +75,7 @@ const EditColdAdaptScreen = (): ReactElement => {
   );
 };
 
-export default EditColdAdaptScreen;
+export default withAuth(EditColdAdaptScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {

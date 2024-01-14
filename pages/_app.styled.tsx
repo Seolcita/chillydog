@@ -21,7 +21,7 @@ export const Container = styled.div`
   justify-content: center;
   padding: 0 4rem;
   min-height: ${bodyHeight};
-  max-height: 200vh;
+  max-height: 1000vh;
   overflow: visible;
 
   @media ${device.xs} {

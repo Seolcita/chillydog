@@ -10,6 +10,7 @@ import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-nex
 import { Dog } from '../../entities/dog.entities';
 import UserContext from '../../context/user.context';
 import { Option } from '../../entities/questionnaire.entities';
+import withAuth from '../../components/HOC/withAuth';
 
 const DogSizeScreen = (): ReactElement => {
   const question = `Q. What is your dog's size?`;
@@ -58,7 +59,7 @@ const DogSizeScreen = (): ReactElement => {
   );
 };
 
-export default DogSizeScreen;
+export default withAuth(DogSizeScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {

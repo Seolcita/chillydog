@@ -9,6 +9,7 @@ import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { DogSize } from '../../../../entities/dog.entities';
 import { Option } from '../../../../entities/questionnaire.entities';
+import withAuth from '../../../../components/HOC/withAuth';
 
 const DogSizeInitialValueMap: Record<DogSize, Option> = {
   [DogSize.SMALL]: { label: 'Small', value: DogSize.SMALL },
@@ -75,7 +76,7 @@ const EditDogSizeScreen = (): ReactElement => {
   );
 };
 
-export default EditDogSizeScreen;
+export default withAuth(EditDogSizeScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {

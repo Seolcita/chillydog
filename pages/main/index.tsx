@@ -11,11 +11,13 @@ interface MainPageGetServerSideProps {
 }
 
 const MainPage = ({ user }: MainPageGetServerSideProps): ReactElement => {
+  if (user === null) {
+    return <div>User is not exist</div>; // TODO: Handle properly
+  }
+
   const { setUser } = useContext(UserContext);
 
-  if (user) {
-    setUser(user);
-  }
+  setUser(user);
 
   return <Main />;
 };

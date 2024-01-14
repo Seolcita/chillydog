@@ -9,6 +9,7 @@ import { Option } from '../../entities/questionnaire.entities';
 import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
+import withAuth from '../../components/HOC/withAuth';
 
 const HeavyCoatScreen = (): ReactElement => {
   const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
@@ -57,7 +58,7 @@ const HeavyCoatScreen = (): ReactElement => {
   );
 };
 
-export default HeavyCoatScreen;
+export default withAuth(HeavyCoatScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {

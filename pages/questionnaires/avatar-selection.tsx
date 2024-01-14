@@ -10,10 +10,11 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
+import withAuth from '../../components/HOC/withAuth';
 
 const AvatarSelectionScreen = (): ReactElement => {
   const question = `Choose your dog's avatar`;
-  const userContext = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
   const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
@@ -26,16 +27,12 @@ const AvatarSelectionScreen = (): ReactElement => {
     event.preventDefault();
     console.log(selectedAvatar);
 
-    if (
-      userContext.user &&
-      selectedAvatar.name !== '' &&
-      selectedAvatar.src !== ''
-    ) {
+    if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
       await axios
         .post('http://localhost:3001/api/dog/avatar-selection', {
           dogId,
           selectedAvatar,
-          userId: userContext.user.id,
+          userId: user.id,
         })
         .then((res) => {
           const dog: Dog = res.data;
@@ -67,4 +64,4 @@ const AvatarSelectionScreen = (): ReactElement => {
   );
 };
 
-export default AvatarSelectionScreen;
+export default withAuth(AvatarSelectionScreen);

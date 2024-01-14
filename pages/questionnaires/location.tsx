@@ -10,6 +10,7 @@ import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import axios from 'axios';
+import withAuth from '../../components/HOC/withAuth';
 
 export const LocationScreen = (): ReactElement => {
   const question = `Q. Which city is your dog living?`;
@@ -50,4 +51,4 @@ export const LocationScreen = (): ReactElement => {
   );
 };
 
-export default LocationScreen;
+export default withAuth(LocationScreen);

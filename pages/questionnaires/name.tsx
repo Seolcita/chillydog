@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
+import withAuth from '../../components/HOC/withAuth';
 
 const NameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
@@ -47,4 +48,4 @@ const NameScreen = (): ReactElement => {
   );
 };
 
-export default NameScreen;
+export default withAuth(NameScreen);

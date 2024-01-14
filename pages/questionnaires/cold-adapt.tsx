@@ -10,6 +10,7 @@ import { Option } from '../../entities/questionnaire.entities';
 import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
+import withAuth from '../../components/HOC/withAuth';
 
 const ColdAdaptScreen = (): ReactElement => {
   const question = `Q. Is your dog acclimated to cold?`;
@@ -59,7 +60,7 @@ const ColdAdaptScreen = (): ReactElement => {
   );
 };
 
-export default ColdAdaptScreen;
+export default withAuth(ColdAdaptScreen);
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
