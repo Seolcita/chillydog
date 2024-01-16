@@ -18,7 +18,7 @@ export const UserContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
-  margin: 2rem 0rem 3rem;
+  margin: 1rem 0 0;
 `;
 
 export const DogContainer = styled.div`
