@@ -3,12 +3,14 @@ import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+
 import { Option } from '../../../../entities/questionnaire.entities';
 import UserContext from '../../../../context/user.context';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { ColdAdaptForm } from '../../../../components/Screens/ColdAdapt/ColdAdaptForm';
 import { User } from '../../../../entities/user.entities';
 import withAuth from '../../../../components/HOC/withAuth';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 
 const ColdAdaptInitialValueMap: Record<string, Option> = {
   true: { label: 'Yes', value: true },
@@ -26,16 +28,24 @@ const EditColdAdaptScreen = (): ReactElement => {
     user.dogs.find((dog) => dog.id === dogId);
 
   if (!dog) {
-    return <div>Loading...</div>; // TODO: Handle properly
+    return (
+      <ErrorCard
+        redirectUrl={`/dog/${dogId}`}
+        buttonText='Go Back To Dog Profile Page'
+      />
+    );
   }
 
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [value, setValue] = useState<Option | undefined>(
     ColdAdaptInitialValueMap[dog.coldAdapt.toString()]
   );
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log(value?.value);
+
+    setIsSubmitting(true);
 
     if (user && value?.value !== undefined) {
       await axios
@@ -45,17 +55,16 @@ const EditColdAdaptScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const user: User = res.data;
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -69,8 +78,10 @@ const EditColdAdaptScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

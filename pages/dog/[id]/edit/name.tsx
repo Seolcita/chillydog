@@ -1,17 +1,20 @@
-import { ReactElement, useContext } from 'react';
-import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
+import { ReactElement, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
 import {
   FormValues,
   NameForm,
 } from '../../../../components/Screens/Name/NameForm';
 import UserContext from '../../../../context/user.context';
-import axios from 'axios';
-import { useRouter } from 'next/router';
 import { User } from '../../../../entities/user.entities';
 import withAuth from '../../../../components/HOC/withAuth';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 
 export const EditNameScreen = (): ReactElement => {
-  const question = `Q. What is your dog's name?`;
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
@@ -19,13 +22,19 @@ export const EditNameScreen = (): ReactElement => {
     user?.dogs !== undefined &&
     user?.dogs.length > 0 &&
     user.dogs.find((dog) => dog.id === dogId);
+  const question = `Q. What is your dog's name?`;
 
   if (!dog) {
-    return <div>Loading...</div>; // TODO: Handle properly
+    return (
+      <ErrorCard
+        redirectUrl={`/dog/${dogId}`}
+        buttonText='Go Back To Dog Profile Page'
+      />
+    );
   }
 
   const onSubmit = async ({ name }: FormValues) => {
-    if (user) {
+    if (user && name && dogId) {
       await axios
         .put('http://localhost:3001/api/dog/name/edit', {
           name,
@@ -33,16 +42,14 @@ export const EditNameScreen = (): ReactElement => {
           dogId,
         })
         .then((res) => {
-          //TODO: update only dog name
           const user: User = res.data;
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          console.error('An error occurred:', error); //TODO: Handle error - Toast message
+          setErrorMessage('Oops! Something went wrong. Please try again.');
+          console.error('An error occurred:', error);
         });
-    } else {
-      console.log('no user');
     }
   };
 
@@ -52,6 +59,7 @@ export const EditNameScreen = (): ReactElement => {
       dogId={dogId as string}
       question={question}
       form={<NameForm onSubmit={onSubmit} initialValueName={dog.name} />}
+      errorMessage={errorMessage}
     />
   );
 };

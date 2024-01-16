@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement, useContext, useState } from 'react';
-import { Button, Select } from 'sk-storybook';
+import { ReactElement } from 'react';
+import { Button, Select, Spinner } from 'sk-storybook';
 
 import * as S from './HeavyCoatForm.styles';
 import { Option } from '../../../entities/questionnaire.entities';
@@ -10,6 +10,7 @@ interface HeavyCoatFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
   setValue: React.Dispatch<React.SetStateAction<Option | undefined>>;
   value: Option | undefined;
+  isSubmitting: boolean;
 }
 
 const options: Option[] = [
@@ -21,11 +22,12 @@ export const HeavyCoatForm = ({
   handleSubmit,
   setValue,
   value,
+  isSubmitting,
 }: HeavyCoatFormProps): ReactElement => {
   return (
     <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <Box marginTop={'1rem'}>
+        <Box marginTop={'1rem'} marginBottom={'2rem'}>
           <Select
             value={value}
             options={options}
@@ -41,11 +43,11 @@ export const HeavyCoatForm = ({
           bgColor='black'
           textColor='white'
           hasShadow={false}
-          disabled={value?.value === undefined} //TODO: make disabled when it is loading
+          disabled={value?.value === undefined || isSubmitting}
           fullWidth
           margin={['xl', 'none', 'none', 'none']}
         >
-          Next
+          {isSubmitting ? <Spinner size='xs' /> : 'Continue'}
         </Button>
       </form>
     </S.Container>

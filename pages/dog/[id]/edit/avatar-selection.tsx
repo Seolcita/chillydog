@@ -3,14 +3,15 @@ import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import UserContext from '../../../../context/user.context';
 import {
   AvatarSelectionForm,
   SelectedAvatar,
 } from '../../../../components/Screens/AvatarSelection/AvatarSelectionForm';
+import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import withAuth from '../../../../components/HOC/withAuth';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 
 const EditAvatarSelectionScreen = (): ReactElement => {
   const question = `Choose your dog's avatar`;
@@ -23,9 +24,16 @@ const EditAvatarSelectionScreen = (): ReactElement => {
     user.dogs.find((dog) => dog.id === dogId);
 
   if (!dog) {
-    return <div>Loading...</div>; // TODO: Handle properly
+    return (
+      <ErrorCard
+        redirectUrl={`/dog/${dogId}`}
+        buttonText='Go Back To Dog Profile Page'
+      />
+    );
   }
 
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
     name: dog.avatar.name,
     src: dog.avatar.src,
@@ -34,7 +42,8 @@ const EditAvatarSelectionScreen = (): ReactElement => {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.stopPropagation();
     event.preventDefault();
-    console.log(selectedAvatar);
+
+    setIsSubmitting(true);
 
     if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
       await axios
@@ -44,17 +53,16 @@ const EditAvatarSelectionScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const user: User = res.data;
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -68,8 +76,10 @@ const EditAvatarSelectionScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setSelectedAvatar}
           value={selectedAvatar}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

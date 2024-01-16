@@ -1,23 +1,26 @@
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import UserContext from '../../../../context/user.context';
+
 import {
   FormValues,
   LocationForm,
 } from '../../../../components/Screens/Location/LocationForm';
+import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import withAuth from '../../../../components/HOC/withAuth';
 
 export const EditLocationScreen = (): ReactElement => {
-  const question = `Q. Which city is your dog living?`;
-  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+
   const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
   const dogId = router.query.id;
+  const question = `Q. Which city is your dog living?`;
 
   const onSubmit = async ({ cityName }: FormValues) => {
-    if (user) {
+    if (user && cityName) {
       await axios
         .put('http://localhost:3001/api/dog/location/edit', {
           location: cityName,
@@ -29,12 +32,9 @@ export const EditLocationScreen = (): ReactElement => {
           router.push(`/main?userId=${user.id}`);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -51,6 +51,7 @@ export const EditLocationScreen = (): ReactElement => {
           />
         )
       }
+      errorMessage={errorMessage}
     />
   );
 };

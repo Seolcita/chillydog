@@ -13,15 +13,18 @@ import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-nex
 import withAuth from '../../components/HOC/withAuth';
 
 const ColdAdaptScreen = (): ReactElement => {
-  const question = `Q. Is your dog acclimated to cold?`;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [value, setValue] = useState<Option | undefined>();
   const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
+  const question = `Q. Is your dog acclimated to cold?`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log(value?.value);
+
+    setIsSubmitting(true);
 
     if (user && value?.value !== undefined) {
       await axios
@@ -31,17 +34,16 @@ const ColdAdaptScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const dog: Dog = res.data;
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -54,8 +56,10 @@ const ColdAdaptScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

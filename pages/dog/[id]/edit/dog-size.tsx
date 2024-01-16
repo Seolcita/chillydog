@@ -10,6 +10,7 @@ import { Questionnaire } from '../../../../components/Questionnaire/Questionnair
 import { DogSize } from '../../../../entities/dog.entities';
 import { Option } from '../../../../entities/questionnaire.entities';
 import withAuth from '../../../../components/HOC/withAuth';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 
 const DogSizeInitialValueMap: Record<DogSize, Option> = {
   [DogSize.SMALL]: { label: 'Small', value: DogSize.SMALL },
@@ -28,16 +29,25 @@ const EditDogSizeScreen = (): ReactElement => {
     user.dogs.find((dog) => dog.id === dogId);
 
   if (!dog) {
-    return <div>Loading...</div>; // TODO: Handle properly
+    return (
+      <ErrorCard
+        redirectUrl={`/dog/${dogId}`}
+        buttonText='Go Back To Dog Profile Page'
+      />
+    );
   }
 
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [value, setValue] = useState<Option | undefined>(
     DogSizeInitialValueMap[dog.dogSize]
   );
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(value?.value);
+
+    setIsSubmitting(true);
+
     if (user && value?.value) {
       await axios
         .put('http://localhost:3001/api/dog/dog-size/edit', {
@@ -46,17 +56,16 @@ const EditDogSizeScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const user: User = res.data;
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      // TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -70,8 +79,10 @@ const EditDogSizeScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

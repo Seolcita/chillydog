@@ -13,14 +13,17 @@ import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-nex
 import withAuth from '../../components/HOC/withAuth';
 
 const AvatarSelectionScreen = (): ReactElement => {
-  const question = `Choose your dog's avatar`;
-  const { user } = useContext(UserContext);
-  const router = useRouter();
-  const dogId = router.query.dogId;
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
     name: '',
     src: '',
   });
+
+  const { user } = useContext(UserContext);
+  const router = useRouter();
+  const dogId = router.query.dogId;
+  const question = `Choose your dog's avatar`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.stopPropagation();
@@ -28,6 +31,8 @@ const AvatarSelectionScreen = (): ReactElement => {
     console.log(selectedAvatar);
 
     if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
+      setIsSubmitting(true);
+
       await axios
         .post('http://localhost:3001/api/dog/avatar-selection', {
           dogId,
@@ -35,17 +40,24 @@ const AvatarSelectionScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const dog: Dog = res.data;
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
+      if (!user) {
+        setErrorMessage('User not found. Please login.');
+        router.push('/auth/signin');
+      } else {
+        setIsSubmitting(false);
+        setErrorMessage('Dog size not found. Please try again.');
+      }
     }
   };
 
@@ -58,8 +70,10 @@ const AvatarSelectionScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setSelectedAvatar}
           value={selectedAvatar}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

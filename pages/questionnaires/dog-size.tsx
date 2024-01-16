@@ -13,15 +13,20 @@ import { Option } from '../../entities/questionnaire.entities';
 import withAuth from '../../components/HOC/withAuth';
 
 const DogSizeScreen = (): ReactElement => {
-  const question = `Q. What is your dog's size?`;
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [value, setValue] = useState<Option | undefined>();
+
   const router = useRouter();
   const dogId = router.query.dogId;
   const { user } = useContext(UserContext);
-  const [value, setValue] = useState<Option | undefined>();
+  const question = `Q. What is your dog's size?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(value?.value);
+
+    setIsSubmitting(true);
+
     if (user && value?.value) {
       await axios
         .post('http://localhost:3001/api/dog/dog-size', {
@@ -30,17 +35,16 @@ const DogSizeScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const dog: Dog = res.data;
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
-    } else {
-      // TODO: Handle error - Toast message
-      console.log('no user');
     }
   };
 
@@ -53,8 +57,10 @@ const DogSizeScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

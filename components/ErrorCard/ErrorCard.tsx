@@ -1,12 +1,24 @@
 import { ReactElement } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
-import { useRouter } from 'next/router';
-import * as S from './CreateDogProfileCard.styles';
 
-export const CreateDogProfile = (): ReactElement => {
+import * as S from './ErrorCard.styles';
+import { useRouter } from 'next/router';
+
+interface ErrorCardProps {
+  redirectUrl: string;
+  message?: string;
+  buttonText?: string;
+}
+
+export const ErrorCard = ({
+  message = 'Something went wrong',
+  redirectUrl,
+  buttonText = 'Go to main page',
+}: ErrorCardProps): ReactElement => {
   const router = useRouter();
+
   const handleClick = async () => {
-    router.push('/questionnaires/name');
+    router.push(redirectUrl);
   };
 
   return (
@@ -14,26 +26,26 @@ export const CreateDogProfile = (): ReactElement => {
       <S.CardContainer>
         <Card
           tabIndex={0}
+          ariaLabel='Error Card'
           isPadded
           isInteractive={false}
-          ariaLabel='Create dog profile card'
-          width={30}
         >
           <S.Contents>
-            <iframe src='https://lottie.host/embed/aea7d986-6070-4116-9bfd-53f2de7a3e3a/J5rYKAGYgF.json'></iframe>
-            {/* TODO: Add information */}
-            {/* <Typography variant='textL'>
-              The app calculates results based on pet profiles and weather
-              information.
-            </Typography> */}
+            <S.ImageBox>
+              <iframe src='https://lottie.host/embed/0491bcbb-4b57-4def-9234-c10cc1ef5952/5JeDrX9lFN.json'></iframe>
+            </S.ImageBox>
+            <Typography variant='headingXS' margin={['xl', 'none']}>
+              {message}
+            </Typography>
             <Button
               bgColor='black'
               textColor='white'
               size='s'
               ariaLabel='Create Dog Profile Button'
               onClick={handleClick}
+              fullWidth
             >
-              Create a dog profile
+              {buttonText}
             </Button>
           </S.Contents>
         </Card>

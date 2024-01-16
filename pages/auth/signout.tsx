@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import UserContext from '../../context/user.context';
 import Login from '../../components/Login/Login';
+import * as S from '../../components/common-styles';
+import { Loader } from '../../components/LineLoader/LineLoader';
 
 export interface SignoutSuccessGetServerSideProps {
   status: number;
@@ -18,7 +20,17 @@ export const Signout = ({
     userCtx.setUser(null);
   }
 
-  return <>{status === 200 ? <Login /> : <div>Loading...</div>}</>; //TODO: Add loading spinner
+  return (
+    <>
+      {status === 200 ? (
+        <Login />
+      ) : (
+        <S.FlexCenter>
+          <Loader />
+        </S.FlexCenter>
+      )}
+    </>
+  );
 };
 
 export async function getServerSideProps(context: any) {
