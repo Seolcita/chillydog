@@ -1,14 +1,16 @@
 import { ReactElement, useContext, useState } from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
-import { Card, Spinner, Typography } from 'sk-storybook';
+import { Button, Card, Typography } from 'sk-storybook';
 import CancelIcon from '@mui/icons-material/Cancel';
+import PetsIcon from '@mui/icons-material/Pets';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { Box } from '@mui/material';
 import axios from 'axios';
 
+import { InProgressDogInfoCard } from '../../InProgressDogInfoCard/InProgressDogInfoCard';
 import { RegistrationStatus } from '../../../entities/questionnaire.entities';
 import { Notification } from '../../Notification/Notification';
+import { UserInfoCard } from '../../UserInfoCard/UserInfoCard';
+import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
 import UserContext from '../../../context/user.context';
 import { User } from '../../../entities/user.entities';
 import * as S from './UserProfile.styles';
@@ -20,9 +22,22 @@ export const UserProfile = (): ReactElement => {
 
   const router = useRouter();
   const { user, setUser } = useContext(UserContext);
-  const hasDogs = user?.dogs !== undefined && user?.dogs.length > 0;
 
-  //TODO: handle modal before deleting dog
+  const checkDogProfiles = (status: RegistrationStatus): boolean => {
+    const result =
+      user?.dogs !== undefined &&
+      user?.dogs.length > 0 &&
+      user.dogs.filter((dog) => dog.registrationStatus === status).length > 0;
+
+    return result;
+  };
+
+  const hasCompletedProfiles = checkDogProfiles(RegistrationStatus.COMPLETED);
+
+  const hasInProgressProfiles = checkDogProfiles(
+    RegistrationStatus.IN_PROGRESS
+  );
+
   const handleSubmit = async (
     event: React.SyntheticEvent,
     dogId: string,
@@ -41,11 +56,13 @@ export const UserProfile = (): ReactElement => {
           setIsSubmitting(false);
           const user: User = res.data;
           setUser(user);
-          setSuccessMessage(`${dogName} is deleted successfully.`);
+          setSuccessMessage(`${dogName} profile is deleted successfully.`);
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(`Fail to delete ${dogName}. Please try again`);
+          setErrorMessage(
+            `Fail to delete ${dogName} profile. Please try again`
+          );
           console.error('An error occurred:', error);
         });
     } else {
@@ -55,7 +72,6 @@ export const UserProfile = (): ReactElement => {
     }
   };
 
-  // TODO: Simplify this component. Separate into two components for userInfo and dogInfo
   return (
     <>
       {user && (
@@ -74,120 +90,87 @@ export const UserProfile = (): ReactElement => {
               >
                 <CancelIcon fontSize='large' />
               </S.CloseButton>
-              <S.UserContainer>
-                <S.AvatarContainer>
-                  <Image
-                    src={user.photoUrl}
-                    width={80}
-                    height={80}
-                    alt={`${user.firstName} avatar`}
-                    style={{
-                      borderRadius: '10rem',
-                      transform: 'scale(1.3)',
-                      margin: ' 3rem  0rem',
-                    }}
-                    priority={true}
-                    draggable={false}
-                  />
-                </S.AvatarContainer>
 
-                <S.Content>
-                  <Typography
-                    variant='textM'
-                    margin={['none', 'lg', 'none', 'none']}
-                    fontWeight='bold'
-                  >
-                    Name:
-                  </Typography>
-                  <S.Texts>
-                    <Typography variant='textM'>
-                      {user.firstName} {user.lastName}
-                    </Typography>
-                  </S.Texts>
-                </S.Content>
+              <UserInfoCard user={user} />
 
-                <S.Content>
-                  <Typography
-                    variant='textM'
-                    margin={['none', 'lg', 'none', 'none']}
-                    fontWeight='bold'
-                  >
-                    Email:
-                  </Typography>
-                  <S.Texts>
-                    <Typography variant='textM'>{user.email}</Typography>
-                  </S.Texts>
-                </S.Content>
-              </S.UserContainer>
+              <Box margin={'1rem auto'}>
+                <Typography
+                  variant='textL'
+                  fontWeight='bold'
+                  margin={['xl', 'none', 'md', 'none']}
+                >
+                  Dog Profiles
+                </Typography>
+              </Box>
+
               <Typography
-                variant='textS'
+                variant='textM'
+                fontWeight='bold'
                 margin={['none', 'none', 'md', 'none']}
               >
-                {/* TODO: If no dogs, add dog button */}
-                {hasDogs ? `${user.firstName}'s dogs` : 'No dogs yet'}
+                Completed
               </Typography>
-              {user &&
-                user.dogs !== undefined &&
-                user?.dogs.length > 0 &&
+              {user && user.dogs !== undefined && user?.dogs.length > 0 ? (
                 user?.dogs.map((dog) => {
-                  return (
-                    dog.registrationStatus === RegistrationStatus.COMPLETED && (
-                      <Card
-                        key={dog.id}
-                        tabIndex={0}
-                        isInteractive={false}
-                        isPadded={true}
-                        ariaLabel='Dog Profile Card'
-                        height={5}
-                        margin={['none', 'none', 'md', 'none']}
-                      >
-                        <S.DogContainer>
-                          <S.AvatarContainer>
-                            <Image
-                              src={`/images/avatars/${dog.avatar.name}.png`}
-                              width={50}
-                              height={50}
-                              alt={`${dog.name} avatar`}
-                              style={{
-                                borderRadius: '10rem',
-                                transform: 'scale(1.4)',
-                                marginRight: '1rem',
-                              }}
-                              priority={true}
-                              draggable={false}
-                            />
-                          </S.AvatarContainer>
-                          <S.Texts>
-                            <Typography variant='textM'>{dog.name}</Typography>
-                          </S.Texts>
-                          <>
-                            <S.Button
-                              onClick={() => router.push(`/dog/${dog.id}`)}
-                              aria-label={`${dog.name} profile button`}
-                            >
-                              <SourceOutlinedIcon fontSize='large' />
-                            </S.Button>
-                            <form
-                              onSubmit={(event) =>
-                                handleSubmit(event, dog.id, dog.name)
-                              }
-                            >
-                              <S.Button
-                                aria-label={`Delete ${dog.name} button`}
-                              >
-                                {isSubmitting ? (
-                                  <Spinner size='xs' />
-                                ) : (
-                                  <DeleteForeverIcon fontSize='large' />
-                                )}
-                              </S.Button>
-                            </form>
-                          </>
-                        </S.DogContainer>
-                      </Card>
+                  return dog.registrationStatus ===
+                    RegistrationStatus.COMPLETED ? (
+                    <DogInfoCard
+                      dog={dog}
+                      handleSubmit={handleSubmit}
+                      isSubmitting={isSubmitting}
+                    />
+                  ) : (
+                    !hasCompletedProfiles && (
+                      //TODO: Replace with Badge component once Storybook is updated
+                      <Typography variant='textS'>- None</Typography>
                     )
                   );
-                })}
+                })
+              ) : (
+                <>
+                  {/* TODO: Replace with Badge component once Storybook is updated */}
+                  <Typography variant='textS'>- None</Typography>
+                  <Button
+                    size='xs'
+                    variant='outlined'
+                    textColor='black'
+                    ariaLabel='Create dog profile button'
+                    margin={['md', 'none', 'none']}
+                    onClick={() => router.push('/questionnaires/name')}
+                  >
+                    Create Dog Profile&nbsp;&nbsp;
+                    <PetsIcon fontSize='medium' />
+                  </Button>
+                </>
+              )}
+
+              <Typography
+                variant='textM'
+                fontWeight='bold'
+                margin={['xl', 'none', 'md', 'none']}
+              >
+                In Progress
+              </Typography>
+              {user && user.dogs !== undefined && user?.dogs.length > 0 ? (
+                user?.dogs.map((dog) => {
+                  return dog.registrationStatus ===
+                    RegistrationStatus.IN_PROGRESS ? (
+                    <InProgressDogInfoCard
+                      dog={dog}
+                      handleSubmit={handleSubmit}
+                      isSubmitting={isSubmitting}
+                    />
+                  ) : (
+                    !hasInProgressProfiles && (
+                      //TODO: Replace with Badge component once Storybook is updated
+                      <Typography variant='textS'>- None</Typography>
+                    )
+                  );
+                })
+              ) : (
+                //TODO: Replace with Badge component once Storybook is updated
+                <Typography variant='textS'>- None</Typography>
+              )}
             </S.Wrapper>
           </Card>
           {errorMessage && (
