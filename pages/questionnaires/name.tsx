@@ -17,7 +17,7 @@ const NameScreen = (): ReactElement => {
   const question = `Q. What is your dog's name?`;
 
   const onSubmit = async ({ name }: FormValues) => {
-    if (user) {
+    if (user && name) {
       await axios
         .post('http://localhost:3001/api/dog/name', {
           name,

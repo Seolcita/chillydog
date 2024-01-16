@@ -41,17 +41,13 @@ export const Questionnaire = ({
   const { user } = useContext(UserContext);
   const router = useRouter();
 
-  //TODO: Handle this properly
-  if (!user) {
-    return <div>loading...</div>;
-  }
   const isLocationScreen = router.pathname.includes('/edit/location');
 
   const editRedirectUrl = isLocationScreen
-    ? `/main?userId=${user.id}`
+    ? `/main?userId=${user?.id}`
     : `/dog/${dogId}`;
 
-  const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user.id}`;
+  const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user?.id}`;
 
   return (
     <S.Container>
