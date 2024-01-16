@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import UserContext from '../../../../context/user.context';
-import { DogSizeForm } from '../../../../components/Screens/DogSize/DogSizeForm';
-import { User } from '../../../../entities/user.entities';
+import axios from 'axios';
+
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
-import { DogSize } from '../../../../entities/dog.entities';
-import { Option } from '../../../../entities/questionnaire.entities';
-import withAuth from '../../../../components/HOC/withAuth';
+import { DogSizeForm } from '../../../../components/Screens/DogSize/DogSizeForm';
 import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import { Option } from '../../../../entities/questionnaire.entities';
+import { DogSize } from '../../../../entities/dog.entities';
+import withAuth from '../../../../components/HOC/withAuth';
+import UserContext from '../../../../context/user.context';
+import { User } from '../../../../entities/user.entities';
 
 const DogSizeInitialValueMap: Record<DogSize, Option> = {
   [DogSize.SMALL]: { label: 'Small', value: DogSize.SMALL },
@@ -19,6 +20,7 @@ const DogSizeInitialValueMap: Record<DogSize, Option> = {
 };
 
 const EditDogSizeScreen = (): ReactElement => {
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's size?`;
   const router = useRouter();
   const dogId = router.query.id;
@@ -63,9 +65,13 @@ const EditDogSizeScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('dogSize or user is undefined');
     }
   };
 

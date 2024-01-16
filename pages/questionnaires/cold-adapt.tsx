@@ -4,21 +4,23 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { ColdAdaptForm } from '../../components/Screens/ColdAdapt/ColdAdaptForm';
+import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { Option } from '../../entities/questionnaire.entities';
+import withAuth from '../../components/HOC/withAuth';
 import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
-import withAuth from '../../components/HOC/withAuth';
 
 const ColdAdaptScreen = (): ReactElement => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [value, setValue] = useState<Option | undefined>();
+
   const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog acclimated to cold?`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -41,9 +43,13 @@ const ColdAdaptScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('coldAdapt or user is undefined');
     }
   };
 

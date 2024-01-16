@@ -1,9 +1,10 @@
 import { ReactElement, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+
 import { DogProfile } from '../../../components/Screens/DogProfile/DogProfile';
+import { ErrorCard } from '../../../components/ErrorCard/ErrorCard';
 import withAuth from '../../../components/HOC/withAuth';
 import UserContext from '../../../context/user.context';
-import { ErrorCard } from '../../../components/ErrorCard/ErrorCard';
 
 export const DogProfilePage = (): ReactElement => {
   const router = useRouter();

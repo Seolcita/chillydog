@@ -14,6 +14,7 @@ const NameScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const { user } = useContext(UserContext);
   const router = useRouter();
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's name?`;
 
   const onSubmit = async ({ name }: FormValues) => {
@@ -29,16 +30,12 @@ const NameScreen = (): ReactElement => {
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
     } else {
-      if (!user) {
-        setErrorMessage('User not found. Please login.');
-        router.push('/auth/signin');
-      } else {
-        setErrorMessage('Dog name not found. Please try again.');
-      }
+      setErrorMessage(errMessage);
+      console.error('dog name or user is undefined');
     }
   };
 

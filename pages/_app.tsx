@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
+import { UserContextProvider } from '../context/user.context';
+import { Header } from '../components/Header/Header';
 import { GlobalStyles } from '../styles/Global';
 import { theme } from '../styles/Theme';
-import { Header } from '../components/Header/Header';
-import { UserContextProvider } from '../context/user.context';
 import * as S from './_app.styled';
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { DogSizeForm } from '../../components/Screens/DogSize/DogSizeForm';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
-import { Dog } from '../../entities/dog.entities';
-import UserContext from '../../context/user.context';
 import { Option } from '../../entities/questionnaire.entities';
+import UserContext from '../../context/user.context';
 import withAuth from '../../components/HOC/withAuth';
+import { Dog } from '../../entities/dog.entities';
 
 const DogSizeScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -20,6 +20,7 @@ const DogSizeScreen = (): ReactElement => {
   const router = useRouter();
   const dogId = router.query.dogId;
   const { user } = useContext(UserContext);
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's size?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -42,9 +43,13 @@ const DogSizeScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('dog size or user is undefined');
     }
   };
 

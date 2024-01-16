@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import {
   AvatarSelectionForm,
   SelectedAvatar,
 } from '../../components/Screens/AvatarSelection/AvatarSelectionForm';
 import UserContext from '../../context/user.context';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import { Dog } from '../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import withAuth from '../../components/HOC/withAuth';
+import { Dog } from '../../entities/dog.entities';
 
 const AvatarSelectionScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -23,6 +24,7 @@ const AvatarSelectionScreen = (): ReactElement => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Choose your dog's avatar`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -47,17 +49,13 @@ const AvatarSelectionScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
     } else {
-      if (!user) {
-        setErrorMessage('User not found. Please login.');
-        router.push('/auth/signin');
-      } else {
-        setIsSubmitting(false);
-        setErrorMessage('Dog size not found. Please try again.');
-      }
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('avatar or user is undefined');
     }
   };
 

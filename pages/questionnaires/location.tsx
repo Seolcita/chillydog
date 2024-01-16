@@ -19,6 +19,7 @@ export const LocationScreen = (): ReactElement => {
   const router = useRouter();
   const { user } = useContext(UserContext);
   const dogId = router.query.dogId;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Which city is your dog living?`;
 
   const onSubmit = async ({ cityName }: FormValues) => {
@@ -35,16 +36,12 @@ export const LocationScreen = (): ReactElement => {
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
     } else {
-      if (!user) {
-        setErrorMessage('User not found. Please login.');
-        router.push('/auth/signin');
-      } else {
-        setErrorMessage('Location value not found. Please try again.');
-      }
+      setErrorMessage(errMessage);
+      console.error('cityName or user is undefined');
     }
   };
 

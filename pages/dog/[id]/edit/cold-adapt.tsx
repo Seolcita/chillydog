@@ -4,13 +4,13 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import { Option } from '../../../../entities/questionnaire.entities';
-import UserContext from '../../../../context/user.context';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { ColdAdaptForm } from '../../../../components/Screens/ColdAdapt/ColdAdaptForm';
-import { User } from '../../../../entities/user.entities';
-import withAuth from '../../../../components/HOC/withAuth';
 import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import { Option } from '../../../../entities/questionnaire.entities';
+import UserContext from '../../../../context/user.context';
+import withAuth from '../../../../components/HOC/withAuth';
+import { User } from '../../../../entities/user.entities';
 
 const ColdAdaptInitialValueMap: Record<string, Option> = {
   true: { label: 'Yes', value: true },
@@ -18,6 +18,7 @@ const ColdAdaptInitialValueMap: Record<string, Option> = {
 };
 
 const EditColdAdaptScreen = (): ReactElement => {
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog acclimated to cold?`;
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
@@ -62,9 +63,13 @@ const EditColdAdaptScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('coldAdapt or user is undefined');
     }
   };
 

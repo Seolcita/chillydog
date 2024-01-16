@@ -2,10 +2,10 @@
 import { ReactElement, useContext } from 'react';
 import axios from 'axios';
 
-import UserContext from '../../context/user.context';
-import Login from '../../components/Login/Login';
-import * as S from '../../components/common-styles';
 import { Loader } from '../../components/LineLoader/LineLoader';
+import UserContext from '../../context/user.context';
+import * as S from '../../components/common-styles';
+import Login from '../../components/Login/Login';
 
 export interface SignoutSuccessGetServerSideProps {
   status: number;
@@ -52,7 +52,6 @@ export async function getServerSideProps(context: any) {
         },
       })
       .then((res) => {
-        console.log('res🧪', res.status);
         return { props: res.status === 200 && { status: res.status } };
       });
   } catch (error) {

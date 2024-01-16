@@ -22,6 +22,7 @@ export const EditNameScreen = (): ReactElement => {
     user?.dogs !== undefined &&
     user?.dogs.length > 0 &&
     user.dogs.find((dog) => dog.id === dogId);
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's name?`;
 
   if (!dog) {
@@ -47,9 +48,12 @@ export const EditNameScreen = (): ReactElement => {
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setErrorMessage(errMessage);
+      console.error('dog name or user is undefined');
     }
   };
 

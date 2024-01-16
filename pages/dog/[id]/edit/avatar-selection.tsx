@@ -7,13 +7,14 @@ import {
   AvatarSelectionForm,
   SelectedAvatar,
 } from '../../../../components/Screens/AvatarSelection/AvatarSelectionForm';
+import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import withAuth from '../../../../components/HOC/withAuth';
 import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
-import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
-import withAuth from '../../../../components/HOC/withAuth';
-import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 
 const EditAvatarSelectionScreen = (): ReactElement => {
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Choose your dog's avatar`;
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
@@ -60,9 +61,13 @@ const EditAvatarSelectionScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('avatar or user is undefined');
     }
   };
 

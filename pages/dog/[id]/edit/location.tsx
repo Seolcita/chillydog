@@ -17,6 +17,7 @@ export const EditLocationScreen = (): ReactElement => {
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Which city is your dog living?`;
 
   const onSubmit = async ({ cityName }: FormValues) => {
@@ -32,9 +33,12 @@ export const EditLocationScreen = (): ReactElement => {
           router.push(`/main?userId=${user.id}`);
         })
         .catch((error) => {
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setErrorMessage(errMessage);
+      console.error('cityName or user is undefined');
     }
   };
 

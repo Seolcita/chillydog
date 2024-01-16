@@ -1,17 +1,17 @@
 import { ReactElement, useContext, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { Card, Spinner, Typography } from 'sk-storybook';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import axios from 'axios';
 
 import { RegistrationStatus } from '../../../entities/questionnaire.entities';
+import { Notification } from '../../Notification/Notification';
 import UserContext from '../../../context/user.context';
 import { User } from '../../../entities/user.entities';
 import * as S from './UserProfile.styles';
-import { Notification } from '../../Notification/Notification';
 
 export const UserProfile = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -48,9 +48,14 @@ export const UserProfile = (): ReactElement => {
           setErrorMessage(`Fail to delete ${dogName}. Please try again`);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage('Oops! Something went wrong. Please try again.');
+      console.error('dogId or user is undefined');
     }
   };
 
+  // TODO: Simplify this component. Separate into two components for userInfo and dogInfo
   return (
     <>
       {user && (

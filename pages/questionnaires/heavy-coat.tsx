@@ -20,6 +20,7 @@ const HeavyCoatScreen = (): ReactElement => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -42,9 +43,13 @@ const HeavyCoatScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
+    } else {
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('heavyCoat or user is undefined');
     }
   };
 
