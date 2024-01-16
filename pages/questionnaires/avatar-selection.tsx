@@ -1,26 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import {
   AvatarSelectionForm,
   SelectedAvatar,
 } from '../../components/Screens/AvatarSelection/AvatarSelectionForm';
 import UserContext from '../../context/user.context';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import { Dog } from '../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import withAuth from '../../components/HOC/withAuth';
+import { Dog } from '../../entities/dog.entities';
 
 const AvatarSelectionScreen = (): ReactElement => {
-  const question = `Choose your dog's avatar`;
-  const { user } = useContext(UserContext);
-  const router = useRouter();
-  const dogId = router.query.dogId;
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
     name: '',
     src: '',
   });
+
+  const { user } = useContext(UserContext);
+  const router = useRouter();
+  const dogId = router.query.dogId;
+  const errMessage = 'Oops! Something went wrong. Please try again.';
+  const question = `Choose your dog's avatar`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.stopPropagation();
@@ -28,6 +33,8 @@ const AvatarSelectionScreen = (): ReactElement => {
     console.log(selectedAvatar);
 
     if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
+      setIsSubmitting(true);
+
       await axios
         .post('http://localhost:3001/api/dog/avatar-selection', {
           dogId,
@@ -35,17 +42,20 @@ const AvatarSelectionScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const dog: Dog = res.data;
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage(errMessage);
           console.error('An error occurred:', error);
         });
     } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
+      setIsSubmitting(false);
+      setErrorMessage(errMessage);
+      console.error('avatar or user is undefined');
     }
   };
 
@@ -58,8 +68,10 @@ const AvatarSelectionScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setSelectedAvatar}
           value={selectedAvatar}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };

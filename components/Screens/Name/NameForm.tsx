@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { Button, Typography } from 'sk-storybook';
+import { Button, Spinner, Typography } from 'sk-storybook';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
@@ -75,7 +75,7 @@ export const NameForm = ({
         fullWidth
         margin={['xl', 'none', 'none', 'none']}
       >
-        Next
+        {isSubmitting ? <Spinner size='xs' /> : 'Continue'}
       </Button>
     </form>
   );

@@ -8,9 +8,7 @@ export interface SigninSuccessGetServerSideProps {
   user: User | null;
 }
 
-export const SigninSuccess = ({
-  user,
-}: SigninSuccessGetServerSideProps): ReactElement => {
+export const SigninSuccess = ({ user }: SigninSuccessGetServerSideProps) => {
   const router = useRouter();
   const userCtx = useContext(UserContext);
 
@@ -22,8 +20,6 @@ export const SigninSuccess = ({
       router.push('/auth/signin');
     }
   }, [user, router, userCtx]);
-
-  return <>Loading...</>; //TODO: Add loading spinner
 };
 
 export async function getServerSideProps(context: any) {

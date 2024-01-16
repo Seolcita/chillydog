@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box } from '@mui/material';
-import { ReactElement } from 'react';
-import { Button, Select } from 'sk-storybook';
+import { ReactElement, useState } from 'react';
+import { Button, Select, Spinner } from 'sk-storybook';
 
 import * as S from './DogSizeForm.styles';
 import { DogSize } from '../../../entities/dog.entities';
@@ -11,6 +11,7 @@ interface DogSizeFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
   setValue: React.Dispatch<React.SetStateAction<Option | undefined>>;
   value: Option | undefined;
+  isSubmitting: boolean;
 }
 
 const options: Option[] = [
@@ -23,11 +24,12 @@ export const DogSizeForm = ({
   handleSubmit,
   setValue,
   value,
+  isSubmitting,
 }: DogSizeFormProps): ReactElement => {
   return (
     <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <Box marginTop={'1rem'}>
+        <Box marginTop={'1rem'} marginBottom={'4.5rem'}>
           <Select
             value={value}
             options={options}
@@ -43,11 +45,11 @@ export const DogSizeForm = ({
           bgColor='black'
           textColor='white'
           hasShadow={false}
-          disabled={!value?.value} //TODO: make disabled when it is loading
+          disabled={!value?.value || isSubmitting}
           fullWidth
           margin={['xl', 'none', 'none', 'none']}
         >
-          Next
+          {isSubmitting ? <Spinner size='xs' /> : 'Continue'}
         </Button>
       </form>
     </S.Container>

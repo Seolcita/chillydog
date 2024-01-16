@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactElement, useContext, useEffect } from 'react';
+import { ReactElement, useContext } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import Main from '../../components/Screens/Main/Main';
 import UserContext from '../../context/user.context';
-import axios from 'axios';
 import { User } from '../../entities/user.entities';
 
 interface MainPageGetServerSideProps {
@@ -11,12 +12,13 @@ interface MainPageGetServerSideProps {
 }
 
 const MainPage = ({ user }: MainPageGetServerSideProps): ReactElement => {
+  const router = useRouter();
+
   if (user === null) {
-    return <div>User is not exist</div>; // TODO: Handle properly
+    router.push('/auth/signin');
   }
 
   const { setUser } = useContext(UserContext);
-
   setUser(user);
 
   return <Main />;
@@ -41,11 +43,10 @@ export async function getServerSideProps(context: any) {
   await axios
     .get(`http://localhost:3001/api/user?userId=${userId}`)
     .then((res) => {
-      console.log('res ⭐️', res.data);
       userData = res.data;
     })
     .catch((error) => {
-      console.error('An error occurred:', error); //TODO: Handle error - Toast message
+      console.error('An error occurred:', error);
       return {
         props: {
           user: null,

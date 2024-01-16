@@ -7,10 +7,12 @@ import { ProgressBar } from '../ProgressBar/ProgressBar';
 import * as S from './Questionnaire.styles';
 import { CloseButton } from '../CloseButton/CloseButton';
 import UserContext from '../../context/user.context';
+import { Notification } from '../Notification/Notification';
 
 interface BaseQuestionnaireProps {
   question: string;
   form: ReactNode;
+  errorMessage?: string;
 }
 
 interface CurrentStepProps extends BaseQuestionnaireProps {
@@ -34,21 +36,18 @@ export const Questionnaire = ({
   form,
   edit,
   dogId,
+  errorMessage,
 }: QuestionnaireProps): ReactElement => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
-  //TODO: Handle this properly
-  if (!user) {
-    return <div>loading...</div>;
-  }
   const isLocationScreen = router.pathname.includes('/edit/location');
 
   const editRedirectUrl = isLocationScreen
-    ? `/main?userId=${user.id}`
+    ? `/main?userId=${user?.id}`
     : `/dog/${dogId}`;
 
-  const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user.id}`;
+  const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user?.id}`;
 
   return (
     <S.Container>
@@ -77,6 +76,7 @@ export const Questionnaire = ({
           <Box>{form}</Box>
         </S.Contents>
       </Card>
+      {errorMessage && <Notification message={errorMessage} variant='error' />}
     </S.Container>
   );
 };

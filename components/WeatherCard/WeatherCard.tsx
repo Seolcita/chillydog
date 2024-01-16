@@ -1,17 +1,16 @@
-import { ReactElement, useContext, useEffect, useState } from 'react';
+import { ReactElement } from 'react';
 import { Typography } from 'sk-storybook';
 
+import { WeatherImageUrlMap } from '../../hooks/use-weather';
+import { DeviceType } from '../../hooks/use-window-resize';
+import { Loader } from '../LineLoader/LineLoader';
 import * as S from './WeatherCard.styles';
 import * as s from '../common-styles';
-import { DeviceType } from '../../hooks/use-window-resize';
-import axios from 'axios';
 import {
   ConvertTempUnit,
   WeatherData,
   WeatherType,
 } from '../../entities/weather.entities';
-import { WeatherImageUrlMap, getWeatherType } from '../../hooks/use-weather';
-import UserContext from '../../context/user.context';
 
 interface WeatherCardProps {
   deviceType: DeviceType;
@@ -98,8 +97,7 @@ export const WeatherCard = ({
           </S.TextContainer>
         </S.Container>
       ) : (
-        // TODO: updated loading once it is available from storybook
-        <div>Loading</div>
+        <Loader />
       )}
     </>
   );

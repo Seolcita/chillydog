@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { KeyboardEvent, ReactElement, useState } from 'react';
-import { Button } from 'sk-storybook';
+import { Button, Spinner } from 'sk-storybook';
 
 import * as S from './AvartarSelectionForm.styled';
 import { dogAvatars } from './Avatars';
@@ -9,6 +9,7 @@ interface AvatarSelectionFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
   setValue: React.Dispatch<React.SetStateAction<SelectedAvatar>>;
   value: SelectedAvatar;
+  isSubmitting: boolean;
 }
 export interface SelectedAvatar {
   name: string;
@@ -19,6 +20,7 @@ export const AvatarSelectionForm = ({
   handleSubmit,
   setValue,
   value,
+  isSubmitting,
 }: AvatarSelectionFormProps): ReactElement => {
   const [highlightIndex, setHighlightIndex] = useState<number>();
 
@@ -80,7 +82,7 @@ export const AvatarSelectionForm = ({
         fullWidth
         margin={['xl', 'none', 'none', 'none']}
       >
-        Next
+        {isSubmitting ? <Spinner size='xs' /> : 'Continue'}
       </Button>
     </form>
   );

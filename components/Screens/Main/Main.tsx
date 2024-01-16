@@ -3,26 +3,25 @@ import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
 import axios from 'axios';
 
-import * as S from './main.style';
+import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
+import { InprogressCards } from '../../InprogressCards/InprogressCards';
 import { useWindowSize } from '../../../hooks/use-window-resize';
-import UserContext from '../../../context/user.context';
 import { WeatherData } from '../../../entities/weather.entities';
 import { getWeatherType } from '../../../hooks/use-weather';
-import { Dog } from '../../../entities/dog.entities';
 import { ResultCards } from '../../ResultCard/ResultCards';
-import { InprogressCards } from '../../InprogressCards/InprogressCards';
-import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
+import UserContext from '../../../context/user.context';
+import { Dog } from '../../../entities/dog.entities';
 import withAuth from '../../HOC/withAuth';
+import * as S from './main.style';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
-  const { deviceType } = useWindowSize();
 
+  const { deviceType } = useWindowSize();
   const { user } = useContext(UserContext);
   const weatherType = weatherData && getWeatherType(weatherData.weatherId);
   const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;
   const hasWeatherInfo = weatherData && weatherType;
-
   const city = user?.location ?? null;
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const Main = (): ReactElement => {
     loadWeatherData();
     const intervalId = setInterval(loadWeatherData, 300000);
     return () => clearInterval(intervalId);
-  }, [city]);
+  }, [city, weatherData]);
 
   return (
     <>

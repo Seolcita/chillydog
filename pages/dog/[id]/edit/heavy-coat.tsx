@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Option } from '../../../../entities/questionnaire.entities';
-import UserContext from '../../../../context/user.context';
-import { User } from '../../../../entities/user.entities';
+import axios from 'axios';
+
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { HeavyCoatForm } from '../../../../components/Screens/HeavyCoat/HeavyCoatForm';
+import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import { Option } from '../../../../entities/questionnaire.entities';
 import withAuth from '../../../../components/HOC/withAuth';
+import UserContext from '../../../../context/user.context';
+import { User } from '../../../../entities/user.entities';
 
 const HeavyCoatInitialValueMap: Record<string, Option> = {
   true: { label: 'Yes', value: true },
@@ -26,15 +28,24 @@ const EditHeavyCoatScreen = (): ReactElement => {
     user.dogs.find((dog) => dog.id === dogId);
 
   if (!dog) {
-    return <div>Loading...</div>; // TODO: Handle properly
+    return (
+      <ErrorCard
+        redirectUrl={`/dog/${dogId}`}
+        buttonText='Go Back To Dog Profile Page'
+      />
+    );
   }
+
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [value, setValue] = useState<Option | undefined>(
     HeavyCoatInitialValueMap[dog.heavyCoat.toString()]
   );
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(value?.value);
+
+    setIsSubmitting(true);
 
     if (user && value?.value !== undefined) {
       await axios
@@ -44,17 +55,19 @@ const EditHeavyCoatScreen = (): ReactElement => {
           userId: user.id,
         })
         .then((res) => {
+          setIsSubmitting(false);
           const user: User = res.data;
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
         .catch((error) => {
-          //TODO: Handle error - Toast message
+          setIsSubmitting(false);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
-      //TODO: Handle error - Toast message
-      console.log('no user');
+      setIsSubmitting(false);
+      console.error('heavyCoat or user is undefined');
     }
   };
 
@@ -68,8 +81,10 @@ const EditHeavyCoatScreen = (): ReactElement => {
           handleSubmit={handleSubmit}
           setValue={setValue}
           value={value}
+          isSubmitting={isSubmitting}
         />
       }
+      errorMessage={errorMessage}
     />
   );
 };
