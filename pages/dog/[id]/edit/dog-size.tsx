@@ -20,7 +20,6 @@ const DogSizeInitialValueMap: Record<DogSize, Option> = {
 };
 
 const EditDogSizeScreen = (): ReactElement => {
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's size?`;
   const router = useRouter();
   const dogId = router.query.id;
@@ -65,12 +64,11 @@ const EditDogSizeScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
       console.error('dogSize or user is undefined');
     }
   };

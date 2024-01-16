@@ -20,7 +20,6 @@ const ColdAdaptScreen = (): ReactElement => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog acclimated to cold?`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -43,12 +42,11 @@ const ColdAdaptScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
       console.error('coldAdapt or user is undefined');
     }
   };

@@ -18,7 +18,6 @@ const HeavyCoatInitialValueMap: Record<string, Option> = {
 };
 
 const EditHeavyCoatScreen = (): ReactElement => {
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
@@ -63,12 +62,11 @@ const EditHeavyCoatScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
       console.error('heavyCoat or user is undefined');
     }
   };

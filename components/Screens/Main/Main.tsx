@@ -45,7 +45,7 @@ const Main = (): ReactElement => {
     loadWeatherData();
     const intervalId = setInterval(loadWeatherData, 300000);
     return () => clearInterval(intervalId);
-  }, [city]);
+  }, [city, weatherData]);
 
   return (
     <>

@@ -18,7 +18,6 @@ const ColdAdaptInitialValueMap: Record<string, Option> = {
 };
 
 const EditColdAdaptScreen = (): ReactElement => {
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Is your dog acclimated to cold?`;
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
@@ -63,12 +62,11 @@ const EditColdAdaptScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
       console.error('coldAdapt or user is undefined');
     }
   };

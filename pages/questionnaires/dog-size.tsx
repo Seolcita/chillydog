@@ -20,7 +20,6 @@ const DogSizeScreen = (): ReactElement => {
   const router = useRouter();
   const dogId = router.query.dogId;
   const { user } = useContext(UserContext);
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's size?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -43,12 +42,11 @@ const DogSizeScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
           console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
       console.error('dog size or user is undefined');
     }
   };

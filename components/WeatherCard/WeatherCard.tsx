@@ -3,6 +3,7 @@ import { Typography } from 'sk-storybook';
 
 import { WeatherImageUrlMap } from '../../hooks/use-weather';
 import { DeviceType } from '../../hooks/use-window-resize';
+import { Loader } from '../LineLoader/LineLoader';
 import * as S from './WeatherCard.styles';
 import * as s from '../common-styles';
 import {
@@ -10,7 +11,6 @@ import {
   WeatherData,
   WeatherType,
 } from '../../entities/weather.entities';
-import { Loader } from '../LineLoader/LineLoader';
 
 interface WeatherCardProps {
   deviceType: DeviceType;
