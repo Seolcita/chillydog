@@ -24,28 +24,28 @@ const Main = (): ReactElement => {
   const hasWeatherInfo = weatherData && weatherType;
   const city = user?.location ?? null;
 
-  useEffect(() => {
+  const loadWeatherData = async () => {
     if (!city) {
       return;
     }
 
-    const loadWeatherData = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:3001/api/weather?city=${city}`
-        );
-        console.log('res☀️', res);
-        const data: WeatherData = res.data;
-        setWeatherData(data);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
-    };
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/api/weather?city=${city}`
+      );
+      console.log('res☀️', res);
+      const data: WeatherData = res.data;
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
 
+  useEffect(() => {
     loadWeatherData();
     const intervalId = setInterval(loadWeatherData, 300000);
     return () => clearInterval(intervalId);
-  }, [city, weatherData]);
+  }, [city, weatherData?.city]);
 
   return (
     <>

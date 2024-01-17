@@ -6,14 +6,14 @@ import UserContext from '../../context/user.context';
 const withAuth = (WrappedComponent: NextPage) => {
   const WithAuth: NextPage = (props) => {
     const router = useRouter();
-    const { user } = useContext(UserContext);
+    const { user, isLoading } = useContext(UserContext);
     const isAuthenticated = user !== null;
 
     useEffect(() => {
-      if (!isAuthenticated) {
-        router.replace('/auth/signin');
+      if (!isLoading && !isAuthenticated) {
+        router.push('/auth/signin');
       }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isLoading, router]);
 
     return <WrappedComponent {...props} />;
   };
