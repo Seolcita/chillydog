@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
+import { LineLoader } from 'sk-storybook';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
@@ -11,14 +13,16 @@ import { getWeatherType } from '../../../hooks/use-weather';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import UserContext from '../../../context/user.context';
 import { Dog } from '../../../entities/dog.entities';
-import withAuth from '../../HOC/withAuth';
+import { FlexCenter } from '../../common-styles';
 import * as S from './main.style';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
 
   const { deviceType } = useWindowSize();
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
+  const router = useRouter();
+
   const weatherType = weatherData && getWeatherType(weatherData.weatherId);
   const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;
   const hasWeatherInfo = weatherData && weatherType;
@@ -49,7 +53,11 @@ const Main = (): ReactElement => {
 
   return (
     <>
-      {!hasDogs ? (
+      {isLoading ? (
+        <FlexCenter>
+          <LineLoader />
+        </FlexCenter>
+      ) : !hasDogs ? (
         <CreateDogProfile />
       ) : (
         <S.Wrapper>
@@ -90,5 +98,5 @@ const Main = (): ReactElement => {
   );
 };
 
-export default withAuth(Main);
+export default Main;
 export { Main };

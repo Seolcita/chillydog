@@ -16,7 +16,7 @@ const bodyHeight = `calc(100vh - ${headerHight}rem)`;
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
-  background-color: pink; //TODO: remove after development
+  background-color: #7d7c7c; //TODO: remove after development
   display: flex;
   justify-content: center;
   padding: 0 4rem;

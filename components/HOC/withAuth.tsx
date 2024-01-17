@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { NextPage } from 'next';
+
 import UserContext from '../../context/user.context';
 
 const withAuth = (WrappedComponent: NextPage) => {
   const WithAuth: NextPage = (props) => {
     const router = useRouter();
-    const { user, isLoading } = useContext(UserContext);
-    const isAuthenticated = user !== null;
+    const { isLoading, isAuthenticated } = useContext(UserContext);
 
     useEffect(() => {
       if (!isLoading && !isAuthenticated) {
