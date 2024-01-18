@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { device } from '../styles/Breakpoints';
 import { headerHight } from '../components/Header/Header.style';
+import ColorMap from '../styles/Color';
 
 export const Layout = styled.div`
   width: 100%;
   max-width: 144rem;
   display: flex;
   flex-direction: column;
-  background-color: brown; //TODO: remove after development
+  background-color: ${ColorMap['primary']
+    .dark}; //TODO: remove after development
+  background-color: #112031;
   margin: auto;
 `;
 
@@ -16,7 +19,7 @@ const bodyHeight = `calc(100vh - ${headerHight}rem)`;
 export const Container = styled.div`
   max-width: 144rem;
   width: 100%;
-  background-color: #7d7c7c; //TODO: remove after development
+  background-color: #112031; //TODO: remove after development - #d96846
   display: flex;
   justify-content: center;
   padding: 0 4rem;
