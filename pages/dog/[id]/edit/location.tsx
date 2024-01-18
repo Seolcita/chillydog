@@ -14,7 +14,7 @@ import withAuth from '../../../../components/HOC/withAuth';
 export const EditLocationScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
   const errMessage = 'Oops! Something went wrong. Please try again.';
@@ -47,6 +47,8 @@ export const EditLocationScreen = (): ReactElement => {
       edit
       dogId={dogId as string}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         user && (
           <LocationForm
@@ -55,7 +57,6 @@ export const EditLocationScreen = (): ReactElement => {
           />
         )
       }
-      errorMessage={errorMessage}
     />
   );
 };

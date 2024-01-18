@@ -1,7 +1,8 @@
-import { ReactElement, useContext, useEffect } from 'react';
-import UserContext from '../../context/user.context';
-import axios from 'axios';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+
+import UserContext from '../../context/user.context';
 import { User } from '../../entities/user.entities';
 
 export interface SigninSuccessGetServerSideProps {
@@ -10,16 +11,19 @@ export interface SigninSuccessGetServerSideProps {
 
 export const SigninSuccess = ({ user }: SigninSuccessGetServerSideProps) => {
   const router = useRouter();
-  const userCtx = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+
+  if (typeof window !== 'undefined' && user) {
+    sessionStorage.setItem('accessToken', user.accessToken);
+  }
 
   useEffect(() => {
-    if (user) {
-      userCtx.setUser(user);
-      router.push(`/main?userId=${user.id}`);
-    } else {
+    if (user === null) {
       router.push('/auth/signin');
     }
-  }, [user, router, userCtx]);
+
+    user && router.push(`/main?userId=${user.id}`);
+  }, [user, router, setUser]);
 };
 
 export async function getServerSideProps(context: any) {
@@ -41,10 +45,9 @@ export async function getServerSideProps(context: any) {
       })
       .then((res) => {
         console.log('res', res.data);
-
         return {
           props: {
-            user: res.data || null,
+            user: res.data,
           },
         };
       });

@@ -21,7 +21,7 @@ const AvatarSelectionScreen = (): ReactElement => {
     src: '',
   });
 
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
   const errMessage = 'Oops! Something went wrong. Please try again.';
@@ -63,6 +63,8 @@ const AvatarSelectionScreen = (): ReactElement => {
     <Questionnaire
       currentStep={6}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <AvatarSelectionForm
           handleSubmit={handleSubmit}
@@ -71,7 +73,6 @@ const AvatarSelectionScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };

@@ -6,43 +6,20 @@ import axios from 'axios';
 
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { DogSizeForm } from '../../../../components/Screens/DogSize/DogSizeForm';
-import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 import { Option } from '../../../../entities/questionnaire.entities';
-import { DogSize } from '../../../../entities/dog.entities';
 import withAuth from '../../../../components/HOC/withAuth';
 import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
-
-const DogSizeInitialValueMap: Record<DogSize, Option> = {
-  [DogSize.SMALL]: { label: 'Small', value: DogSize.SMALL },
-  [DogSize.MEDIUM]: { label: 'Medium', value: DogSize.MEDIUM },
-  [DogSize.LARGE]: { label: 'Large', value: DogSize.LARGE },
-};
 
 const EditDogSizeScreen = (): ReactElement => {
   const question = `Q. What is your dog's size?`;
   const router = useRouter();
   const dogId = router.query.id;
-  const { user, setUser } = useContext(UserContext);
-  const dog =
-    user?.dogs !== undefined &&
-    user?.dogs.length > 0 &&
-    user.dogs.find((dog) => dog.id === dogId);
-
-  if (!dog) {
-    return (
-      <ErrorCard
-        redirectUrl={`/dog/${dogId}`}
-        buttonText='Go Back To Dog Profile Page'
-      />
-    );
-  }
+  const { user, setUser, isLoading } = useContext(UserContext);
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [value, setValue] = useState<Option | undefined>(
-    DogSizeInitialValueMap[dog.dogSize]
-  );
+  const [value, setValue] = useState<Option | undefined>(undefined);
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -78,6 +55,8 @@ const EditDogSizeScreen = (): ReactElement => {
       edit
       dogId={dogId as string}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <DogSizeForm
           handleSubmit={handleSubmit}
@@ -86,7 +65,6 @@ const EditDogSizeScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };

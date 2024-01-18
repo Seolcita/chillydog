@@ -1,4 +1,4 @@
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext, useLayoutEffect } from 'react';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Card, Typography } from 'sk-storybook';
@@ -9,6 +9,7 @@ import { RegistrationStatus } from '../../../entities/questionnaire.entities';
 import { DogSize } from '../../../entities/dog.entities';
 import UserContext from '../../../context/user.context';
 import * as S from './DogProfile.styles';
+import { Loader } from '../../LineLoader/LineLoader';
 
 interface DogProfileProps {
   dogId: string | string[];
@@ -22,18 +23,18 @@ const DogSizeMap: Record<DogSize, string> = {
 
 export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
   const router = useRouter();
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
 
   const dog =
     user?.dogs !== undefined &&
     user?.dogs.length > 0 &&
     user.dogs.find((dog) => dog.id === dogId);
-  console.log('user', user);
-  console.log('dogProfile🐶', dog);
 
   return (
     <>
-      {dog && dog.registrationStatus === RegistrationStatus.COMPLETED && (
+      {!isLoading &&
+      dog &&
+      dog.registrationStatus === RegistrationStatus.COMPLETED ? (
         <S.ProfileContainer>
           <Card
             tabIndex={0}
@@ -156,6 +157,8 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
             </S.Container>
           </Card>
         </S.ProfileContainer>
+      ) : (
+        <Loader />
       )}
     </>
   );

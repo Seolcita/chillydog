@@ -2,9 +2,8 @@
 import { ReactElement, useContext } from 'react';
 import axios from 'axios';
 
-import { Loader } from '../../components/LineLoader/LineLoader';
+import { ErrorCard } from '../../components/ErrorCard/ErrorCard';
 import UserContext from '../../context/user.context';
-import * as S from '../../components/common-styles';
 import Login from '../../components/Login/Login';
 
 export interface SignoutSuccessGetServerSideProps {
@@ -14,20 +13,21 @@ export interface SignoutSuccessGetServerSideProps {
 export const Signout = ({
   status,
 }: SignoutSuccessGetServerSideProps): ReactElement => {
-  const userCtx = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
-  if (status === 200) {
-    userCtx.setUser(null);
-  }
+  setUser(null);
+  sessionStorage.removeItem('accessToken');
 
   return (
     <>
       {status === 200 ? (
         <Login />
       ) : (
-        <S.FlexCenter>
-          <Loader />
-        </S.FlexCenter>
+        <ErrorCard
+          redirectUrl='/auth/signin'
+          message='Seems like you are already logout.'
+          buttonText='Go to Login Page'
+        />
       )}
     </>
   );
@@ -44,20 +44,21 @@ export async function getServerSideProps(context: any) {
     cookie.startsWith('refresh_token=')
   );
 
-  try {
-    return axios
-      .get(`http://localhost:3001/api/auth/logout`, {
-        headers: {
-          Cookie: refreshTokenCookie,
-        },
-      })
-      .then((res) => {
-        return { props: res.status === 200 && { status: res.status } };
-      });
-  } catch (error) {
-    console.error('API request failed', error);
-    return { props: { status: 500 } };
-  }
+  return axios
+    .get(`http://localhost:3001/api/auth/logout`, {
+      headers: {
+        Cookie: refreshTokenCookie,
+      },
+    })
+    .then((res) => {
+      return {
+        props: res.status === 200 && { status: res.status },
+      };
+    })
+    .catch((error) => {
+      console.error('Fail to logout:', error);
+      return { props: { status: 500 } };
+    });
 }
 
 export default Signout;

@@ -19,7 +19,7 @@ const DogSizeScreen = (): ReactElement => {
 
   const router = useRouter();
   const dogId = router.query.dogId;
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const question = `Q. What is your dog's size?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -55,6 +55,8 @@ const DogSizeScreen = (): ReactElement => {
     <Questionnaire
       currentStep={2}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <DogSizeForm
           handleSubmit={handleSubmit}
@@ -63,7 +65,6 @@ const DogSizeScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };

@@ -11,11 +11,12 @@ import { User } from '../../../../entities/user.entities';
 import withAuth from '../../../../components/HOC/withAuth';
 import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
 import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
+import { Dog } from '../../../../entities/dog.entities';
 
 export const EditNameScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
   const dog =
@@ -25,7 +26,7 @@ export const EditNameScreen = (): ReactElement => {
   const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's name?`;
 
-  if (!dog) {
+  if (!dog && !isLoading) {
     return (
       <ErrorCard
         redirectUrl={`/dog/${dogId}`}
@@ -62,8 +63,14 @@ export const EditNameScreen = (): ReactElement => {
       edit
       dogId={dogId as string}
       question={question}
-      form={<NameForm onSubmit={onSubmit} initialValueName={dog.name} />}
       errorMessage={errorMessage}
+      isLoading={isLoading}
+      form={
+        <NameForm
+          onSubmit={onSubmit}
+          initialValueName={dog && dog?.name ? dog.name : ''}
+        />
+      }
     />
   );
 };

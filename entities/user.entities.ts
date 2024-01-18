@@ -8,4 +8,5 @@ export interface User {
   photoUrl: string;
   location?: string;
   dogs?: Dog[];
+  accessToken: string;
 }

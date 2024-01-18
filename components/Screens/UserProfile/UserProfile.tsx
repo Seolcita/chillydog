@@ -14,6 +14,7 @@ import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
 import UserContext from '../../../context/user.context';
 import { User } from '../../../entities/user.entities';
 import * as S from './UserProfile.styles';
+import { Loader } from '../../LineLoader/LineLoader';
 
 export const UserProfile = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -21,7 +22,7 @@ export const UserProfile = (): ReactElement => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isLoading } = useContext(UserContext);
 
   const checkDogProfiles = (status: RegistrationStatus): boolean => {
     const result =
@@ -74,7 +75,7 @@ export const UserProfile = (): ReactElement => {
 
   return (
     <>
-      {user && (
+      {!isLoading && user ? (
         <S.ProfileContainer>
           <Card
             tabIndex={0}
@@ -151,24 +152,23 @@ export const UserProfile = (): ReactElement => {
               >
                 In Progress
               </Typography>
-              {user && user.dogs !== undefined && user?.dogs.length > 0 ? (
+              {user &&
+                user.dogs !== undefined &&
+                user?.dogs.length > 0 &&
                 user?.dogs.map((dog) => {
-                  return dog.registrationStatus ===
-                    RegistrationStatus.IN_PROGRESS ? (
-                    <InProgressDogInfoCard
-                      dog={dog}
-                      handleSubmit={handleSubmit}
-                      isSubmitting={isSubmitting}
-                    />
-                  ) : (
-                    !hasInProgressProfiles && (
-                      //TODO: Replace with Badge component once Storybook is updated
-                      <Typography variant='textS'>- None</Typography>
+                  return (
+                    dog.registrationStatus ===
+                      RegistrationStatus.IN_PROGRESS && (
+                      <InProgressDogInfoCard
+                        dog={dog}
+                        handleSubmit={handleSubmit}
+                        isSubmitting={isSubmitting}
+                      />
                     )
                   );
-                })
-              ) : (
-                //TODO: Replace with Badge component once Storybook is updated
+                })}
+              {/* TODO: Replace with Badge component once Storybook is updated */}
+              {!hasInProgressProfiles && (
                 <Typography variant='textS'>- None</Typography>
               )}
             </S.Wrapper>
@@ -180,6 +180,8 @@ export const UserProfile = (): ReactElement => {
             <Notification message={successMessage} variant='success' />
           )}
         </S.ProfileContainer>
+      ) : (
+        <Loader />
       )}
     </>
   );

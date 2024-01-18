@@ -4,12 +4,12 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { HeavyCoatForm } from '../../components/Screens/HeavyCoat/HeavyCoatForm';
+import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { Option } from '../../entities/questionnaire.entities';
 import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import withAuth from '../../components/HOC/withAuth';
 
 const HeavyCoatScreen = (): ReactElement => {
@@ -17,7 +17,7 @@ const HeavyCoatScreen = (): ReactElement => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [value, setValue] = useState<Option | undefined>();
 
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
   const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
@@ -55,6 +55,8 @@ const HeavyCoatScreen = (): ReactElement => {
     <Questionnaire
       currentStep={3}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <HeavyCoatForm
           handleSubmit={handleSubmit}
@@ -63,7 +65,6 @@ const HeavyCoatScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };
