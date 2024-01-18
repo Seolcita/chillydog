@@ -2,7 +2,6 @@
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
 import { LineLoader } from 'sk-storybook';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
@@ -21,7 +20,6 @@ const Main = (): ReactElement => {
 
   const { deviceType } = useWindowSize();
   const { user, isLoading } = useContext(UserContext);
-  const router = useRouter();
 
   const weatherType = weatherData && getWeatherType(weatherData.weatherId);
   const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;

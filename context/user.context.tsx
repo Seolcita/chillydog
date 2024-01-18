@@ -9,6 +9,7 @@ interface UserContextValue {
   setUser: (user: User | null) => void;
   isLoading: boolean;
   isAuthenticated: boolean;
+  refreshUser: () => void;
 }
 
 const UserContext = createContext<UserContextValue>({
@@ -16,12 +17,14 @@ const UserContext = createContext<UserContextValue>({
   setUser: (user: User | null) => {},
   isLoading: true,
   isAuthenticated: false,
+  refreshUser: () => {},
 });
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [trigger, setTrigger] = useState(0);
 
   const router = useRouter();
 
@@ -30,11 +33,8 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }
 
-  const context: UserContextValue = {
-    user: userData,
-    setUser: setUserHandler,
-    isLoading,
-    isAuthenticated,
+  const refreshUser = () => {
+    setTrigger((prevTrigger) => prevTrigger + 1);
   };
 
   useEffect(() => {
@@ -61,7 +61,15 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
           setIsLoading(false);
         });
     }
-  }, []);
+  }, [trigger]);
+
+  const context: UserContextValue = {
+    user: userData,
+    setUser: setUserHandler,
+    isLoading,
+    isAuthenticated,
+    refreshUser,
+  };
 
   return (
     <UserContext.Provider value={context}>{children}</UserContext.Provider>

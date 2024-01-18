@@ -3,17 +3,17 @@ import { MouseEvent, ReactElement, useContext } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 
-import * as S from './Completion.styled';
 import UserContext from '../../../context/user.context';
-import { FlexCenter } from '../../common-styles';
 import { Loader } from '../../LineLoader/LineLoader';
+import * as S from './Completion.styled';
 
 export const Completion = (): ReactElement => {
   const router = useRouter();
-  const { user, isLoading } = useContext(UserContext);
+  const { user, isLoading, refreshUser } = useContext(UserContext);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     user && router.push(`/main?userId=${user.id}`);
+    refreshUser();
   };
 
   return (
