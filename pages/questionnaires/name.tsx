@@ -3,16 +3,16 @@ import { ReactElement, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
 import { FormValues, NameForm } from '../../components/Screens/Name/NameForm';
 import UserContext from '../../context/user.context';
 import { Dog } from '../../entities/dog.entities';
-import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import withAuth from '../../components/HOC/withAuth';
 
 const NameScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. What is your dog's name?`;
@@ -45,6 +45,7 @@ const NameScreen = (): ReactElement => {
       question={question}
       form={<NameForm onSubmit={onSubmit} />}
       errorMessage={errorMessage}
+      isLoading={isLoading}
     />
   );
 };

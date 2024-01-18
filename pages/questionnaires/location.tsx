@@ -8,16 +8,16 @@ import {
   LocationForm,
 } from '../../components/Screens/Location/LocationForm';
 import { Questionnaire } from '../../components/Questionnaire/Questionnaire';
-import UserContext from '../../context/user.context';
-import { Dog } from '../../entities/dog.entities';
 import { useQuestionnaireNextScreenURL } from '../../hooks/use-questionnaire-next-screen-url';
 import withAuth from '../../components/HOC/withAuth';
+import UserContext from '../../context/user.context';
+import { Dog } from '../../entities/dog.entities';
 
 export const LocationScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   const router = useRouter();
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const dogId = router.query.dogId;
   const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Q. Which city is your dog living?`;
@@ -51,6 +51,7 @@ export const LocationScreen = (): ReactElement => {
       question={question}
       form={<LocationForm onSubmit={onSubmit} />}
       errorMessage={errorMessage}
+      isLoading={isLoading}
     />
   );
 };

@@ -4,43 +4,22 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { ColdAdaptForm } from '../../../../components/Screens/ColdAdapt/ColdAdaptForm';
-import { ErrorCard } from '../../../../components/ErrorCard/ErrorCard';
+import { Questionnaire } from '../../../../components/Questionnaire/Questionnaire';
 import { Option } from '../../../../entities/questionnaire.entities';
 import UserContext from '../../../../context/user.context';
 import withAuth from '../../../../components/HOC/withAuth';
 import { User } from '../../../../entities/user.entities';
 
-const ColdAdaptInitialValueMap: Record<string, Option> = {
-  true: { label: 'Yes', value: true },
-  false: { label: 'No', value: false },
-};
-
 const EditColdAdaptScreen = (): ReactElement => {
   const question = `Q. Is your dog acclimated to cold?`;
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
-  const dog =
-    user?.dogs !== undefined &&
-    user?.dogs.length > 0 &&
-    user.dogs.find((dog) => dog.id === dogId);
-
-  if (!dog) {
-    return (
-      <ErrorCard
-        redirectUrl={`/dog/${dogId}`}
-        buttonText='Go Back To Dog Profile Page'
-      />
-    );
-  }
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [value, setValue] = useState<Option | undefined>(
-    ColdAdaptInitialValueMap[dog.coldAdapt.toString()]
-  );
+  const [value, setValue] = useState<Option | undefined>(undefined);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -76,6 +55,8 @@ const EditColdAdaptScreen = (): ReactElement => {
       edit
       dogId={dogId as string}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <ColdAdaptForm
           handleSubmit={handleSubmit}
@@ -84,7 +65,6 @@ const EditColdAdaptScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };

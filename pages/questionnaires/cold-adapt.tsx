@@ -17,7 +17,7 @@ const ColdAdaptScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [value, setValue] = useState<Option | undefined>();
 
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
   const question = `Q. Is your dog acclimated to cold?`;
@@ -55,6 +55,8 @@ const ColdAdaptScreen = (): ReactElement => {
     <Questionnaire
       currentStep={4}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <ColdAdaptForm
           handleSubmit={handleSubmit}
@@ -63,7 +65,6 @@ const ColdAdaptScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };

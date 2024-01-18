@@ -16,7 +16,7 @@ import { User } from '../../../../entities/user.entities';
 const EditAvatarSelectionScreen = (): ReactElement => {
   const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Choose your dog's avatar`;
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;
   const dog =
@@ -24,7 +24,7 @@ const EditAvatarSelectionScreen = (): ReactElement => {
     user?.dogs.length > 0 &&
     user.dogs.find((dog) => dog.id === dogId);
 
-  if (!dog) {
+  if (!dog && !isLoading) {
     return (
       <ErrorCard
         redirectUrl={`/dog/${dogId}`}
@@ -36,8 +36,8 @@ const EditAvatarSelectionScreen = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<SelectedAvatar>({
-    name: dog.avatar.name,
-    src: dog.avatar.src,
+    name: dog && dog.avatar ? dog.avatar.name : '',
+    src: dog && dog.avatar ? dog.avatar.src : '',
   });
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -76,6 +76,8 @@ const EditAvatarSelectionScreen = (): ReactElement => {
       edit
       dogId={dogId as string}
       question={question}
+      errorMessage={errorMessage}
+      isLoading={isLoading}
       form={
         <AvatarSelectionForm
           handleSubmit={handleSubmit}
@@ -84,7 +86,6 @@ const EditAvatarSelectionScreen = (): ReactElement => {
           isSubmitting={isSubmitting}
         />
       }
-      errorMessage={errorMessage}
     />
   );
 };
