@@ -44,7 +44,7 @@ export const LoginImage = styled(Center)`
   width: 100%;
   height: 100%;
   background-color: ${ColorMap['warning'].extraLight};
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   & > iframe {
     border: none;

@@ -64,7 +64,6 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
         event.stopPropagation(), setOff(true);
       }}
     >
-      {/* TODO: Change Colors */}
       <S.ProfileButton
         onClick={() => setIsOpen((prev) => !prev)}
         aria-haspopup='true'

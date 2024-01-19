@@ -21,11 +21,6 @@ export const CreateDogProfile = (): ReactElement => {
         >
           <S.Contents>
             <iframe src='https://lottie.host/embed/aea7d986-6070-4116-9bfd-53f2de7a3e3a/J5rYKAGYgF.json'></iframe>
-            {/* TODO: Add information */}
-            {/* <Typography variant='textL'>
-              The app calculates results based on pet profiles and weather
-              information.
-            </Typography> */}
             <Button
               bgColor='black'
               textColor='white'

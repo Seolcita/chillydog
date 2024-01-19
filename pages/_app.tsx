@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <S.Container>
             <Component {...pageProps} />
           </S.Container>
-          <S.Footer>Footer</S.Footer>
+          {/* <S.Footer>Footer</S.Footer> */}
         </S.Layout>
       </UserContextProvider>
     </ThemeProvider>

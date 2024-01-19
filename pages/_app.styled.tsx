@@ -9,6 +9,7 @@ export const Layout = styled.div`
   max-width: 144rem;
   display: flex;
   flex-direction: column;
+  // background-color: ${ColorMap['grey'].extraLight};
   background-color: ${ColorMap['grey'].dark};
   margin: auto;
 `;
@@ -19,7 +20,6 @@ export const Container = styled.div`
   display: relative;
   max-width: 144rem;
   width: 100%;
-  // background-color: ${ColorMap['grey'].extraLight};
   background-color: ${ColorMap['grey'].dark};
   display: flex;
   justify-content: center;
@@ -48,6 +48,6 @@ export const Container = styled.div`
 `;
 
 //TODO: It is placeholder. Remove this after creating Footer component
-export const Footer = styled.div`
-  background-color: yellow;
-`;
+// export const Footer = styled.div`
+//   background-color: yellow;
+// `;

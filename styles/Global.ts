@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import ColorMap from './Color';
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -22,7 +23,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1;
-  background-color:grey; //TODO: remove or update after development
+  background-color:${ColorMap['grey'].dark};
   width: 100%;
 }
 
