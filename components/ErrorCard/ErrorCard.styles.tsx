@@ -16,10 +16,10 @@ export const Contents = styled(Center)`
 `;
 
 export const ImageBox = styled(Center)`
-  flex-direction: column;
-
   & > iframe {
     border: none;
+    width: 50%;
+    height: 50%;
     transform: scale(1.2);
   }
 `;

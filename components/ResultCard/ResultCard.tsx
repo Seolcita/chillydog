@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import { Result } from '../../hooks/use-result';
 import * as S from './ResultCard.style';
-import { titleColorMap } from './ResultCard.style';
 import { titillium } from '../../styles/Fonts';
 import { DeviceType } from '../../hooks/use-window-resize';
 
@@ -43,7 +42,7 @@ const ResultCard = ({
               {name}
             </Typography>
           </S.AvatarBox>
-          <S.ResultBox>
+          <S.ResultBox tabIndex={0}>
             <S.Title
               $point={result.point}
               $deviceType={deviceType}

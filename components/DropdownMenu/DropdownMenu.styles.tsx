@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ColorMap from '../../styles/Color';
 
 type MenuListContainerProps = {
-  isOpen: boolean;
+  $isOpen: boolean;
 };
 
 type ListItemProps = {
@@ -18,6 +18,7 @@ export const ProfileButton = styled.button`
   margin: 0;
   background-color: transparent;
   border: none;
+  border-radius: 50%;
 `;
 
 export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
@@ -25,8 +26,14 @@ export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
   height: 4.5rem;
   width: 4.5rem;
   margin: 0;
-  &:hover {
-    color: ${ColorMap['grey'].light}
+  border-radius: 50%;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: ${ColorMap['primary'].main};
+    background-color: ${ColorMap['white'].main};
+  }
 `;
 
 export const MenuListContainer = styled.ul<MenuListContainerProps>`
@@ -42,8 +49,8 @@ export const MenuListContainer = styled.ul<MenuListContainerProps>`
   padding: 1rem;
   border-radius: 0.4rem;
   box-shadow: 0.2rem 0.2rem 0.6rem #98a2b380;
-  transform: ${({ isOpen }) =>
-    isOpen ? 'translateY(-5%)' : 'translateY(-130%)'};
+  transform: ${({ $isOpen }) =>
+    $isOpen ? 'translateY(-5%)' : 'translateY(-130%)'};
   transition: all 3s ease;
   background-color: ${() => ColorMap['white'].main};
 `;

@@ -25,12 +25,11 @@ export const Completion = (): ReactElement => {
           <Card
             ariaLabel={`questionnaire completed`}
             tabIndex={0}
-            width={45}
             isPadded
             isInteractive={false}
           >
-            <S.Contents tabIndex={0}>
-              <S.Message>
+            <S.Contents>
+              <S.Message tabIndex={0}>
                 <Typography variant='headingXS' fontWeight='bold'>
                   Congratulation!
                 </Typography>

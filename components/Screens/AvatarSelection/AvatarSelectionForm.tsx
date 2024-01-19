@@ -79,6 +79,7 @@ export const AvatarSelectionForm = ({
         bgColor='black'
         textColor='white'
         hasShadow={false}
+        disabled={isSubmitting || !value.name}
         fullWidth
         margin={['xl', 'none', 'none', 'none']}
       >

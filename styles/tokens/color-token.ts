@@ -32,7 +32,7 @@ export const colors: Color = {
   },
   greyDark: {
     code: 800,
-    hex: '#1D2939',
+    hex: '#112031',
   },
   blueBackground: {
     code: 25,
@@ -92,7 +92,7 @@ export const colors: Color = {
   },
   yellowDark: {
     code: 800,
-    hex: '#93370D',
+    hex: '#E48C00',
   },
   greenBackground: {
     code: 25,

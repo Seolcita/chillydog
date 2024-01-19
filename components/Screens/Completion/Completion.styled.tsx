@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import { FlexCenter, QuestionnaireFormContainer } from '../../common-styles';
+import {
+  Center,
+  FlexCenter,
+  QuestionnaireFormContainer,
+} from '../../common-styles';
 
-export const Container = styled(FlexCenter)``;
+export const Container = styled(Center)``;
 
-export const Contents = styled(QuestionnaireFormContainer)`
-  height: 40rem;
-  width: 100%;
+export const Contents = styled(Center)`
+  flex-direction: column;
+  justify-content: center;
   padding: 2rem;
 `;
 
@@ -13,10 +17,10 @@ export const Message = styled.div`
   text-align: center;
 `;
 
-export const CompleteImage = styled(FlexCenter)`
+export const CompleteImage = styled(Center)`
   & > iframe {
     border: none;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
   }
 `;

@@ -78,7 +78,6 @@ export const UserProfile = (): ReactElement => {
       {!isLoading && user ? (
         <S.ProfileContainer>
           <Card
-            tabIndex={0}
             isInteractive={false}
             isPadded={true}
             ariaLabel='Dog Profile Card'
@@ -87,14 +86,14 @@ export const UserProfile = (): ReactElement => {
             <S.Wrapper>
               <S.CloseButton
                 onClick={() => router.push(`/main?userId=${user?.id}`)}
-                aria-label='Dog profile close button'
+                aria-label='Dog profile close'
               >
                 <CancelIcon fontSize='large' />
               </S.CloseButton>
 
               <UserInfoCard user={user} />
 
-              <Box margin={'1rem auto'}>
+              <Box margin={'1rem auto'} tabIndex={0}>
                 <Typography
                   variant='textL'
                   fontWeight='bold'
@@ -109,7 +108,7 @@ export const UserProfile = (): ReactElement => {
                 fontWeight='bold'
                 margin={['none', 'none', 'md', 'none']}
               >
-                Completed
+                <span tabIndex={0}>Completed</span>
               </Typography>
               {user && user.dogs !== undefined && user?.dogs.length > 0 ? (
                 user?.dogs.map((dog) => {
@@ -150,7 +149,7 @@ export const UserProfile = (): ReactElement => {
                 fontWeight='bold'
                 margin={['xl', 'none', 'md', 'none']}
               >
-                In Progress
+                <span tabIndex={0}>In Progress</span>
               </Typography>
               {user &&
                 user.dogs !== undefined &&

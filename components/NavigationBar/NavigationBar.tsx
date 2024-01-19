@@ -60,7 +60,7 @@ export const NavigationBar = (): ReactElement => {
       {isLoggedIn ? (
         <S.IconsContainer>
           <CreateDogProfileButton />
-          <DropdownMenu items={dropdownItems} menuLabel='Menu' />
+          <DropdownMenu items={dropdownItems} />
         </S.IconsContainer>
       ) : (
         <Link href='/auth/signin'>

@@ -58,7 +58,7 @@ export const NameForm = ({
         className={titillium.className}
       />
       {hasError && (
-        <S.ErrorText $isVisible={hasError}>
+        <S.ErrorText $isVisible={hasError} role='alert' aria-live='assertive'>
           <Typography variant='textS' color='error'>
             <FontAwesomeIcon icon={faCircleExclamation} />
             {errors.name}

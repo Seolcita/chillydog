@@ -30,7 +30,7 @@ export const ErrorCard = ({
           isPadded
           isInteractive={false}
         >
-          <S.Contents>
+          <S.Contents role='alert' aria-live='assertive'>
             <S.ImageBox>
               <iframe src='https://lottie.host/embed/0491bcbb-4b57-4def-9234-c10cc1ef5952/5JeDrX9lFN.json'></iframe>
             </S.ImageBox>

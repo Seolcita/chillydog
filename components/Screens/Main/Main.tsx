@@ -14,6 +14,7 @@ import UserContext from '../../../context/user.context';
 import { Dog } from '../../../entities/dog.entities';
 import { FlexCenter } from '../../common-styles';
 import * as S from './main.style';
+import { Box } from '@mui/material';
 
 const Main = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
@@ -35,7 +36,6 @@ const Main = (): ReactElement => {
       const res = await axios.get(
         `http://localhost:3001/api/weather?city=${city}`
       );
-      console.log('res☀️', res);
       const data: WeatherData = res.data;
       setWeatherData(data);
     } catch (error) {

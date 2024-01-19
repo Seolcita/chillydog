@@ -45,7 +45,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
             <S.Container>
               <S.CloseButton
                 onClick={() => router.push(`/main?userId=${user?.id}`)}
-                aria-label='Dog profile close button'
+                aria-label='Dog profile close'
               >
                 <CancelIcon fontSize='large' />
               </S.CloseButton>
@@ -67,13 +67,13 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                   onClick={() =>
                     router.push(`/dog/${dog.id}/edit/avatar-selection`)
                   }
-                  aria-label='Change avatar button'
+                  aria-label={`Change${dog.name} avatar`}
                 >
                   <DriveFileRenameOutlineIcon fontSize='large' />
                 </S.ChangeAvatarButton>
               </S.AvatarContainer>
 
-              <S.Content>
+              <S.Content tabIndex={0}>
                 <Typography
                   variant='textM'
                   margin={['none', 'lg', 'none', 'none']}
@@ -86,13 +86,13 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </S.Texts>
                 <S.EditIconButton
                   onClick={() => router.push(`/dog/${dog.id}/edit/name`)}
-                  aria-label='Edit dog name button'
+                  aria-label='Edit dog name'
                 >
                   <DriveFileRenameOutlineIcon fontSize='large' />
                 </S.EditIconButton>
               </S.Content>
 
-              <S.Content>
+              <S.Content tabIndex={0}>
                 <Typography
                   variant='textM'
                   margin={['none', 'lg', 'none', 'none']}
@@ -107,13 +107,13 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </S.Texts>
                 <S.EditIconButton
                   onClick={() => router.push(`/dog/${dog.id}/edit/dog-size`)}
-                  aria-label='Edit dog size button'
+                  aria-label='Edit dog size'
                 >
                   <DriveFileRenameOutlineIcon fontSize='large' />
                 </S.EditIconButton>
               </S.Content>
 
-              <S.Content>
+              <S.Content tabIndex={0}>
                 <Typography
                   variant='textM'
                   margin={['none', 'lg', 'none', 'none']}
@@ -128,13 +128,13 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </S.Texts>
                 <S.EditIconButton
                   onClick={() => router.push(`/dog/${dog.id}/edit/cold-adapt`)}
-                  aria-label='Edit cold adapt button'
+                  aria-label='Edit cold adapt'
                 >
                   <DriveFileRenameOutlineIcon fontSize='large' />
                 </S.EditIconButton>
               </S.Content>
 
-              <S.Content>
+              <S.Content tabIndex={0}>
                 <Typography
                   variant='textM'
                   margin={['none', 'lg', 'none', 'none']}
@@ -149,7 +149,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                 </S.Texts>
                 <S.EditIconButton
                   onClick={() => router.push(`/dog/${dog.id}/edit/heavy-coat`)}
-                  aria-label='Edit heavy coat button'
+                  aria-label='Edit heavy coat'
                 >
                   <DriveFileRenameOutlineIcon fontSize='large' />
                 </S.EditIconButton>

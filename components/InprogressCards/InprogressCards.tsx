@@ -9,6 +9,7 @@ import * as s from '../common-styles';
 import { useRouter } from 'next/router';
 import { QuestionnaireScreenMap } from '../../hooks/use-questionnaire-next-screen-url';
 import { DeviceType } from '../../hooks/use-window-resize';
+import { Box } from '@mui/material';
 
 interface InprogressCardsProps {
   dogs: Dog[];
@@ -30,12 +31,13 @@ export const InprogressCards = ({
   const CompleteProfileButton = (dog: Dog, isVisible: boolean): ReactNode => {
     return (
       <s.Visibility $isVisible={isVisible}>
-        {/* TODO: Improve button style */}
         <S.CompleteButton
           onClick={() => handleClick(dog)}
-          aria-label='Complete Profile button'
+          aria-label='Complete Profile'
         >
-          Complete Profile
+          <Typography variant='textXS' color='white' fontWeight='bold'>
+            Complete Profile
+          </Typography>
         </S.CompleteButton>
       </s.Visibility>
     );
@@ -51,7 +53,6 @@ export const InprogressCards = ({
           return (
             <S.CardContainer key={dog.id}>
               <Card
-                tabIndex={0}
                 isPadded
                 isInteractive={false}
                 ariaLabel='In progress dog profile card'
@@ -70,14 +71,21 @@ export const InprogressCards = ({
                     draggable={false}
                     tabIndex={0}
                   />
-                  <S.TextBox>
+                  <S.TextBox tabIndex={0}>
                     <Typography variant='textM' color='black' fontWeight='bold'>
                       Creating <S.Span>{dog.name}</S.Span> profile status is
+                      <br />
                       <S.Span> IN PROGRESS</S.Span>
                     </Typography>
+                    <S.ProgressBarValue>
+                      {`${((dog.completedStep / dog.totalSteps) * 100).toFixed(
+                        0
+                      )}%`}
+                    </S.ProgressBarValue>
                     <S.ProgressBar
                       value={(dog.completedStep / dog.totalSteps) * 100}
                       max='100'
+                      $isMobile={isMobile}
                     />
 
                     {CompleteProfileButton(dog, isMobile)}
