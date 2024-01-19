@@ -16,7 +16,14 @@ export const Signout = ({
   const { setUser } = useContext(UserContext);
 
   setUser(null);
-  sessionStorage.removeItem('accessToken');
+
+  if (typeof window !== 'undefined') {
+    const accessToken = sessionStorage.getItem('accessToken');
+
+    if (accessToken) {
+      sessionStorage.removeItem('accessToken');
+    }
+  }
 
   return (
     <>

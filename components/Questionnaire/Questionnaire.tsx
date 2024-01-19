@@ -61,7 +61,6 @@ export const Questionnaire = ({
         <S.Container>
           <Card
             ariaLabel={`questionnaire card step ${currentStep}`}
-            tabIndex={0}
             width={45}
             isPadded
             isInteractive={false}

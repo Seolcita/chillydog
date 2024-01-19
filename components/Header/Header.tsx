@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
-import { Logo } from '../Logo/Logo';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
+import { Logo } from '../Logo/Logo';
 import * as S from './Header.style';
-import { CreateDogProfileButton } from '../CreateDogProfileButton/CreateDogProfileButton';
 
 export const Header = (): ReactElement => {
   return (

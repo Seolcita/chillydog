@@ -31,7 +31,7 @@ export const DogInfoCard = ({
       tabIndex={0}
       isInteractive={false}
       isPadded={true}
-      ariaLabel='Dog Profile Card'
+      ariaLabel='Completed dog profile card'
       height={5}
       margin={['none', 'none', 'md', 'none']}
     >
@@ -57,12 +57,12 @@ export const DogInfoCard = ({
         <>
           <S.Button
             onClick={() => router.push(`/dog/${dog.id}`)}
-            aria-label={`${dog.name} profile button`}
+            aria-label={`${dog.name} profile`}
           >
             <SourceOutlinedIcon fontSize='large' />
           </S.Button>
           <form onSubmit={(event) => handleSubmit(event, dog.id, dog.name)}>
-            <S.Button aria-label={`Delete ${dog.name} profile button`}>
+            <S.Button aria-label={`Delete ${dog.name} profile`}>
               {isSubmitting ? (
                 <Spinner size='xs' />
               ) : (

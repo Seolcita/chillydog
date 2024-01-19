@@ -11,7 +11,7 @@ export const CreateDogProfileButton = (): ReactElement => {
   };
 
   return (
-    <S.AddButton onClick={handleClick} aria-label='Create a dog profile button'>
+    <S.AddButton onClick={handleClick} aria-label='Create a dog profile'>
       <S.AddIcon />
     </S.AddButton>
   );

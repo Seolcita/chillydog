@@ -57,23 +57,11 @@ export const NavigationBar = (): ReactElement => {
 
   return (
     <nav>
-      {isLoggedIn ? (
+      {isLoggedIn && (
         <S.IconsContainer>
           <CreateDogProfileButton />
-          <DropdownMenu items={dropdownItems} menuLabel='Menu' />
+          <DropdownMenu items={dropdownItems} />
         </S.IconsContainer>
-      ) : (
-        <Link href='/auth/signin'>
-          <Button
-            size='s'
-            textColor='black'
-            bgColor='white'
-            ariaLabel='login button'
-            hasShadow={false}
-          >
-            Login
-          </Button>
-        </Link>
       )}
     </nav>
   );

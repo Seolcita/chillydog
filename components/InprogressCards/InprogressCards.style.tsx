@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { device } from '../../styles/Breakpoints';
 import ColorMap from '../../styles/Color';
 
+export interface ProgressBarProps {
+  $isMobile: boolean;
+}
+
 export const CardContainer = styled.div`
   display: flex;
   width: 100%;
@@ -20,7 +24,7 @@ export const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5rem;
+
   width: 100%;
   flex-grow: 1;
 
@@ -29,7 +33,7 @@ export const TextBox = styled.div`
   }
 
   @media ${device.sm} {
-    padding: 0 2rem 0 4rem;
+    padding: 0 2rem 0 6rem;
   }
 `;
 
@@ -37,30 +41,56 @@ export const Span = styled.span`
   color: ${ColorMap['warning'].main};
 `;
 
-export const ProgressBar = styled.progress`
-  width: 85%;
-  margin: 1rem 0;
-  height: 2rem;
+export const ProgressBarValue = styled.span`
+  color: transparent;
 `;
 
-export const CompleteButton = styled.button`
-  padding: 1rem 2rem;
-  line-height: 2rem;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: 500;
-  background-color: ${ColorMap['black'].main};
-  color: ${ColorMap['white'].main};
-  margin: 0 1rem;
+export const ProgressBar = styled.progress<ProgressBarProps>`
+  width: 85%;
+  height: 2rem;
+  margin-bottom: ${({ $isMobile }) => ($isMobile ? '2rem' : 'none')};
+`;
 
-  &:hover {
-    background-color: ${ColorMap['grey'].dark};
+const buttonColor = ColorMap['primary'].dark;
+export const CompleteButton = styled.button`
+  position: relative;
+  background-color: ${buttonColor};
+  color: ${ColorMap['white'].main};
+
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -0.5rem;
+    left: -0.5rem;
+    border-top: 0.2rem solid ${buttonColor};
+    border-left: 0.2rem solid ${buttonColor};
+    transition: all 0.25s;
   }
 
-  &:focus,
-  &:active {
-    background-color: ${ColorMap['grey'].main};
+  &:after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    bottom: -0.5rem;
+    right: -0.5rem;
+    border-bottom: 0.2rem solid ${buttonColor};
+    border-right: 0.2rem solid ${buttonColor};
+    transition: all 0.25s;
+  }
+
+  &:hover:before,
+  &:hover:after,
+  &:focus:before,
+  &:focus:after {
+    height: 100%;
+    width: 100%;
   }
 
   @media ${device.xs} {

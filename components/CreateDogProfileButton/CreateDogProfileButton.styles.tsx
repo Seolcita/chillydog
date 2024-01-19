@@ -9,14 +9,20 @@ export const AddButton = styled.button`
   padding: 0;
   height: 4.5rem;
   width: 4.5rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
+  border-radius: 50%;
 `;
 
 export const AddIcon = styled(AddCircleRoundedIcon)`
   color: ${ColorMap['white'].main};
   height: 4.5rem;
   width: 4.5rem;
-  
-  &:hover {
-    color: ${ColorMap['grey'].light}
+  border-radius: 50%;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: ${ColorMap['primary'].main};
+    background-color: ${ColorMap['white'].main};
+  }
 `;

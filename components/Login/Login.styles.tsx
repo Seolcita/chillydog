@@ -1,27 +1,59 @@
 import styled from 'styled-components';
-import ColorMap from '../../styles/Color';
+
 import { device } from '../../styles/Breakpoints';
-import { FlexCenter } from '../common-styles';
+import ColorMap from '../../styles/Color';
+import { Center } from '../common-styles';
 
-export const LoginContainer = styled(FlexCenter)``;
-
-export const CardContents = styled(FlexCenter)`
+export const Container = styled(Center)`
+  flex-direction: column;
+  align-items: space-between;
+  width: 55rem;
   @media ${device.xs} {
-    flex-direction: column;
+    width: 33rem;
+    margin-top: 5rem;
   }
 `;
 
-export const LoginOptions = styled(FlexCenter)`
-  flex-direction: column;
+export const CardContents = styled(Center)`
+  flex-direction: row;
+  height: 20rem;
+
+  @media ${device.xs} {
+    flex-direction: column;
+    height: 40rem;
+  }
 `;
 
-export const LoginImage = styled(FlexCenter)`
+export const LoginOptions = styled(Center)`
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-right: 2rem;
+
+  @media ${device.xs} {
+    padding: 1rem 0 3rem;
+    height: 25rem;
+  }
+`;
+
+export const TextContainer = styled.div`
+  margin-bottom: 2.5rem;
+`;
+
+export const LoginImage = styled(Center)`
+  width: 100%;
+  height: 100%;
   background-color: ${ColorMap['warning'].extraLight};
+  border-radius: 0.5rem;
 
   & > iframe {
     border: none;
-    width: 60%;
-    height: 50%;
+    width: 80%;
+    height: 80%;
     margin-bottom: -2.5rem;
+  }
+
+  @media ${device.xs} {
+    height: 30rem;
   }
 `;

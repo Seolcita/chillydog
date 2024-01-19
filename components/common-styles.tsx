@@ -7,10 +7,13 @@ export interface VisibilityProps {
 
 const height = `calc(100vh - ${headerHight}rem)`;
 
-export const FlexCenter = styled.div`
+export const Center = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const FlexCenter = styled(Center)`
   height: ${height};
   width: 100%;
 `;

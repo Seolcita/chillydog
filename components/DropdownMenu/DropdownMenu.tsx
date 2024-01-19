@@ -21,10 +21,9 @@ export interface DropdownItem {
 
 interface DropdownMenProps {
   items: DropdownItem[];
-  menuLabel: string;
 }
 
-const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
+const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [off, setOff] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -65,16 +64,16 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
         event.stopPropagation(), setOff(true);
       }}
     >
-      {/* TODO: Change Colors */}
       <S.ProfileButton
         onClick={() => setIsOpen((prev) => !prev)}
         aria-haspopup='true'
         aria-expanded={isOpen}
+        aria-label='User Profile Menu'
       >
         <S.StyledAccountCircleIcon />
       </S.ProfileButton>
       {isOpen && (
-        <S.MenuListContainer role='menu' aria-label={menuLabel} isOpen={isOpen}>
+        <S.MenuListContainer role='menu' $isOpen={isOpen}>
           {items.map((item) => (
             <S.ListItem
               key={item.label}
@@ -92,13 +91,15 @@ const DropdownMenu = ({ items, menuLabel }: DropdownMenProps): ReactElement => {
                       style={{
                         transform: `scale(${
                           noScale.includes(item.avatarName)
-                            ? item.avatarName === 'location'
+                            ? item.avatarName === 'location' ||
+                              item.avatarName === 'logout'
                               ? 0.8
                               : 1
                             : 1.6
                         }`,
                       }}
                       alt='avatar'
+                      aria-hidden='true'
                     />
                     <Typography variant='textS' fontWeight='bold'>
                       {item.label}

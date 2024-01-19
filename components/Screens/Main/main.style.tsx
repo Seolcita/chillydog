@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { device } from '../../../styles/Breakpoints';
 import { FlexCenter } from '../../../components/common-styles';
 
@@ -29,13 +30,13 @@ export const CardsContainer = styled.div`
   flex-direction: column;
 `;
 
-export const CardsSection = styled.section`
+export const CardsSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-export const WeatherSection = styled.section`
+export const WeatherSection = styled.div`
   display: flex;
   margin-bottom: 2rem;
 `;

@@ -11,13 +11,13 @@ interface UserInfoCardProps {
 
 export const UserInfoCard = ({ user }: UserInfoCardProps): ReactElement => {
   return (
-    <S.UserContainer>
+    <S.UserContainer tabIndex={0}>
       <S.AvatarContainer>
         <Image
           src={user.photoUrl}
           width={80}
           height={80}
-          alt={`${user.firstName} avatar`}
+          alt={`${user.firstName}'s avatar`}
           style={{
             borderRadius: '10rem',
             transform: 'scale(1.3)',

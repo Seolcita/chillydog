@@ -37,7 +37,7 @@ export const InProgressDogInfoCard = ({
       tabIndex={0}
       isInteractive={false}
       isPadded={true}
-      ariaLabel='Dog Profile Card'
+      ariaLabel='In progress dog profile card'
       height={5}
       margin={['none', 'none', 'md', 'none']}
     >
@@ -62,12 +62,12 @@ export const InProgressDogInfoCard = ({
         <>
           <S.Button
             onClick={() => handleClick(dog)}
-            aria-label={`Complete ${dog.name} profile button`}
+            aria-label={`Complete ${dog.name} profile`}
           >
             <EditNoteIcon fontSize='large' />
           </S.Button>
           <form onSubmit={(event) => handleSubmit(event, dog.id, dog.name)}>
-            <S.Button aria-label={`Delete ${dog.name} profile button`}>
+            <S.Button aria-label={`Delete ${dog.name} profile`}>
               {isSubmitting ? (
                 <Spinner size='xs' />
               ) : (

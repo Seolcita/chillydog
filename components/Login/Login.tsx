@@ -1,41 +1,36 @@
 import { ReactElement } from 'react';
+import PetsIcon from '@mui/icons-material/Pets';
 import { Button, Card, Typography } from 'sk-storybook';
 
+import { Preview } from '../Preview/Preview';
 import * as S from './Login.styles';
-import { useWindowSize, DeviceType } from '../../hooks/use-window-resize';
 
 const Login = (): ReactElement => {
-  const { deviceType } = useWindowSize();
-  const isMobile = deviceType === DeviceType.MOBILE;
-
   const handleLogin = () => {
     window.location.href = 'http://localhost:3001/api/auth/google/login';
   };
 
   return (
-    <S.LoginContainer>
+    <S.Container>
       <Card
         tabIndex={0}
-        height={isMobile ? 45 : 30}
-        width={isMobile ? 30 : 65}
         isInteractive={false}
+        isPadded
         ariaLabel='login section'
       >
         <S.CardContents>
           <S.LoginOptions>
-            <Typography
-              variant='headingM'
-              fontWeight='extraBold'
-              margin={['none', 'none', 'xl']}
-            >
-              Login
-            </Typography>
+            <S.TextContainer>
+              <Typography variant='headingM' fontWeight='extraBold'>
+                {`Login `}
+                <PetsIcon fontSize='large' />
+              </Typography>
+            </S.TextContainer>
             <Button
               size='l'
               onClick={handleLogin}
               textColor='white'
               ariaLabel='Login button'
-              margin={['none', 'none', 'md']}
               bgColor='error'
             >
               Sign in with Google
@@ -46,7 +41,9 @@ const Login = (): ReactElement => {
           </S.LoginImage>
         </S.CardContents>
       </Card>
-    </S.LoginContainer>
+
+      <Preview />
+    </S.Container>
   );
 };
 
