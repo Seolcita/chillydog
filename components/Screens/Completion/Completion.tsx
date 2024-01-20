@@ -2,7 +2,9 @@
 import { MouseEvent, ReactElement, useContext } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
+import Lottie from 'lottie-react';
 
+import CompletionAnimation from '../../../assets/complete/complete.json';
 import UserContext from '../../../context/user.context';
 import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './Completion.styled';
@@ -37,9 +39,9 @@ export const Completion = (): ReactElement => {
                   Your dog profile is created!
                 </Typography>
               </S.Message>
-              <S.CompleteImage>
-                <iframe src='https://lottie.host/embed/2ecf2dd2-c749-4c9d-a7df-6e9e5aadd28a/A6V31k8XFi.json'></iframe>
-              </S.CompleteImage>
+              <S.LottieContainer>
+                <Lottie animationData={CompletionAnimation} />
+              </S.LottieContainer>
               <Button
                 ariaLabel='Go to main page button'
                 size='l'

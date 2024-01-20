@@ -40,18 +40,17 @@ export const TextContainer = styled.div`
   margin-bottom: 2.5rem;
 `;
 
+export const LottieContainer = styled.div`
+  width: 70%;
+  height: 70%;
+  margin-bottom: 2rem;
+`;
+
 export const LoginImage = styled(Center)`
   width: 100%;
   height: 100%;
   background-color: ${ColorMap['warning'].extraLight};
   border-radius: 0.5rem;
-
-  & > iframe {
-    border: none;
-    width: 80%;
-    height: 80%;
-    margin-bottom: -2.5rem;
-  }
 
   @media ${device.xs} {
     height: 30rem;

@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  Center,
-  FlexCenter,
-  QuestionnaireFormContainer,
-} from '../../common-styles';
+import { Center } from '../../common-styles';
 
 export const Container = styled(Center)``;
 
@@ -17,10 +13,7 @@ export const Message = styled.div`
   text-align: center;
 `;
 
-export const CompleteImage = styled(Center)`
-  & > iframe {
-    border: none;
-    width: 50%;
-    height: 50%;
-  }
+export const LottieContainer = styled(Center)`
+  width: 20rem;
+  height: 20rem;
 `;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { device } from '../../styles/Breakpoints';
 
-export const headerHight = 7;
+export const headerHight = 9;
 export const Header = styled.header`
   display: flex;
   align-items: center;
@@ -20,5 +20,6 @@ export const Header = styled.header`
 
   @media ${device.md} {
     padding: 0 8rem;
+    margin-bottom: 2rem;
   }
 `;

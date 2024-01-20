@@ -1,6 +1,9 @@
 import { ReactElement } from 'react';
-import { Button, Card, Typography } from 'sk-storybook';
+import { Button, Card } from 'sk-storybook';
 import { useRouter } from 'next/router';
+import Lottie from 'lottie-react';
+
+import CreateDogProfileAnimation from '../../assets/createDogProfile/createDogProfile.json';
 import * as S from './CreateDogProfileCard.styles';
 
 export const CreateDogProfile = (): ReactElement => {
@@ -20,12 +23,14 @@ export const CreateDogProfile = (): ReactElement => {
           width={30}
         >
           <S.Contents>
-            <iframe src='https://lottie.host/embed/aea7d986-6070-4116-9bfd-53f2de7a3e3a/J5rYKAGYgF.json'></iframe>
+            <S.LottieContainer>
+              <Lottie animationData={CreateDogProfileAnimation} />
+            </S.LottieContainer>
             <Button
               bgColor='black'
               textColor='white'
-              size='s'
-              ariaLabel='Create Dog Profile Button'
+              size='m'
+              ariaLabel='Create Dog Profile'
               onClick={handleClick}
             >
               Create a dog profile

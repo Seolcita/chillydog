@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { FlexCenter } from '../common-styles';
-import { headerHight } from '../Header/Header.style';
+import { Center, FlexCenter } from '../common-styles';
 
 export const Wrap = styled(FlexCenter)``;
 
@@ -15,11 +14,12 @@ export const Contents = styled.section`
   flex-direction: column;
   width: 100%;
   padding: 2rem;
+`;
 
-  & > iframe {
-    margin-top: -2rem;
-    margin-bottom: 4rem;
-    border: none;
-    transform: scale(1.5);
-  }
+export const LottieContainer = styled(Center)`
+  width: 100%;
+  height: 100%;
+  margin-top: -4rem;
+  margin-bottom: 2rem;
+  transform: scale(1.5);
 `;
