@@ -1,26 +1,26 @@
-import { Box } from '@mui/material';
-import { Typography } from 'sk-storybook';
-import Image from 'next/image';
 import { ReactElement } from 'react';
+import { Box } from '@mui/material';
+import Image from 'next/image';
+
+import * as S from './Logo.styles';
+import { lilita } from '../../styles/Fonts';
+import { DeviceType, useWindowSize } from '../../hooks/use-window-resize';
 
 export const Logo = (): ReactElement => {
+  const { deviceType } = useWindowSize();
+  const isMobile = deviceType === DeviceType.MOBILE;
   return (
-    // TODO: Update logo when it is ready
     <Box display='flex' alignItems='center'>
       <Image
-        src='/images/logo/logo.png'
+        src='/images/logo/logo.svg'
         alt='An logo image'
-        width={45}
-        height={45}
+        width={50}
+        height={50}
+        style={{ border: '0.2rem solid white', borderRadius: '50%' }}
       />
-      <Typography
-        variant='headingXS'
-        color='white'
-        fontWeight='bold'
-        margin={['none', 'lg']}
-      >
+      <S.LogoText className={lilita.className} $isMobile={isMobile}>
         Chilly Dog
-      </Typography>
+      </S.LogoText>
     </Box>
   );
 };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { device } from '../../styles/Breakpoints';
+import { Center } from '../common-styles';
 
 export const Container = styled.section`
   display: flex;
@@ -8,7 +9,7 @@ export const Container = styled.section`
   align-items: center;
   width: 100%;
   height: 15rem;
-  padding: 2.5rem;
+  padding: 5rem;
   background: rgb(110, 159, 255);
   background: linear-gradient(
     140deg,
@@ -23,16 +24,20 @@ export const Container = styled.section`
   }
 `;
 
-export const ImageContainer = styled.div`
-  & > iframe {
-    border: none;
-    width: 13rem;
-    height: 13rem;
-  }
-
+export const ImageContainer = styled(Center)`
+  width: 100%;
+  height: 100%;
   @media ${device.xs} {
+    width: 15rme;
     margin-top: 0rem;
+    margin-right: 2rem;
+    justify-content: start;
   }
+`;
+
+export const LottieContainer = styled(Center)`
+  width: 15rem;
+  height: 15rem;
 `;
 
 export const TextContainer = styled.div`

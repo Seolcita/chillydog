@@ -1,7 +1,9 @@
 import { ReactElement } from 'react';
 import PetsIcon from '@mui/icons-material/Pets';
 import { Button, Card, Typography } from 'sk-storybook';
+import Lottie from 'lottie-react';
 
+import LoginAnimation from '../../assets/login/login.json';
 import { Preview } from '../Preview/Preview';
 import * as S from './Login.styles';
 
@@ -37,7 +39,9 @@ const Login = (): ReactElement => {
             </Button>
           </S.LoginOptions>
           <S.LoginImage>
-            <iframe src='https://lottie.host/embed/dba8e544-225a-42d5-9ff7-6a39b954ff62/zPrQZvBKHV.json' />
+            <S.LottieContainer>
+              <Lottie animationData={LoginAnimation} />
+            </S.LottieContainer>
           </S.LoginImage>
         </S.CardContents>
       </Card>

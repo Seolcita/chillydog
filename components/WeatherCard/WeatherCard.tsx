@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import { Typography } from 'sk-storybook';
+import Lottie from 'lottie-react';
 
+import LoginAnimation from '../../assets/login/login.json';
 import { WeatherImageUrlMap } from '../../hooks/use-weather';
 import { DeviceType } from '../../hooks/use-window-resize';
 import { Loader } from '../LineLoader/LineLoader';
@@ -57,7 +59,9 @@ export const WeatherCard = ({
             tabIndex={0}
             aria-label={`${weatherType} Weather Image`}
           >
-            {<iframe src={WeatherImageUrlMap[weatherType]} />}
+            <S.LottieContainer>
+              {WeatherImageUrlMap[weatherType]}
+            </S.LottieContainer>
           </S.ImageContainer>
           <S.TextContainer tabIndex={0}>
             <s.Visibility $isVisible={isMobile}>

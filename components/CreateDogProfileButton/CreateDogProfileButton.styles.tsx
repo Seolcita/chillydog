@@ -7,16 +7,16 @@ export const AddButton = styled.button`
   border: none;
   margin: 0;
   padding: 0;
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 5rem;
+  width: 5rem;
   margin-right: 1.5rem;
   border-radius: 50%;
 `;
 
 export const AddIcon = styled(AddCircleRoundedIcon)`
   color: ${ColorMap['white'].main};
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 50%;
 
   &:hover,

@@ -15,11 +15,7 @@ export const Contents = styled(Center)`
   padding: 2rem;
 `;
 
-export const ImageBox = styled(Center)`
-  & > iframe {
-    border: none;
-    width: 50%;
-    height: 50%;
-    transform: scale(1.2);
-  }
+export const LottieContainer = styled(Center)`
+  width: 20rem;
+  height: 20rem;
 `;
