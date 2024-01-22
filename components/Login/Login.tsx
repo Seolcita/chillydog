@@ -1,10 +1,9 @@
 import { ReactElement } from 'react';
-import PetsIcon from '@mui/icons-material/Pets';
 import { Button, Card, Typography } from 'sk-storybook';
+import PetsIcon from '@mui/icons-material/Pets';
 import Lottie from 'lottie-react';
 
 import LoginAnimation from '../../assets/login/login.json';
-import { Preview } from '../Preview/Preview';
 import * as S from './Login.styles';
 
 const Login = (): ReactElement => {
@@ -24,18 +23,28 @@ const Login = (): ReactElement => {
           <S.LoginOptions>
             <S.TextContainer>
               <Typography variant='headingM' fontWeight='extraBold'>
-                {`Login `}
+                {`Welcome   `}
                 <PetsIcon fontSize='large' />
               </Typography>
             </S.TextContainer>
             <Button
-              size='l'
+              size='m'
               onClick={handleLogin}
               textColor='white'
               ariaLabel='Login button'
               bgColor='error'
+              margin={['none', 'none', 'md', 'none']}
             >
               Sign in with Google
+            </Button>
+            <Button
+              size='m'
+              onClick={handleLogin}
+              textColor='white'
+              ariaLabel='Login button'
+              bgColor='primary'
+            >
+              Sign up with Google
             </Button>
           </S.LoginOptions>
           <S.LoginImage>
@@ -45,8 +54,6 @@ const Login = (): ReactElement => {
           </S.LoginImage>
         </S.CardContents>
       </Card>
-
-      <Preview />
     </S.Container>
   );
 };

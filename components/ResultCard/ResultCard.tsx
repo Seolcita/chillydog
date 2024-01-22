@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
-import { Card, Typography, device } from 'sk-storybook';
+import { Card, Typography } from 'sk-storybook';
 import Image from 'next/image';
 
-import { Result } from '../../hooks/use-result';
-import * as S from './ResultCard.style';
-import { titillium } from '../../styles/Fonts';
 import { DeviceType } from '../../hooks/use-window-resize';
+import { Result } from '../../hooks/use-result';
+import { titillium } from '../../styles/Fonts';
+import * as S from './ResultCard.style';
 
 interface ResultCardProps {
   name: string;
@@ -22,7 +22,13 @@ const ResultCard = ({
 }: ResultCardProps): ReactElement => {
   return (
     <S.CardContainer>
-      <Card ariaLabel='result card' isPadded tabIndex={0} isInteractive={false}>
+      <Card
+        ariaLabel='result card'
+        isPadded
+        tabIndex={0}
+        isInteractive={false}
+        hasBoxShadow={false}
+      >
         <S.Contents>
           <S.AvatarBox>
             <Image

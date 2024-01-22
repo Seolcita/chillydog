@@ -38,6 +38,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (typeof window !== 'undefined') {
       const accessToken = sessionStorage.getItem('accessToken');
       if (!accessToken) {

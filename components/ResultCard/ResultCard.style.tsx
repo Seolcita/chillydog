@@ -8,6 +8,14 @@ interface TitleProps {
   $deviceType: DeviceType;
 }
 
+export const titleColorMap: Record<number, string> = {
+  1: ColorMap['success'].dark!,
+  2: ColorMap['success'].dark!,
+  3: ColorMap['warning'].main!,
+  4: ColorMap['warning'].dark!,
+  5: ColorMap['error'].dark!,
+};
+
 export const setFontSize = (deviceType: DeviceType): string => {
   if (deviceType === DeviceType.MOBILE) {
     return '2rem';
@@ -16,14 +24,6 @@ export const setFontSize = (deviceType: DeviceType): string => {
   } else {
     return '2.2rem';
   }
-};
-
-export const titleColorMap: Record<number, string> = {
-  1: ColorMap['success'].main,
-  2: ColorMap['success'].dark!,
-  3: ColorMap['warning'].light!,
-  4: ColorMap['warning'].main,
-  5: ColorMap['success'].main,
 };
 
 export const CardContainer = styled.div`

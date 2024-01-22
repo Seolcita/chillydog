@@ -1,27 +1,24 @@
 import { ReactElement } from 'react';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Card, Spinner, Typography } from 'sk-storybook';
 import Image from 'next/image';
 
 import { QuestionnaireScreenMap } from '../../hooks/use-questionnaire-next-screen-url';
+import { ModalProps } from '../Screens/UserProfile/UserProfile';
 import * as S from '../Screens/UserProfile/UserProfile.styles';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { Dog } from '../../entities/dog.entities';
 import { useRouter } from 'next/router';
 
 interface InProgressDogInfoCardProps {
   dog: Dog;
-  handleSubmit: (
-    event: React.SyntheticEvent,
-    dogId: string,
-    dogName: string
-  ) => void;
+  handleModal: ({ dogId, dogName, event }: ModalProps) => void;
   isSubmitting: boolean;
 }
 
 export const InProgressDogInfoCard = ({
   dog,
-  handleSubmit,
+  handleModal,
   isSubmitting,
 }: InProgressDogInfoCardProps): ReactElement => {
   const router = useRouter();
@@ -66,15 +63,18 @@ export const InProgressDogInfoCard = ({
           >
             <EditNoteIcon fontSize='large' />
           </S.Button>
-          <form onSubmit={(event) => handleSubmit(event, dog.id, dog.name)}>
-            <S.Button aria-label={`Delete ${dog.name} profile`}>
-              {isSubmitting ? (
-                <Spinner size='xs' />
-              ) : (
-                <DeleteForeverIcon fontSize='large' />
-              )}
-            </S.Button>
-          </form>
+          <S.Button
+            aria-label={`Delete ${dog.name} profile`}
+            onClick={(event) =>
+              handleModal({ dogId: dog.id, dogName: dog.name, event })
+            }
+          >
+            {isSubmitting ? (
+              <Spinner size='xs' />
+            ) : (
+              <DeleteForeverIcon fontSize='large' />
+            )}
+          </S.Button>
         </>
       </S.DogContainer>
     </Card>

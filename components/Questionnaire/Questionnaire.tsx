@@ -3,13 +3,12 @@ import { Card, Typography } from 'sk-storybook';
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 
+import { Notification } from '../Notification/Notification';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
-import * as S from './Questionnaire.styles';
 import { CloseButton } from '../CloseButton/CloseButton';
 import UserContext from '../../context/user.context';
-import { Notification } from '../Notification/Notification';
 import { Loader } from '../LineLoader/LineLoader';
-import { FlexCenter } from '../common-styles';
+import * as S from './Questionnaire.styles';
 
 interface BaseQuestionnaireProps {
   question: string;
@@ -53,11 +52,13 @@ export const Questionnaire = ({
 
   const redirectUrl = edit ? editRedirectUrl : `/main?userId=${user?.id}`;
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {!isLoading && (
         <S.Container>
           <Card
             ariaLabel={`questionnaire card step ${currentStep}`}

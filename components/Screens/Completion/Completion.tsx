@@ -12,51 +12,50 @@ import * as S from './Completion.styled';
 export const Completion = (): ReactElement => {
   const router = useRouter();
   const { user, isLoading, refreshUser } = useContext(UserContext);
+
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     user && router.push(`/main?userId=${user.id}`);
     refreshUser();
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <S.Container>
-          <Card
-            ariaLabel={`questionnaire completed`}
-            tabIndex={0}
-            isPadded
-            isInteractive={false}
+    <S.Container>
+      <Card
+        ariaLabel={`questionnaire completed`}
+        tabIndex={0}
+        isPadded
+        isInteractive={false}
+      >
+        <S.Contents>
+          <S.Message tabIndex={0}>
+            <Typography variant='headingXS' fontWeight='bold'>
+              Congratulation!
+            </Typography>
+            <Typography variant='headingXS' fontWeight='bold'>
+              Your dog profile is created!
+            </Typography>
+          </S.Message>
+          <S.LottieContainer>
+            <Lottie animationData={CompletionAnimation} />
+          </S.LottieContainer>
+          <Button
+            ariaLabel='Go to main page button'
+            size='m'
+            bgColor='black'
+            textColor='white'
+            hasShadow={false}
+            fullWidth
+            onClick={handleClick}
           >
-            <S.Contents>
-              <S.Message tabIndex={0}>
-                <Typography variant='headingXS' fontWeight='bold'>
-                  Congratulation!
-                </Typography>
-                <Typography variant='headingXS' fontWeight='bold'>
-                  Your dog profile is created!
-                </Typography>
-              </S.Message>
-              <S.LottieContainer>
-                <Lottie animationData={CompletionAnimation} />
-              </S.LottieContainer>
-              <Button
-                ariaLabel='Go to main page button'
-                size='l'
-                bgColor='black'
-                textColor='white'
-                hasShadow={false}
-                fullWidth
-                onClick={handleClick}
-              >
-                Go to main page
-              </Button>
-            </S.Contents>
-          </Card>
-        </S.Container>
-      )}
-    </>
+            Go to main page
+          </Button>
+        </S.Contents>
+      </Card>
+    </S.Container>
   );
 };

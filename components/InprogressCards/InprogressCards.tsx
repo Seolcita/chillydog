@@ -56,6 +56,7 @@ export const InprogressCards = ({
                 isPadded
                 isInteractive={false}
                 ariaLabel='In progress dog profile card'
+                hasBoxShadow={false}
               >
                 <S.Contents>
                   <Image

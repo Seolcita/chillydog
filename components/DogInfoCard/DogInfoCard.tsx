@@ -1,26 +1,23 @@
 import { ReactElement } from 'react';
+import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Card, Spinner, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
+import { ModalProps } from '../Screens/UserProfile/UserProfile';
 import * as S from '../Screens/UserProfile/UserProfile.styles';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
 import { Dog } from '../../entities/dog.entities';
 
 interface DogInfoCardProps {
   dog: Dog;
-  handleSubmit: (
-    event: React.SyntheticEvent,
-    dogId: string,
-    dogName: string
-  ) => void;
   isSubmitting: boolean;
+  handleModal: ({ dogId, dogName, event }: ModalProps) => void;
 }
 
 export const DogInfoCard = ({
   dog,
-  handleSubmit,
+  handleModal,
   isSubmitting,
 }: DogInfoCardProps): ReactElement => {
   const router = useRouter();
@@ -61,15 +58,18 @@ export const DogInfoCard = ({
           >
             <SourceOutlinedIcon fontSize='large' />
           </S.Button>
-          <form onSubmit={(event) => handleSubmit(event, dog.id, dog.name)}>
-            <S.Button aria-label={`Delete ${dog.name} profile`}>
-              {isSubmitting ? (
-                <Spinner size='xs' />
-              ) : (
-                <DeleteForeverIcon fontSize='large' />
-              )}
-            </S.Button>
-          </form>
+          <S.Button
+            aria-label={`Delete ${dog.name} profile`}
+            onClick={(event) =>
+              handleModal({ dogId: dog.id, dogName: dog.name, event })
+            }
+          >
+            {isSubmitting ? (
+              <Spinner size='xs' />
+            ) : (
+              <DeleteForeverIcon fontSize='large' />
+            )}
+          </S.Button>
         </>
       </S.DogContainer>
     </Card>

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
-import { LineLoader } from 'sk-storybook';
 import axios from 'axios';
 
 import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
@@ -12,7 +11,7 @@ import { getWeatherType } from '../../../hooks/use-weather';
 import { ResultCards } from '../../ResultCard/ResultCards';
 import UserContext from '../../../context/user.context';
 import { Dog } from '../../../entities/dog.entities';
-import { FlexCenter } from '../../common-styles';
+import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './main.style';
 
 const Main = (): ReactElement => {
@@ -48,13 +47,13 @@ const Main = (): ReactElement => {
     return () => clearInterval(intervalId);
   }, [city, weatherData?.city]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
-      {isLoading ? (
-        <FlexCenter>
-          <LineLoader />
-        </FlexCenter>
-      ) : !hasDogs ? (
+      {!isLoading && !hasDogs ? (
         <CreateDogProfile />
       ) : (
         <S.Wrapper>
@@ -68,6 +67,7 @@ const Main = (): ReactElement => {
                 />
               )}
             </S.WeatherSection>
+
             <S.CardsContainer>
               {hasDogs && hasWeatherInfo && (
                 <S.CardsSection>

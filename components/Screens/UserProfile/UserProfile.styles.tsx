@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import ColorMap from '../../../styles/Color';
+import { Center } from '../../common-styles';
 
 export const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export const Wrapper = styled.div`
@@ -95,4 +97,20 @@ export const CloseButton = styled.button`
   &:focus {
     color: ${ColorMap['grey'].main};
   }
+`;
+
+export const Span = styled.span`
+  color: ${ColorMap['warning'].main};
+`;
+
+export const ModalContent = styled(Center)`
+  padding: 2rem 1.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18rem;
+`;
+
+export const ButtonContainer = styled(Center)`
+  width: 100%;
+  gap: 1rem;
 `;

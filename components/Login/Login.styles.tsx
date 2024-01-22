@@ -16,7 +16,7 @@ export const Container = styled(Center)`
 
 export const CardContents = styled(Center)`
   flex-direction: row;
-  height: 20rem;
+  height: 22rem;
 
   @media ${device.xs} {
     flex-direction: column;
