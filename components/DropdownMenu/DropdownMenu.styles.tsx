@@ -23,8 +23,8 @@ export const ProfileButton = styled.button`
 
 export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
   color: ${ColorMap['white'].main};
-  height: 5rem;
-  width: 5rem;
+  height: 4.5rem;
+  width: 4.5rem;
   margin: 0;
   border-radius: 50%;
 

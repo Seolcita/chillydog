@@ -1,8 +1,6 @@
 import { ReactElement } from 'react';
 import { Typography } from 'sk-storybook';
-import Lottie from 'lottie-react';
 
-import LoginAnimation from '../../assets/login/login.json';
 import { WeatherImageUrlMap } from '../../hooks/use-weather';
 import { DeviceType } from '../../hooks/use-window-resize';
 import { Loader } from '../LineLoader/LineLoader';
@@ -46,66 +44,62 @@ export const WeatherCard = ({
     return formattedTemp;
   };
 
+  if (!weatherData || !weatherType) {
+    return <Loader />;
+  }
+
   return (
-    <>
-      {weatherData && weatherType ? (
-        <S.Container tabIndex={0} aria-label='Weather display card'>
-          <s.Visibility $isVisible={!isMobile} tabIndex={0}>
-            <Typography variant='headingS' color='white' aria-label='city'>
-              {weatherData.city}
-            </Typography>
-          </s.Visibility>
-          <S.ImageContainer
-            tabIndex={0}
-            aria-label={`${weatherType} Weather Image`}
+    <S.Container tabIndex={0} aria-label='Weather display card'>
+      <s.Visibility $isVisible={!isMobile} tabIndex={0}>
+        <Typography variant='headingS' color='white' aria-label='city'>
+          {weatherData.city}
+        </Typography>
+      </s.Visibility>
+      <S.ImageContainer
+        tabIndex={0}
+        aria-label={`${weatherType} Weather Image`}
+      >
+        <S.LottieContainer>{WeatherImageUrlMap[weatherType]}</S.LottieContainer>
+      </S.ImageContainer>
+      <S.TextContainer tabIndex={0}>
+        <s.Visibility $isVisible={isMobile}>
+          <Typography variant='headingXS' color='white' aria-label='city'>
+            {weatherData.city}
+          </Typography>
+        </s.Visibility>
+        <S.Temperature>
+          {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
+          <Typography
+            variant='headingM'
+            fontWeight='bold'
+            color='white'
+            margin={['none', 'md', 'none', 'none']}
+            aria-label='temperature in celsius'
           >
-            <S.LottieContainer>
-              {WeatherImageUrlMap[weatherType]}
-            </S.LottieContainer>
-          </S.ImageContainer>
-          <S.TextContainer tabIndex={0}>
-            <s.Visibility $isVisible={isMobile}>
-              <Typography variant='headingXS' color='white' aria-label='city'>
-                {weatherData.city}
-              </Typography>
-            </s.Visibility>
-            <S.Temperature>
-              {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
-              <Typography
-                variant='headingM'
-                fontWeight='bold'
-                color='white'
-                margin={['none', 'md', 'none', 'none']}
-                aria-label='temperature in celsius'
-              >
-                {convertTempUnit({
-                  temp: weatherData.temperature,
-                  unit: 'celsius',
-                })}
-              </Typography>
-              <Typography
-                variant='headingXS'
-                color='white'
-                aria-label='temperature in fahrenheit'
-              >
-                {convertTempUnit({
-                  temp: weatherData.temperature,
-                  unit: 'fahrenheit',
-                })}
-              </Typography>
-            </S.Temperature>
-            <Typography
-              variant='textL'
-              color='white'
-              aria-label='weather description'
-            >
-              {weatherData.description}
-            </Typography>
-          </S.TextContainer>
-        </S.Container>
-      ) : (
-        <Loader />
-      )}
-    </>
+            {convertTempUnit({
+              temp: weatherData.temperature,
+              unit: 'celsius',
+            })}
+          </Typography>
+          <Typography
+            variant='headingXS'
+            color='white'
+            aria-label='temperature in fahrenheit'
+          >
+            {convertTempUnit({
+              temp: weatherData.temperature,
+              unit: 'fahrenheit',
+            })}
+          </Typography>
+        </S.Temperature>
+        <Typography
+          variant='textL'
+          color='white'
+          aria-label='weather description'
+        >
+          {weatherData.description}
+        </Typography>
+      </S.TextContainer>
+    </S.Container>
   );
 };

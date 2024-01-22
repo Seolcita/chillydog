@@ -102,7 +102,7 @@ export const useResult = ({
       return {
         title: 'No evidence of risk',
         description: 'Have fun outside!',
-        point,
+        point: 1,
       };
     } else if (point === 2) {
       return {
@@ -126,7 +126,7 @@ export const useResult = ({
       return {
         title: 'Potentially life-threatening cold',
         description: 'Avoid prolonged outdoor activity',
-        point,
+        point: 5,
       };
     } else {
       throw Error('error');

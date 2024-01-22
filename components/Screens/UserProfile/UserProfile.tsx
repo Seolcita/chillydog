@@ -1,5 +1,5 @@
-import { ReactElement, useContext, useState } from 'react';
-import { Button, Card, Typography } from 'sk-storybook';
+import { ReactElement, ReactNode, useContext, useState } from 'react';
+import { Badge, Button, Card, Modal, Typography } from 'sk-storybook';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PetsIcon from '@mui/icons-material/Pets';
 import { useRouter } from 'next/router';
@@ -13,13 +13,22 @@ import { UserInfoCard } from '../../UserInfoCard/UserInfoCard';
 import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
 import UserContext from '../../../context/user.context';
 import { User } from '../../../entities/user.entities';
-import * as S from './UserProfile.styles';
 import { Loader } from '../../LineLoader/LineLoader';
+import * as S from './UserProfile.styles';
+
+export interface ModalProps {
+  dogName: string;
+  dogId: string;
+  event: React.SyntheticEvent;
+}
 
 export const UserProfile = (): ReactElement => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [successMessage, setSuccessMessage] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [dogName, setDogName] = useState<string>();
+  const [dogId, setDogId] = useState<string>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const { user, setUser, isLoading } = useContext(UserContext);
@@ -33,8 +42,8 @@ export const UserProfile = (): ReactElement => {
     return result;
   };
 
+  const hasDogs = user?.dogs !== undefined && user?.dogs.length > 0;
   const hasCompletedProfiles = checkDogProfiles(RegistrationStatus.COMPLETED);
-
   const hasInProgressProfiles = checkDogProfiles(
     RegistrationStatus.IN_PROGRESS
   );
@@ -55,6 +64,7 @@ export const UserProfile = (): ReactElement => {
         })
         .then((res) => {
           setIsSubmitting(false);
+          setIsOpen(false);
           const user: User = res.data;
           setUser(user);
           setSuccessMessage(`${dogName} profile is deleted successfully.`);
@@ -73,8 +83,16 @@ export const UserProfile = (): ReactElement => {
     }
   };
 
+  const handleModal = ({ dogName, dogId, event }: ModalProps) => {
+    console.log('clicked', dogName, dogId);
+    event.preventDefault();
+    setDogName(dogName);
+    setDogId(dogId);
+    setIsOpen(true);
+  };
+
   return (
-    <>
+    <Box>
       {!isLoading && user ? (
         <S.ProfileContainer>
           <Card
@@ -104,48 +122,53 @@ export const UserProfile = (): ReactElement => {
               </Box>
 
               <Typography
-                variant='textM'
+                variant='textS'
                 fontWeight='bold'
                 margin={['none', 'none', 'md', 'none']}
               >
                 <span tabIndex={0}>Completed</span>
               </Typography>
-              {user && user.dogs !== undefined && user?.dogs.length > 0 ? (
+              {user &&
+                user.dogs !== undefined &&
+                user?.dogs.length > 0 &&
                 user?.dogs.map((dog) => {
-                  return dog.registrationStatus ===
-                    RegistrationStatus.COMPLETED ? (
-                    <DogInfoCard
-                      dog={dog}
-                      handleSubmit={handleSubmit}
-                      isSubmitting={isSubmitting}
-                    />
-                  ) : (
-                    !hasCompletedProfiles && (
-                      //TODO: Replace with Badge component once Storybook is updated
-                      <Typography variant='textS'>- None</Typography>
+                  return (
+                    dog.registrationStatus === RegistrationStatus.COMPLETED && (
+                      <DogInfoCard
+                        dog={dog}
+                        handleModal={handleModal}
+                        isSubmitting={isSubmitting}
+                      />
                     )
                   );
-                })
-              ) : (
-                <>
-                  {/* TODO: Replace with Badge component once Storybook is updated */}
-                  <Typography variant='textS'>- None</Typography>
-                  <Button
-                    size='xs'
-                    variant='outlined'
-                    textColor='black'
-                    ariaLabel='Create dog profile button'
-                    margin={['md', 'none', 'none']}
-                    onClick={() => router.push('/questionnaires/name')}
-                  >
-                    Create Dog Profile&nbsp;&nbsp;
-                    <PetsIcon fontSize='medium' />
-                  </Button>
-                </>
+                })}
+
+              {(!hasDogs || !hasCompletedProfiles) && (
+                <Box
+                  display='inline-block'
+                  marginTop={'0.2rem'}
+                  marginBottom={'0.4rem'}
+                >
+                  <Badge title='None' color='white' bgColor='primary' />
+                </Box>
+              )}
+
+              {!hasDogs && (
+                <Button
+                  size='xs'
+                  variant='outlined'
+                  textColor='black'
+                  ariaLabel='Create dog profile button'
+                  margin={['md', 'none', 'none']}
+                  onClick={() => router.push('/questionnaires/name')}
+                >
+                  Create Dog Profile&nbsp;&nbsp;
+                  <PetsIcon fontSize='medium' />
+                </Button>
               )}
 
               <Typography
-                variant='textM'
+                variant='textS'
                 fontWeight='bold'
                 margin={['xl', 'none', 'md', 'none']}
               >
@@ -160,15 +183,16 @@ export const UserProfile = (): ReactElement => {
                       RegistrationStatus.IN_PROGRESS && (
                       <InProgressDogInfoCard
                         dog={dog}
-                        handleSubmit={handleSubmit}
+                        handleModal={handleModal}
                         isSubmitting={isSubmitting}
                       />
                     )
                   );
                 })}
-              {/* TODO: Replace with Badge component once Storybook is updated */}
               {!hasInProgressProfiles && (
-                <Typography variant='textS'>- None</Typography>
+                <Box display='inline-block' marginTop={'0.2rem'}>
+                  <Badge title='None' color='white' bgColor='primary' />
+                </Box>
               )}
             </S.Wrapper>
           </Card>
@@ -182,6 +206,51 @@ export const UserProfile = (): ReactElement => {
       ) : (
         <Loader />
       )}
-    </>
+
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          ariaLabel={`Delete ${dogName} profile modal`}
+          backdropColor='#00000080'
+          width={40}
+        >
+          <S.ModalContent>
+            <Typography variant='textL' fontWeight='bold'>
+              Are you sure you want to <S.Span>delete {dogName}</S.Span>
+              {`'s `}
+              profile?
+            </Typography>
+            <S.ButtonContainer>
+              <Button
+                size='s'
+                onClick={(event) =>
+                  dogId && dogName && handleSubmit(event, dogId, dogName)
+                }
+                ariaLabel={`${dogName} profile delete`}
+                textColor='white'
+                bgColor='black'
+                fullWidth
+              >
+                Delete
+              </Button>
+              <Button
+                size='s'
+                onClick={() => setIsOpen(false)}
+                ariaLabel={`${dogName} profile delete`}
+                textColor='black'
+                bgColor='white'
+                fullWidth
+                variant='outlined'
+              >
+                Cancel
+              </Button>
+            </S.ButtonContainer>
+          </S.ModalContent>
+        </Modal>
+      )}
+    </Box>
   );
 };
