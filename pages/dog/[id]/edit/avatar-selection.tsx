@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactElement, SyntheticEvent, useContext, useState } from 'react';
+import React, {
+  ReactElement,
+  SyntheticEvent,
+  useContext,
+  useState,
+} from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 

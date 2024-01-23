@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { Button, Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 import Lottie from 'lottie-react';
