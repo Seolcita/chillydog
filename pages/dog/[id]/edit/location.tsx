@@ -23,7 +23,7 @@ export const EditLocationScreen = (): ReactElement => {
   const onSubmit = async ({ cityName }: FormValues) => {
     if (user && cityName) {
       await axios
-        .put('http://localhost:3001/api/dog/location/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/location/edit`, {
           location: cityName,
           userId: user.id,
         })

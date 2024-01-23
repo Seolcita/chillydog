@@ -5,10 +5,26 @@ import Lottie from 'lottie-react';
 
 import LoginAnimation from '../../assets/login/login.json';
 import * as S from './Login.styles';
+import axios from 'axios';
 
 const Login = (): ReactElement => {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:3001/api/auth/google/login';
+    window.location.href = `${process.env.END_POINT_URL}/auth/google/login`;
+
+    // await axios
+    //   .get(`${process.env.END_POINT_URL}/auth/google/login`)
+    //   .then((res) => {
+    //     console.log('response🚨', res.data);
+
+    //     // if (typeof window !== 'undefined' && user) {
+    //     //   sessionStorage.setItem('accessToken', user.accessToken);
+
+    //     // }
+    //     // user && router.push(`/main?userId=${user.id}`);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error🤬🤬🤬🤬', error);
+    //   });
   };
 
   return (

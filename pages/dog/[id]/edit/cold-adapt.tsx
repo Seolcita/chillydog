@@ -28,7 +28,7 @@ const EditColdAdaptScreen = (): ReactElement => {
 
     if (user && value?.value !== undefined) {
       await axios
-        .put('http://localhost:3001/api/dog/cold-adapt/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/cold-adapt/edit`, {
           dogId,
           coldAdapt: value.value,
           userId: user.id,

@@ -29,32 +29,35 @@ export const SigninSuccess = ({ user }: SigninSuccessGetServerSideProps) => {
 export async function getServerSideProps(context: any) {
   const { req } = context;
   const cookies = req.headers.cookie;
+  console.log('COOKIE😅', cookies);
 
-  const cookiesArray = cookies.split('; ');
+  const cookiesArray = cookies && cookies.split('; ');
 
-  const accessTokenCookie = cookiesArray.find((cookie: string) =>
-    cookie.startsWith('access_token=')
-  );
+  const accessTokenCookie =
+    cookiesArray &&
+    cookiesArray.find((cookie: string) => cookie.startsWith('access_token='));
 
-  try {
-    return axios
-      .get(`http://localhost:3001/api/auth/profile`, {
-        headers: {
-          Cookie: accessTokenCookie,
+  console.log('🥎🥎🥎🥎🥎🥎🥎🥎🥎accessTokenCookie', accessTokenCookie);
+
+  return await axios
+    .get(`${process.env.END_POINT_URL}/auth/profile`, {
+      withCredentials: true,
+      headers: {
+        Cookie: accessTokenCookie,
+      },
+    })
+    .then((res) => {
+      console.log('res🥎🥎🥎🥎🥎🥎🥎🥎🥎', res.data);
+      return {
+        props: {
+          user: res.data,
         },
-      })
-      .then((res) => {
-        console.log('res', res.data);
-        return {
-          props: {
-            user: res.data,
-          },
-        };
-      });
-  } catch (error) {
-    console.error('API request failed', error);
-    return { props: { user: null } };
-  }
+      };
+    })
+    .catch((error) => {
+      console.error('Error🤬🤬🤬🤬', error);
+      return { props: { user: null } };
+    });
 }
 
 export default SigninSuccess;

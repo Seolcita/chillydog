@@ -29,7 +29,7 @@ const ColdAdaptScreen = (): ReactElement => {
 
     if (user && value?.value !== undefined) {
       await axios
-        .post('http://localhost:3001/api/dog/cold-adapt', {
+        .post(`${process.env.END_POINT_URL}/dog/cold-adapt`, {
           dogId,
           coldAdapt: value.value,
           userId: user.id,

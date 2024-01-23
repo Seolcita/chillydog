@@ -28,7 +28,7 @@ const EditDogSizeScreen = (): ReactElement => {
 
     if (user && value?.value) {
       await axios
-        .put('http://localhost:3001/api/dog/dog-size/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/dog-size/edit`, {
           dogId,
           dogSize: value.value,
           userId: user.id,

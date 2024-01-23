@@ -41,26 +41,30 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     if (typeof window !== 'undefined') {
       const accessToken = sessionStorage.getItem('accessToken');
-      if (!accessToken) {
+      if (accessToken === null || accessToken === 'undefined') {
         router.push('/auth/signin');
       }
 
-      axios
-        .get(`http://localhost:3001/api/auth/login-status`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((res) => {
-          setIsAuthenticated(res.data.loggedIn);
-          setUserData(res.data.user);
-          sessionStorage.setItem('accessToken', res.data.user.accessToken);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error fetching user data:', error);
-          setIsLoading(false);
-        });
+      console.log('accessToken🚨', accessToken);
+
+      if (accessToken) {
+        axios
+          .get(`${process.env.END_POINT_URL}/auth/login-status`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+          .then((res) => {
+            setIsAuthenticated(res.data.loggedIn);
+            setUserData(res.data.user);
+            sessionStorage.setItem('accessToken', res.data.user.accessToken);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error);
+            setIsLoading(false);
+          });
+      }
     }
   }, [trigger]);
 

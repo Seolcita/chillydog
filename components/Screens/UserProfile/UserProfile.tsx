@@ -59,7 +59,7 @@ export const UserProfile = (): ReactElement => {
 
     if (user && dogId) {
       await axios
-        .delete('http://localhost:3001/api/dog/delete', {
+        .delete(`${process.env.END_POINT_URL}/dog/delete`, {
           data: { dogId, userId: user.id },
         })
         .then((res) => {

@@ -52,7 +52,7 @@ export async function getServerSideProps(context: any) {
   );
 
   return axios
-    .get(`http://localhost:3001/api/auth/logout`, {
+    .get(`${process.env.END_POINT_URL}/auth/logout`, {
       headers: {
         Cookie: refreshTokenCookie,
       },

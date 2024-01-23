@@ -32,7 +32,7 @@ const Main = (): ReactElement => {
 
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/weather?city=${city}`
+        `${process.env.END_POINT_URL}/weather?city=${city}`
       );
       const data: WeatherData = res.data;
       setWeatherData(data);
