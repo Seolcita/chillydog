@@ -37,7 +37,7 @@ export const EditNameScreen = (): ReactElement => {
   const onSubmit = async ({ name }: FormValues) => {
     if (user && name && dogId) {
       await axios
-        .put('http://localhost:3001/api/dog/name/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/name/edit`, {
           name,
           userId: user.id,
           dogId,

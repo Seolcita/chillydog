@@ -28,7 +28,7 @@ const EditHeavyCoatScreen = (): ReactElement => {
 
     if (user && value?.value !== undefined) {
       await axios
-        .put('http://localhost:3001/api/dog/heavy-coat/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/heavy-coat/edit`, {
           dogId,
           heavyCoat: value.value,
           userId: user.id,

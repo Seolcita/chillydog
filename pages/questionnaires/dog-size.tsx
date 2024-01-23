@@ -29,7 +29,7 @@ const DogSizeScreen = (): ReactElement => {
 
     if (user && value?.value) {
       await axios
-        .post('http://localhost:3001/api/dog/dog-size', {
+        .post(`${process.env.END_POINT_URL}/dog/dog-size`, {
           dogId,
           dogSize: value.value,
           userId: user.id,

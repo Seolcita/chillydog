@@ -36,7 +36,7 @@ const AvatarSelectionScreen = (): ReactElement => {
       setIsSubmitting(true);
 
       await axios
-        .post('http://localhost:3001/api/dog/avatar-selection', {
+        .post(`${process.env.END_POINT_URL}/dog/avatar-selection`, {
           dogId,
           selectedAvatar,
           userId: user.id,

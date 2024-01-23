@@ -25,7 +25,7 @@ export const LocationScreen = (): ReactElement => {
   const onSubmit = async ({ cityName }: FormValues) => {
     if (user && cityName) {
       await axios
-        .post('http://localhost:3001/api/dog/location', {
+        .post(`${process.env.END_POINT_URL}/dog/location`, {
           dogId,
           location: cityName,
           userId: user.id,

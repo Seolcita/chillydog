@@ -29,7 +29,7 @@ const HeavyCoatScreen = (): ReactElement => {
 
     if (user && value?.value !== undefined) {
       await axios
-        .post('http://localhost:3001/api/dog/heavy-coat', {
+        .post(`${process.env.END_POINT_URL}/dog/heavy-coat`, {
           dogId,
           heavyCoat: value.value,
           userId: user.id,

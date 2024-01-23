@@ -48,7 +48,7 @@ const EditAvatarSelectionScreen = (): ReactElement => {
 
     if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
       await axios
-        .put('http://localhost:3001/api/dog/avatar-selection/edit', {
+        .put(`${process.env.END_POINT_URL}/dog/avatar-selection/edit`, {
           dogId,
           selectedAvatar,
           userId: user.id,

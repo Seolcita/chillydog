@@ -20,7 +20,7 @@ const NameScreen = (): ReactElement => {
   const onSubmit = async ({ name }: FormValues) => {
     if (user && name) {
       await axios
-        .post('http://localhost:3001/api/dog/name', {
+        .post(`${process.env.END_POINT_URL}/dog/name`, {
           name,
           userId: user.id,
         })
