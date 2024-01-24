@@ -6,11 +6,8 @@ module.exports = (phase) => {
   const env = {
     END_POINT_URL: isDev
       ? 'http://localhost:3001/api'
-      : 'https://nice-blue-gosling-kit.cyclic.app/api', //TODO: change to production url once it is ready
+      : 'https://nice-blue-gosling-kit.cyclic.app/api',
   };
-
-  // const env = { END_POINT_URL: 'https://nice-blue-gosling-kit.cyclic.app/api' };
-  // const env = { END_POINT_URL: 'http://localhost:3001/api' };
 
   return {
     reactStrictMode: true,
