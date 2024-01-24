@@ -1,3 +1,4 @@
+import axios from 'axios';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
@@ -8,6 +9,8 @@ import { theme } from '../styles/Theme';
 import * as S from './_app.styled';
 
 export default function App({ Component, pageProps }: AppProps) {
+  axios.defaults.withCredentials = true;
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />

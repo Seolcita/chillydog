@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
 import UserContext from '../context/user.context';
-import Login from '../components/Login/Login';
 
 const Home = () => {
   const router = useRouter();
