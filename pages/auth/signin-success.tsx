@@ -27,6 +27,7 @@ export const SigninSuccess = ({ user }: SigninSuccessGetServerSideProps) => {
 };
 
 export async function getServerSideProps(context: any) {
+  axios.defaults.withCredentials = true;
   const { req } = context;
   const cookies = req.headers.cookie;
   console.log('COOKIE😅', cookies);
