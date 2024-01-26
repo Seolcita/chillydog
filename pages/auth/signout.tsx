@@ -1,71 +1,51 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactElement, useContext } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import axios from 'axios';
 
 import { ErrorCard } from '../../components/ErrorCard/ErrorCard';
 import UserContext from '../../context/user.context';
 import Login from '../../components/Login/Login';
 
-export interface SignoutSuccessGetServerSideProps {
-  status: number;
-}
+export const Signout = (): ReactElement => {
+  const [isLogout, setIsLogout] = useState<boolean>(false);
 
-export const Signout = ({
-  status,
-}: SignoutSuccessGetServerSideProps): ReactElement => {
   const { setUser } = useContext(UserContext);
 
-  setUser(null);
+  (async () => {
+    await axios
+      .post(`${process.env.END_POINT_URL}/auth/logout`)
+      .then((res) => {
+        res.data.LoggedOut && setIsLogout(true);
+      })
+      .catch((error) => {
+        console.error('Fail to logout:', error);
+        setIsLogout(false);
+      });
+  })();
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && isLogout) {
     const accessToken = sessionStorage.getItem('accessToken');
 
     if (accessToken) {
       sessionStorage.removeItem('accessToken');
     }
+
+    setUser(null);
   }
 
   return (
     <>
-      {status === 200 ? (
+      {isLogout ? (
         <Login />
       ) : (
         <ErrorCard
-          redirectUrl='/auth/signin'
-          message='Seems like you are already logout.'
-          buttonText='Go to Login Page'
+          redirectUrl={`/auth/signout`}
+          message='Something went wrong! Please try again.'
+          buttonText='Sign Out'
         />
       )}
     </>
   );
 };
-
-export async function getServerSideProps(context: any) {
-  const { req } = context;
-
-  const cookies = req.headers.cookie;
-
-  const cookiesArray = cookies.split('; ');
-
-  const refreshTokenCookie = cookiesArray.find((cookie: string) =>
-    cookie.startsWith('refresh_token=')
-  );
-
-  return axios
-    .get(`${process.env.END_POINT_URL}/auth/logout`, {
-      headers: {
-        Cookie: refreshTokenCookie,
-      },
-    })
-    .then((res) => {
-      return {
-        props: res.status === 200 && { status: res.status },
-      };
-    })
-    .catch((error) => {
-      console.error('Fail to logout:', error);
-      return { props: { status: 500 } };
-    });
-}
 
 export default Signout;

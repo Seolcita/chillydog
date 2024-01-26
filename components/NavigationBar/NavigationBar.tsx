@@ -1,19 +1,17 @@
-import Link from 'next/link';
-import { ReactElement, useContext, useEffect, useState } from 'react';
-import { Button } from 'sk-storybook';
+import { ReactElement, useContext } from 'react';
 
-import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
-import UserContext from '../../context/user.context';
-import { RegistrationStatus } from '../../entities/questionnaire.entities';
 import { CreateDogProfileButton } from '../CreateDogProfileButton/CreateDogProfileButton';
+import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
+import { RegistrationStatus } from '../../entities/questionnaire.entities';
+import UserContext from '../../context/user.context';
 import * as S from './NavigationBar.styles';
 
 export const NavigationBar = (): ReactElement => {
-  const { user } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const isLoggedIn = user !== null;
 
   const dropdownItems: DropdownItem[] = [];
-  if (isLoggedIn) {
+  if (!isLoading && isLoggedIn) {
     const userProfile = {
       avatarPath: user.photoUrl,
       avatarName: 'login',
