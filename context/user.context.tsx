@@ -60,10 +60,6 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     if (typeof window !== 'undefined') {
       const accessToken = sessionStorage.getItem('accessToken');
 
-      // if (!accessToken) {
-      //   router.push('/auth/signin');
-      // }
-
       if (accessToken) {
         setIsLoading(true);
         fetchUserProfile(accessToken);
