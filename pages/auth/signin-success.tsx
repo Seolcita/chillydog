@@ -1,64 +1,55 @@
-import { useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import UserContext from '../../context/user.context';
-import { User } from '../../entities/user.entities';
 
 export interface SigninSuccessGetServerSideProps {
-  user: User | null;
+  accessToken: string | null;
 }
 
-export const SigninSuccess = ({ user }: SigninSuccessGetServerSideProps) => {
+export const SigninSuccess = ({
+  accessToken,
+}: SigninSuccessGetServerSideProps) => {
   const router = useRouter();
   const { setUser } = useContext(UserContext);
 
-  if (typeof window !== 'undefined' && user) {
-    sessionStorage.setItem('accessToken', user.accessToken);
+  if (typeof window !== 'undefined' && accessToken) {
+    sessionStorage.setItem('accessToken', accessToken);
   }
 
   useEffect(() => {
-    if (user === null) {
-      router.push('/auth/signin');
-    }
-
-    user && router.push(`/main?userId=${user.id}`);
-  }, [user, router, setUser]);
+    (async () => {
+      accessToken &&
+        (await axios
+          .post(`${process.env.END_POINT_URL}/auth/profile`, {
+            accessToken,
+          })
+          .then((res) => {
+            setUser(res.data);
+            router.push(`/main?userId=${res.data.id}`);
+          })
+          .catch((error) => {
+            console.error('Fail to fetch profile', error);
+          }));
+    })();
+  }, []);
 };
 
-export async function getServerSideProps(context: any) {
-  axios.defaults.withCredentials = true;
-  const { req } = context;
-  const cookies = req.headers.cookie;
-  console.log('COOKIE😅', cookies);
+export default SigninSuccess;
 
-  const cookiesArray = cookies && cookies.split('; ');
-
-  const accessTokenCookie =
-    cookiesArray &&
-    cookiesArray.find((cookie: string) => cookie.startsWith('access_token='));
-
-  console.log('🥎🥎🥎🥎🥎🥎🥎🥎🥎accessTokenCookie', accessTokenCookie);
-
-  return await axios
-    .get(`${process.env.END_POINT_URL}/auth/profile`, {
-      withCredentials: true,
-      headers: {
-        Cookie: accessTokenCookie,
-      },
-    })
+export async function getServerSideProps() {
+  let accessToken;
+  await axios
+    .get(`${process.env.END_POINT_URL}/auth/token`)
     .then((res) => {
-      console.log('res🥎🥎🥎🥎🥎🥎🥎🥎🥎', res.data);
-      return {
-        props: {
-          user: res.data,
-        },
-      };
+      accessToken = res.data.token.accessToken;
     })
     .catch((error) => {
-      console.error('Error🤬🤬🤬🤬', error);
-      return { props: { user: null } };
+      console.error('Fail to get token:', error);
     });
-}
 
-export default SigninSuccess;
+  return {
+    props: { accessToken },
+  };
+}
