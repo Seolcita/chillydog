@@ -15,6 +15,7 @@ export const CloseButton = styled.button`
   height: 2.5rem;
   transition: background-color 0.2s ease-in-out;
   z-index: 1;
+  margin-bottom: 1rem;
 
   &:hover {
     background-color: ${ColorMap['grey'].extraLight};

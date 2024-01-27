@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ColorMap from '../../../styles/Color';
+import { device } from '../../../styles/Breakpoints';
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -12,6 +13,10 @@ export const Container = styled.div`
   flex-direction: column;
   position: relative;
   padding: 2rem;
+
+  @media ${device.xs} {
+    padding: 0;
+  }
 `;
 
 export const Content = styled.div`

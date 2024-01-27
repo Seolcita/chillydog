@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 import { ImageStepsProgressBar } from 'sk-storybook';
 import Image from 'next/image';
-import { Box } from '@mui/material';
+
+import * as S from './ProgressBar.styles';
 
 const poopImage = (
   <Image
@@ -43,7 +44,7 @@ export const ProgressBar = ({
   currentStep,
 }: ProgressBarProps): ReactElement => {
   return (
-    <Box display='flex' justifyContent='center' marginBottom={'2rem'}>
+    <S.Container>
       <ImageStepsProgressBar
         prevImg={poopImage}
         currentImg={dogImage}
@@ -51,6 +52,6 @@ export const ProgressBar = ({
         totalSteps={totalSteps}
         currentStep={currentStep}
       />
-    </Box>
+    </S.Container>
   );
 };

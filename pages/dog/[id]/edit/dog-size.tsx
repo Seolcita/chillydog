@@ -12,7 +12,7 @@ import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 
 const EditDogSizeScreen = (): ReactElement => {
-  const question = `Q. What is your dog's size?`;
+  const question = `What is your dog's size?`;
   const router = useRouter();
   const dogId = router.query.id;
   const { user, setUser, isLoading } = useContext(UserContext);

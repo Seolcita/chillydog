@@ -44,6 +44,10 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${device.xs} {
+    padding-right: 1rem;
+  }
 `;
 
 export const Temperature = styled.div`

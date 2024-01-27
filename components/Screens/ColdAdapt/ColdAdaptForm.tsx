@@ -32,7 +32,7 @@ export const ColdAdaptForm = ({
             value={value}
             options={options}
             onChange={(opt: Option) => setValue(opt)}
-            height={4.5}
+            height={6}
             fullWidth
             color='primary'
           />

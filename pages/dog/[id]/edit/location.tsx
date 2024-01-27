@@ -18,7 +18,7 @@ export const EditLocationScreen = (): ReactElement => {
   const router = useRouter();
   const dogId = router.query.id;
   const errMessage = 'Oops! Something went wrong. Please try again.';
-  const question = `Q. Which city is your dog living?`;
+  const question = `Which city is your dog living?`;
 
   const onSubmit = async ({ cityName }: FormValues) => {
     if (user && cityName) {

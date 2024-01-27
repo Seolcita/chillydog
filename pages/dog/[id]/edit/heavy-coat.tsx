@@ -12,7 +12,7 @@ import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 
 const EditHeavyCoatScreen = (): ReactElement => {
-  const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
+  const question = `Is your dog Northern breed or has your dog heavy coat?`;
   const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;

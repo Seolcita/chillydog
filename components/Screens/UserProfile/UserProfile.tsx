@@ -101,6 +101,7 @@ export const UserProfile = (): ReactElement => {
             hasBoxShadow={false}
             ariaLabel='Dog Profile Card'
             margin={['xl', 'none']}
+            maxWidth={34}
           >
             <S.Wrapper>
               <CloseButton

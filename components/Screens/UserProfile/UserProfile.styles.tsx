@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
+  max-width: 34rem;
 `;
 
 export const UserContainer = styled.div`
@@ -46,6 +47,15 @@ export const Content = styled.div`
   &:hover {
     background-color: ${ColorMap['grey'].extraLight};
   }
+`;
+
+export const UserDetail = styled(Center)`
+  justify-content: start;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem 0.5rem;
+  background-color: ${ColorMap['grey'].extraLight}80;
+  border-radius: 0.5rem;
 `;
 
 export const Texts = styled.div`
