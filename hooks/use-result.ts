@@ -35,38 +35,32 @@ export const useResult = ({
     humidity > 60;
   const wetWeatherPoint = isWetWeather ? 2 : 0;
 
-  console.log('coldAdaptPoint', coldAdaptPoint);
-  console.log('heavyCoatPoint', heavyCoatPoint);
-  console.log('isWetWeather', isWetWeather);
-  console.log('wetWeatherPoint', wetWeatherPoint);
-  console.log('weatherType', weatherType);
-
   let weatherAndSizePoint = 0;
 
   // weather & size
   if (dogSize === DogSize.SMALL) {
-    // -6°C or below -6°C
-    if (temp <= -6) {
+    // -5°C or below -5°C
+    if (temp <= -5) {
       weatherAndSizePoint = 5;
-      // between -2°C and -5°C
-    } else if (temp >= -5 && temp <= -2) {
+      // between -4°C and -2°C
+    } else if (temp >= -4 && temp <= -2) {
       weatherAndSizePoint = 4;
       // between -1°C and 6°C
     } else if (temp >= -1 && temp <= 6) {
       weatherAndSizePoint = 3;
-      // between 7°C and 9°C
-    } else if (temp >= 7 && temp <= 9) {
+      // between 7°C and 11°C
+    } else if (temp >= 7 && temp <= 11) {
       weatherAndSizePoint = 2;
-      // 10°C or over 10°C
-    } else if (temp >= 10) {
+      // 12°C or over 12°C
+    } else if (temp >= 12) {
       weatherAndSizePoint = 1;
     }
   } else if (dogSize === DogSize.MEDIUM) {
-    // -12°C or below -12°C
-    if (temp <= -12) {
+    // -10°C or below -10°C
+    if (temp <= -10) {
       weatherAndSizePoint = 5;
-      // between -4°C and -11°C
-    } else if (temp >= -4 && temp <= -11) {
+      // between -2°C and -9°C
+    } else if (temp >= -9 && temp <= -2) {
       weatherAndSizePoint = 4;
       // between -1°C and 6°C
     } else if (temp >= -1 && temp <= 6) {
@@ -79,20 +73,20 @@ export const useResult = ({
       weatherAndSizePoint = 1;
     }
   } else if (dogSize === DogSize.LARGE) {
-    // -12°C or below -12°C
-    if (temp <= -12) {
+    // -10°C or below -10°C
+    if (temp <= -10) {
       weatherAndSizePoint = 5;
-      // between -11°C and -9°C
-    } else if (temp >= -11 && temp <= -9) {
+      // between -9°C and -5°C
+    } else if (temp >= -9 && temp <= -5) {
       weatherAndSizePoint = 4;
-      // between -8°C and 1°C
-    } else if (temp >= -8 && temp <= 1) {
+      // between -6°C and 3°C
+    } else if (temp >= -6 && temp <= 3) {
       weatherAndSizePoint = 3;
-      // between 0°C and 4°C
-    } else if (temp >= 0 && temp <= 4) {
+      // between 4°C and 6°C
+    } else if (temp >= 4 && temp <= 6) {
       weatherAndSizePoint = 2;
-      // 5°C or over 5°C
-    } else if (temp >= 5) {
+      // 7°C or over 7°C
+    } else if (temp >= 7) {
       weatherAndSizePoint = 1;
     }
   }
@@ -133,9 +127,8 @@ export const useResult = ({
     }
   };
 
-  console.log('weatherAndSizePoint', weatherAndSizePoint);
   const totalPoints =
     coldAdaptPoint + heavyCoatPoint + wetWeatherPoint + weatherAndSizePoint;
-  console.log('totalPoints', totalPoints);
+
   return result(totalPoints);
 };

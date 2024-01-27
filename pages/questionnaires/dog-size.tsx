@@ -20,7 +20,7 @@ const DogSizeScreen = (): ReactElement => {
   const router = useRouter();
   const dogId = router.query.dogId;
   const { user, isLoading } = useContext(UserContext);
-  const question = `Q. What is your dog's size?`;
+  const question = `What is your dog's size?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();

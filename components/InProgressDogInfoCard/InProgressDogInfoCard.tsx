@@ -31,7 +31,6 @@ export const InProgressDogInfoCard = ({
   return (
     <Card
       key={dog.id}
-      tabIndex={0}
       isInteractive={false}
       isPadded={true}
       ariaLabel='In progress dog profile card'
@@ -49,7 +48,7 @@ export const InProgressDogInfoCard = ({
               borderRadius: '10rem',
               margin: '0 1.5rem',
             }}
-            priority={true}
+            priority={false}
             draggable={false}
           />
         </S.AvatarContainer>

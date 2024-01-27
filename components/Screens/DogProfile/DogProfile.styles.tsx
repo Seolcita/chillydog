@@ -69,21 +69,3 @@ export const ChangeAvatarButton = styled(EditIconButton)`
   border-radius: 50%;
   background-color: ${ColorMap['grey'].extraLight};
 `;
-
-export const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: transparent;
-  border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-
-  &:hover,
-  &:focus {
-    color: ${ColorMap['grey'].main};
-  }
-`;

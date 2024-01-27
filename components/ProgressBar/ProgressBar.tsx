@@ -43,7 +43,7 @@ export const ProgressBar = ({
   currentStep,
 }: ProgressBarProps): ReactElement => {
   return (
-    <Box display='flex' justifyContent='center'>
+    <Box display='flex' justifyContent='center' marginBottom={'2rem'}>
       <ImageStepsProgressBar
         prevImg={poopImage}
         currentImg={dogImage}

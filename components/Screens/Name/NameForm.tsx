@@ -1,12 +1,11 @@
 import { ReactElement } from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-import { Button, Spinner, Typography } from 'sk-storybook';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-
-import * as S from './NameForm.styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Spinner, Typography } from 'sk-storybook';
 import { titillium } from '../../../styles/Fonts';
+import * as S from './NameForm.styled';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 interface NameFormProps {
   onSubmit: (values: FormValues) => void;

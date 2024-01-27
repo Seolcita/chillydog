@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode, useContext, useState } from 'react';
 import { Badge, Button, Card, Modal, Typography } from 'sk-storybook';
-import CancelIcon from '@mui/icons-material/Cancel';
 import PetsIcon from '@mui/icons-material/Pets';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/material';
@@ -11,10 +10,12 @@ import { RegistrationStatus } from '../../../entities/questionnaire.entities';
 import { Notification } from '../../Notification/Notification';
 import { UserInfoCard } from '../../UserInfoCard/UserInfoCard';
 import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
+import { CloseButton } from '../../CloseButton/CloseButton';
 import UserContext from '../../../context/user.context';
 import { User } from '../../../entities/user.entities';
 import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './UserProfile.styles';
+import * as s from '../../common-styles';
 
 export interface ModalProps {
   dogName: string;
@@ -84,7 +85,6 @@ export const UserProfile = (): ReactElement => {
   };
 
   const handleModal = ({ dogName, dogId, event }: ModalProps) => {
-    console.log('clicked', dogName, dogId);
     event.preventDefault();
     setDogName(dogName);
     setDogId(dogId);
@@ -96,18 +96,17 @@ export const UserProfile = (): ReactElement => {
       {!isLoading && user ? (
         <S.ProfileContainer>
           <Card
+            isPadded
             isInteractive={false}
-            isPadded={true}
+            hasBoxShadow={false}
             ariaLabel='Dog Profile Card'
             margin={['xl', 'none']}
           >
             <S.Wrapper>
-              <S.CloseButton
-                onClick={() => router.push(`/main?userId=${user?.id}`)}
-                aria-label='Dog profile close'
-              >
-                <CancelIcon fontSize='large' />
-              </S.CloseButton>
+              <CloseButton
+                redirectUrl={`/main?userId=${user?.id}`}
+                ariaLabel='User profile close'
+              />
 
               <UserInfoCard user={user} />
 
@@ -117,7 +116,7 @@ export const UserProfile = (): ReactElement => {
                   fontWeight='bold'
                   margin={['xl', 'none', 'md', 'none']}
                 >
-                  Dog Profiles
+                  - Dog Profiles -
                 </Typography>
               </Box>
 
@@ -138,6 +137,7 @@ export const UserProfile = (): ReactElement => {
                         dog={dog}
                         handleModal={handleModal}
                         isSubmitting={isSubmitting}
+                        key={dog.id}
                       />
                     )
                   );
@@ -185,6 +185,7 @@ export const UserProfile = (): ReactElement => {
                         dog={dog}
                         handleModal={handleModal}
                         isSubmitting={isSubmitting}
+                        key={dog.id}
                       />
                     )
                   );
@@ -214,12 +215,11 @@ export const UserProfile = (): ReactElement => {
             setIsOpen(false);
           }}
           ariaLabel={`Delete ${dogName} profile modal`}
-          backdropColor='#00000080'
           width={40}
         >
           <S.ModalContent>
             <Typography variant='textL' fontWeight='bold'>
-              Are you sure you want to <S.Span>delete {dogName}</S.Span>
+              Are you sure you want to <s.Span>delete</s.Span> {dogName}
               {`'s `}
               profile?
             </Typography>

@@ -51,7 +51,12 @@ export const WeatherCard = ({
   return (
     <S.Container tabIndex={0} aria-label='Weather display card'>
       <s.Visibility $isVisible={!isMobile} tabIndex={0}>
-        <Typography variant='headingS' color='white' aria-label='city'>
+        <Typography
+          variant='headingS'
+          color='white'
+          aria-label='city'
+          fontWeight='bold'
+        >
           {weatherData.city}
         </Typography>
       </s.Visibility>
@@ -63,7 +68,12 @@ export const WeatherCard = ({
       </S.ImageContainer>
       <S.TextContainer tabIndex={0}>
         <s.Visibility $isVisible={isMobile}>
-          <Typography variant='headingXS' color='white' aria-label='city'>
+          <Typography
+            variant='headingXS'
+            color='white'
+            aria-label='city'
+            fontWeight='bold'
+          >
             {weatherData.city}
           </Typography>
         </s.Visibility>
@@ -73,7 +83,7 @@ export const WeatherCard = ({
             variant='headingM'
             fontWeight='bold'
             color='white'
-            margin={['none', 'md', 'none', 'none']}
+            margin={['none', 'lg', 'none', 'none']}
             aria-label='temperature in celsius'
           >
             {convertTempUnit({

@@ -15,7 +15,7 @@ const NameScreen = (): ReactElement => {
   const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const errMessage = 'Oops! Something went wrong. Please try again.';
-  const question = `Q. What is your dog's name?`;
+  const question = `What is your dog's name?`;
 
   const onSubmit = async ({ name }: FormValues) => {
     if (user && name) {

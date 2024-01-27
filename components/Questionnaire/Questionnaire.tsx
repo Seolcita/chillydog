@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useContext } from 'react';
 import { Card, Typography } from 'sk-storybook';
-import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
+import { Box } from '@mui/material';
 
 import { Notification } from '../Notification/Notification';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
@@ -61,10 +61,11 @@ export const Questionnaire = ({
       {!isLoading && (
         <S.Container>
           <Card
-            ariaLabel={`questionnaire card step ${currentStep}`}
-            width={45}
             isPadded
+            width={45}
             isInteractive={false}
+            hasBoxShadow={false}
+            ariaLabel={`questionnaire card step ${currentStep}`}
           >
             <CloseButton
               redirectUrl={redirectUrl}
@@ -74,10 +75,11 @@ export const Questionnaire = ({
               {currentStep && !edit && (
                 <ProgressBar totalSteps={6} currentStep={currentStep} />
               )}
+
               <Typography
                 variant='headingXS'
                 fontWeight='bold'
-                margin={['sm', 'none', 'lg']}
+                margin={['none', 'none', 'md', 'none']}
               >
                 {question}
               </Typography>

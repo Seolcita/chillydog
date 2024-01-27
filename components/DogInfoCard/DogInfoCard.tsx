@@ -25,7 +25,6 @@ export const DogInfoCard = ({
   return (
     <Card
       key={dog.id}
-      tabIndex={0}
       isInteractive={false}
       isPadded={true}
       ariaLabel='Completed dog profile card'
@@ -44,7 +43,7 @@ export const DogInfoCard = ({
               transform: 'scale(1.4)',
               marginRight: '1rem',
             }}
-            priority={true}
+            priority={false}
             draggable={false}
           />
         </S.AvatarContainer>

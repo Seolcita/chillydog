@@ -9,7 +9,7 @@ interface TitleProps {
 }
 
 export const titleColorMap: Record<number, string> = {
-  1: ColorMap['success'].dark!,
+  1: ColorMap['primary'].dark!,
   2: ColorMap['success'].dark!,
   3: ColorMap['warning'].main!,
   4: ColorMap['warning'].dark!,

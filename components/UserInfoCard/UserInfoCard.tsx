@@ -15,15 +15,15 @@ export const UserInfoCard = ({ user }: UserInfoCardProps): ReactElement => {
       <S.AvatarContainer>
         <Image
           src={user.photoUrl}
-          width={80}
-          height={80}
+          width={70}
+          height={70}
           alt={`${user.firstName}'s avatar`}
           style={{
             borderRadius: '10rem',
-            transform: 'scale(1.3)',
-            margin: ' 3rem  0rem',
+            transform: 'scale(1.2)',
+            margin: ' 2rem  0rem',
           }}
-          priority={true}
+          priority={false}
           draggable={false}
         />
       </S.AvatarContainer>

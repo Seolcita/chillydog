@@ -8,13 +8,19 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 2rem;
   right: 2rem;
-  background-color: transparent;
   border: none;
+  background-color: transparent;
+  border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
+  transition: background-color 0.2s ease-in-out;
+  z-index: 1;
 
-  &:hover,
-  &:focus {
-    color: ${ColorMap['grey'].main};
+  &:hover {
+    background-color: ${ColorMap['grey'].extraLight};
+  }
+
+  &:active {
+    background-color: ${ColorMap['grey'].light}80;
   }
 `;

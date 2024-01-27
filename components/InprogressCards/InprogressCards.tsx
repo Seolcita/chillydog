@@ -1,15 +1,14 @@
 import { ReactElement, ReactNode } from 'react';
-import { Dog } from '../../entities/dog.entities';
 import { RegistrationStatus } from '../../entities/questionnaire.entities';
-import Image from 'next/image';
+import { Dog } from '../../entities/dog.entities';
 import { Card, Typography } from 'sk-storybook';
+import Image from 'next/image';
 
-import * as S from './InprogressCards.style';
-import * as s from '../common-styles';
-import { useRouter } from 'next/router';
 import { QuestionnaireScreenMap } from '../../hooks/use-questionnaire-next-screen-url';
 import { DeviceType } from '../../hooks/use-window-resize';
-import { Box } from '@mui/material';
+import * as S from './InprogressCards.style';
+import { useRouter } from 'next/router';
+import * as s from '../common-styles';
 
 interface InprogressCardsProps {
   dogs: Dog[];
@@ -68,15 +67,16 @@ export const InprogressCards = ({
                       borderRadius: '10rem',
                       marginLeft: '1.5rem',
                     }}
-                    priority={true}
+                    priority={false}
                     draggable={false}
                     tabIndex={0}
                   />
                   <S.TextBox tabIndex={0}>
                     <Typography variant='textM' color='black' fontWeight='bold'>
-                      Creating <S.Span>{dog.name}</S.Span> profile status is
+                      Creating <s.Span color='warning'>{dog.name}</s.Span>{' '}
+                      profile status is
                       <br />
-                      <S.Span> IN PROGRESS</S.Span>
+                      <s.Span color='warning'> IN PROGRESS</s.Span>
                     </Typography>
                     <S.ProgressBarValue>
                       {`${((dog.completedStep / dog.totalSteps) * 100).toFixed(

@@ -23,7 +23,7 @@ export const dogAvatars = dogsArray.map((dog) => {
         height={80}
         alt={`${dog} avatar`}
         style={{ borderRadius: '10rem', transform: `scale(${scaleImg})` }}
-        priority={true}
+        priority={false}
         draggable={false}
       />
     ),

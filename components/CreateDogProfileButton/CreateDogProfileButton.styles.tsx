@@ -7,8 +7,6 @@ export const AddButton = styled.button`
   border: none;
   margin: 0;
   padding: 0;
-  height: 5rem;
-  width: 5rem;
   margin-right: 1.5rem;
   border-radius: 50%;
 `;
@@ -18,6 +16,7 @@ export const AddIcon = styled(AddCircleRoundedIcon)`
   height: 4.5rem;
   width: 4.5rem;
   border-radius: 50%;
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus,
