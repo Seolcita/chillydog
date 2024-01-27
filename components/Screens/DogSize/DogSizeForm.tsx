@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { ReactElement } from 'react';
 import { Box } from '@mui/material';
-import { ReactElement, useState } from 'react';
 import { Button, Select, Spinner } from 'sk-storybook';
 
 import * as S from './DogSizeForm.styles';

@@ -8,14 +8,14 @@ import Login from '../../components/Login/Login';
 
 export const Signout = (): ReactElement => {
   const [isLogout, setIsLogout] = useState<boolean>(false);
-
-  const { setUser } = useContext(UserContext);
+  const { isLoading, setUser } = useContext(UserContext);
 
   (async () => {
     await axios
       .post(`${process.env.END_POINT_URL}/auth/logout`)
       .then((res) => {
         res.data.LoggedOut && setIsLogout(true);
+        setUser(null);
       })
       .catch((error) => {
         console.error('Fail to logout:', error);
@@ -29,23 +29,9 @@ export const Signout = (): ReactElement => {
     if (accessToken) {
       sessionStorage.removeItem('accessToken');
     }
-
-    setUser(null);
   }
 
-  return (
-    <>
-      {isLogout ? (
-        <Login />
-      ) : (
-        <ErrorCard
-          redirectUrl={`/auth/signout`}
-          message='Something went wrong! Please try again.'
-          buttonText='Sign Out'
-        />
-      )}
-    </>
-  );
+  return <>{!isLoading && isLogout && <Login />}</>;
 };
 
 export default Signout;

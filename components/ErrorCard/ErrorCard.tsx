@@ -27,10 +27,10 @@ export const ErrorCard = ({
     <S.Wrap>
       <S.CardContainer>
         <Card
-          tabIndex={0}
           ariaLabel='Error Card'
           isPadded
           isInteractive={false}
+          hasBoxShadow={false}
         >
           <S.Contents role='alert' aria-live='assertive'>
             <S.LottieContainer>

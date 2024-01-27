@@ -37,10 +37,6 @@ export const TextBox = styled.div`
   }
 `;
 
-export const Span = styled.span`
-  color: ${ColorMap['warning'].main};
-`;
-
 export const ProgressBarValue = styled.span`
   color: transparent;
 `;

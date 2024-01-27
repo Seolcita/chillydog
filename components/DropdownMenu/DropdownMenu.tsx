@@ -25,7 +25,6 @@ interface DropdownMenProps {
 
 const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
-  const [off, setOff] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
   const noScale = ['corgi', 'husky', 'login', 'logout', 'location', 'logout'];
 
@@ -41,7 +40,6 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
   }, [menuRef]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    setOff(false);
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
@@ -61,7 +59,7 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
       onKeyDown={handleKeyDown}
       style={{ position: 'relative' }}
       onClick={(event) => {
-        event.stopPropagation(), setOff(true);
+        event.stopPropagation();
       }}
     >
       <S.ProfileButton
@@ -75,27 +73,23 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
       {isOpen && (
         <S.MenuListContainer role='menu' $isOpen={isOpen}>
           {items.map((item) => (
-            <S.ListItem
-              key={item.label}
-              role='menuitem'
-              tabIndex={-1}
-              off={off}
-            >
+            <S.ListItem key={item.label} role='menuitem' tabIndex={-1}>
               {item.url && (
-                <Link href={item.url}>
+                <Link href={item.url} onClick={() => setIsOpen(false)}>
                   <S.ListItemContents>
                     <Image
                       src={item.avatarPath}
                       width={40}
                       height={40}
                       style={{
+                        borderRadius: '50%',
                         transform: `scale(${
                           noScale.includes(item.avatarName)
                             ? item.avatarName === 'location' ||
                               item.avatarName === 'logout'
                               ? 0.8
                               : 1
-                            : 1.6
+                            : 1.8
                         }`,
                       }}
                       alt='avatar'

@@ -20,7 +20,7 @@ export const CardContents = styled(Center)`
 
   @media ${device.xs} {
     flex-direction: column;
-    height: 40rem;
+    height: 47rem;
   }
 `;
 
@@ -28,7 +28,8 @@ export const LoginOptions = styled(Center)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 3rem;
 
   @media ${device.xs} {
     padding: 1rem 0 3rem;
@@ -38,6 +39,10 @@ export const LoginOptions = styled(Center)`
 
 export const TextContainer = styled.div`
   margin-bottom: 2.5rem;
+
+  @media ${device.xs} {
+    padding: 2rem 0 1rem;
+  }
 `;
 
 export const LottieContainer = styled.div`

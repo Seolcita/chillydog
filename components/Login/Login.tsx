@@ -4,6 +4,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import Lottie from 'lottie-react';
 
 import LoginAnimation from '../../assets/login/login.json';
+import { lilita } from '../../styles/Fonts';
 import * as S from './Login.styles';
 
 const Login = (): ReactElement => {
@@ -14,16 +15,16 @@ const Login = (): ReactElement => {
   return (
     <S.Container>
       <Card
-        tabIndex={0}
-        isInteractive={false}
         isPadded
+        isInteractive={false}
+        hasBoxShadow={false}
         ariaLabel='login section'
       >
         <S.CardContents>
           <S.LoginOptions>
             <S.TextContainer>
               <Typography variant='headingM' fontWeight='extraBold'>
-                {`Welcome   `}
+                <span className={lilita.className}>{`Welcome   `}</span>
                 <PetsIcon fontSize='large' />
               </Typography>
             </S.TextContainer>
@@ -33,6 +34,7 @@ const Login = (): ReactElement => {
               textColor='white'
               ariaLabel='Login button'
               bgColor='error'
+              fullWidth
               margin={['none', 'none', 'md', 'none']}
             >
               Sign in with Google
@@ -43,6 +45,7 @@ const Login = (): ReactElement => {
               textColor='white'
               ariaLabel='Login button'
               bgColor='primary'
+              fullWidth
             >
               Sign up with Google
             </Button>

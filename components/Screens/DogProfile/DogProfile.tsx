@@ -1,15 +1,15 @@
-import { ReactElement, useContext, useLayoutEffect } from 'react';
+import { ReactElement, useContext } from 'react';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { RegistrationStatus } from '../../../entities/questionnaire.entities';
+import { CloseButton } from '../../CloseButton/CloseButton';
 import { DogSize } from '../../../entities/dog.entities';
 import UserContext from '../../../context/user.context';
-import * as S from './DogProfile.styles';
 import { Loader } from '../../LineLoader/LineLoader';
+import * as S from './DogProfile.styles';
 
 interface DogProfileProps {
   dogId: string | string[];
@@ -37,18 +37,16 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
       dog.registrationStatus === RegistrationStatus.COMPLETED ? (
         <S.ProfileContainer>
           <Card
-            tabIndex={0}
+            isPadded
             isInteractive={false}
-            isPadded={true}
+            hasBoxShadow={false}
             ariaLabel='Dog Profile Card'
           >
+            <CloseButton
+              redirectUrl={`/main?userId=${user?.id}`}
+              ariaLabel='Dog profile close'
+            />
             <S.Container>
-              <S.CloseButton
-                onClick={() => router.push(`/main?userId=${user?.id}`)}
-                aria-label='Dog profile close'
-              >
-                <CancelIcon fontSize='large' />
-              </S.CloseButton>
               <S.AvatarContainer>
                 <Image
                   src={`/images/avatars/${dog.avatar.name}.png`}
@@ -60,7 +58,7 @@ export const DogProfile = ({ dogId }: DogProfileProps): ReactElement => {
                     transform: 'scale(1.8)',
                     margin: ' 2rem  0rem',
                   }}
-                  priority={true}
+                  priority={false}
                   draggable={false}
                 />
                 <S.ChangeAvatarButton

@@ -16,11 +16,11 @@ export const CreateDogProfile = (): ReactElement => {
     <S.Wrap>
       <S.CardContainer>
         <Card
-          tabIndex={0}
           isPadded
           isInteractive={false}
           ariaLabel='Create dog profile card'
           width={30}
+          hasBoxShadow={false}
         >
           <S.Contents>
             <S.LottieContainer>

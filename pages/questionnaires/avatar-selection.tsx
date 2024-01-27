@@ -30,7 +30,6 @@ const AvatarSelectionScreen = (): ReactElement => {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.stopPropagation();
     event.preventDefault();
-    console.log(selectedAvatar);
 
     if (user && selectedAvatar.name !== '' && selectedAvatar.src !== '') {
       setIsSubmitting(true);

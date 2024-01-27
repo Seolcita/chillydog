@@ -23,11 +23,10 @@ const ResultCard = ({
   return (
     <S.CardContainer>
       <Card
-        ariaLabel='result card'
         isPadded
-        tabIndex={0}
         isInteractive={false}
         hasBoxShadow={false}
+        ariaLabel='result card'
       >
         <S.Contents>
           <S.AvatarBox>
@@ -40,7 +39,7 @@ const ResultCard = ({
                 borderRadius: '10rem',
                 transform: `scale(1.5)`,
               }}
-              priority={true}
+              priority={false}
               draggable={false}
               tabIndex={0}
             />

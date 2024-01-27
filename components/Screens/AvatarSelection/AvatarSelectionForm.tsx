@@ -60,7 +60,6 @@ export const AvatarSelectionForm = ({
                   src: `/images/avatars/${avatar.name}.png`,
                 });
                 setHighlightIndex(index);
-                console.log(avatar.name);
               }}
               onKeyDown={(event) => handleKeyDown(event, avatar.name, index)}
               role='button'

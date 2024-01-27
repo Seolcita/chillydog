@@ -26,10 +26,10 @@ export const Completion = (): ReactElement => {
   return (
     <S.Container>
       <Card
-        ariaLabel={`questionnaire completed`}
-        tabIndex={0}
         isPadded
         isInteractive={false}
+        hasBoxShadow={false}
+        ariaLabel={`questionnaire completed`}
       >
         <S.Contents>
           <S.Message tabIndex={0}>

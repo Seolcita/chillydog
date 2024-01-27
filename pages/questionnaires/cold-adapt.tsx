@@ -20,7 +20,7 @@ const ColdAdaptScreen = (): ReactElement => {
   const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
-  const question = `Q. Is your dog acclimated to cold?`;
+  const question = `Is your dog acclimated to cold?`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();

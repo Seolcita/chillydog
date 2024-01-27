@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ColorMap from '../../../styles/Color';
 import { Center } from '../../common-styles';
+import { CloseButton } from '../../CloseButton/CloseButton';
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -81,36 +82,16 @@ export const AvatarContainer = styled.div`
   justify-content: center;
 `;
 
-export const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  background-color: transparent;
-  border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-
-  &:hover,
-  &:focus {
-    color: ${ColorMap['grey'].main};
-  }
-`;
-
-export const Span = styled.span`
-  color: ${ColorMap['warning'].main};
-`;
+export const CardCloseButton = styled(CloseButton)``;
 
 export const ModalContent = styled(Center)`
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem;
   flex-direction: column;
-  justify-content: space-between;
-  height: 18rem;
+  height: 16rem;
 `;
 
 export const ButtonContainer = styled(Center)`
   width: 100%;
   gap: 1rem;
+  margin-top: 4rem;
 `;

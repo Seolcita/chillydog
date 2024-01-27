@@ -20,7 +20,7 @@ const HeavyCoatScreen = (): ReactElement => {
   const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
-  const question = `Q. Is your dog Northern breed or has your dog heavy coat?`;
+  const question = `Is your dog Northern breed or has your dog heavy coat?`;
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();

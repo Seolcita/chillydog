@@ -1,5 +1,5 @@
 import { ReactElement, useContext } from 'react';
-import CancelIcon from '@mui/icons-material/Cancel';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useRouter } from 'next/router';
 
 import UserContext from '../../context/user.context';
@@ -24,7 +24,7 @@ export const CloseButton = ({
       }}
       aria-label={ariaLabel}
     >
-      <CancelIcon fontSize='large' />
+      <CloseOutlinedIcon style={{ fontSize: '2rem' }} />
     </S.CloseButton>
   );
 };

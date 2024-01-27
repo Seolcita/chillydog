@@ -7,10 +7,6 @@ type MenuListContainerProps = {
   $isOpen: boolean;
 };
 
-type ListItemProps = {
-  off: boolean;
-};
-
 export const ProfileButton = styled.button`
   display: flex;
   align-items: center;
@@ -27,6 +23,7 @@ export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
   width: 4.5rem;
   margin: 0;
   border-radius: 50%;
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus,
@@ -55,7 +52,7 @@ export const MenuListContainer = styled.ul<MenuListContainerProps>`
   background-color: ${() => ColorMap['white'].main};
 `;
 
-export const ListItem = styled.li<ListItemProps>`
+export const ListItem = styled.li`
   padding: 1rem;
   color: ${ColorMap['primary'].dark};
 
