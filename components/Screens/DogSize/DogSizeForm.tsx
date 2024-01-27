@@ -34,7 +34,7 @@ export const DogSizeForm = ({
             value={value}
             options={options}
             onChange={(opt: Option) => setValue(opt)}
-            height={4.5}
+            height={7}
             fullWidth
             color='primary'
           />

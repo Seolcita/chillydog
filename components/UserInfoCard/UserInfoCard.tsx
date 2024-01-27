@@ -28,7 +28,7 @@ export const UserInfoCard = ({ user }: UserInfoCardProps): ReactElement => {
         />
       </S.AvatarContainer>
 
-      <S.Content>
+      <S.UserDetail>
         <Typography
           variant='textM'
           margin={['none', 'lg', 'none', 'none']}
@@ -41,9 +41,9 @@ export const UserInfoCard = ({ user }: UserInfoCardProps): ReactElement => {
             {user.firstName} {user.lastName}
           </Typography>
         </S.Texts>
-      </S.Content>
+      </S.UserDetail>
 
-      <S.Content>
+      <S.UserDetail>
         <Typography
           variant='textM'
           margin={['none', 'lg', 'none', 'none']}
@@ -54,7 +54,7 @@ export const UserInfoCard = ({ user }: UserInfoCardProps): ReactElement => {
         <S.Texts>
           <Typography variant='textM'>{user.email}</Typography>
         </S.Texts>
-      </S.Content>
+      </S.UserDetail>
     </S.UserContainer>
   );
 };

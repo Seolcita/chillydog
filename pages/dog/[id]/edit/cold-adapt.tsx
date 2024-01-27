@@ -12,7 +12,7 @@ import withAuth from '../../../../components/HOC/withAuth';
 import { User } from '../../../../entities/user.entities';
 
 const EditColdAdaptScreen = (): ReactElement => {
-  const question = `Q. Is your dog acclimated to cold?`;
+  const question = `Is your dog acclimated to cold?`;
   const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.id;

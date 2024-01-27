@@ -23,7 +23,7 @@ export const EditNameScreen = (): ReactElement => {
     user?.dogs.length > 0 &&
     user.dogs.find((dog) => dog.id === dogId);
   const errMessage = 'Oops! Something went wrong. Please try again.';
-  const question = `Q. What is your dog's name?`;
+  const question = `What is your dog's name?`;
 
   if (!dog && !isLoading) {
     return (

@@ -79,7 +79,9 @@ export const Questionnaire = ({
               <Typography
                 variant='headingXS'
                 fontWeight='bold'
-                margin={['none', 'none', 'md', 'none']}
+                margin={
+                  edit ? ['xl', 'none', 'lg'] : ['none', 'none', 'md', 'none']
+                }
               >
                 {question}
               </Typography>
