@@ -38,35 +38,6 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     setTrigger((prevTrigger) => prevTrigger + 1);
   };
 
-  const fetchUserProfile = async (accessToken: string) => {
-    await axios
-      .get(`${process.env.END_POINT_URL}/auth/login-status`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        setIsAuthenticated(res.data.loggedIn);
-        setUserData(res.data.user);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const accessToken = sessionStorage.getItem('accessToken');
-
-      if (accessToken) {
-        setIsLoading(true);
-        fetchUserProfile(accessToken);
-      }
-    }
-  }, [trigger, router]);
-
   const context: UserContextValue = {
     user: userData,
     setUser: setUserHandler,

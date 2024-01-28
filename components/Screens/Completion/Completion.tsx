@@ -11,12 +11,11 @@ import * as S from './Completion.styled';
 
 export const Completion = (): ReactElement => {
   const router = useRouter();
-  const { user, isLoading, refreshUser } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     user && router.push(`/main?userId=${user.id}`);
-    refreshUser();
   };
 
   if (isLoading) {

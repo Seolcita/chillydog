@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import { useContext } from 'react';
 import { useRouter } from 'next/router';
-import UserContext from '../../context/user.context';
 
 export interface SigninSuccessGetServerSideProps {
   accessToken: string | null;
@@ -12,23 +10,25 @@ export const SigninSuccess = ({
   accessToken,
 }: SigninSuccessGetServerSideProps) => {
   const router = useRouter();
-  const { setUser } = useContext(UserContext);
+
+  const getProfile = async (accessToken: string) => {
+    await axios
+      .post(`${process.env.END_POINT_URL}/auth/profile`, {
+        accessToken,
+      })
+      .then((res) => {
+        const userId = res.data.id;
+        window.location.href = `/main?userId=${userId}`;
+      })
+      .catch((error) => {
+        console.error('Fail to fetch profile', error);
+      });
+  };
 
   if (typeof window !== 'undefined' && accessToken) {
     sessionStorage.setItem('accessToken', accessToken);
-    (async () => {
-      await axios
-        .post(`${process.env.END_POINT_URL}/auth/profile`, {
-          accessToken,
-        })
-        .then((res) => {
-          setUser(res.data);
-          window.location.href = `/main?userId=${res.data.id}`;
-        })
-        .catch((error) => {
-          console.error('Fail to fetch profile', error);
-        });
-    })();
+
+    getProfile(accessToken);
   }
 };
 

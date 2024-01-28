@@ -15,12 +15,10 @@ export const CloseButton = ({
   ariaLabel,
 }: CloseButtonProps): ReactElement => {
   const router = useRouter();
-  const { refreshUser } = useContext(UserContext);
   return (
     <S.CloseButton
       onClick={() => {
         router.push(redirectUrl);
-        refreshUser();
       }}
       aria-label={ariaLabel}
     >
