@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import { ReactElement, useRef } from 'react';
-import * as S from './Avatars.styled';
 
 const dogsArray = [
   'borderCollie',
@@ -25,6 +23,7 @@ export const dogAvatars = dogsArray.map((dog) => {
         style={{ borderRadius: '10rem', transform: `scale(${scaleImg})` }}
         priority={false}
         draggable={false}
+        placeholder='empty'
       />
     ),
   };
