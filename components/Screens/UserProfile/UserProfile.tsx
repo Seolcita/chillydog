@@ -16,6 +16,7 @@ import { User } from '../../../entities/user.entities';
 import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './UserProfile.styles';
 import * as s from '../../common-styles';
+import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 
 export interface ModalProps {
   dogName: string;
@@ -33,6 +34,8 @@ export const UserProfile = (): ReactElement => {
 
   const router = useRouter();
   const { user, setUser, isLoading } = useContext(UserContext);
+  const { deviceType } = useWindowSize();
+  const isMobile = deviceType === DeviceType.MOBILE;
 
   const checkDogProfiles = (status: RegistrationStatus): boolean => {
     const result =
@@ -216,7 +219,7 @@ export const UserProfile = (): ReactElement => {
             setIsOpen(false);
           }}
           ariaLabel={`Delete ${dogName} profile modal`}
-          width={40}
+          width={isMobile ? 30 : 40}
         >
           <S.ModalContent>
             <Typography variant='textL' fontWeight='bold'>
