@@ -11,7 +11,6 @@ const MainPage = (): ReactElement => {
 
   useEffect(() => {
     const fetchUserProfile = async (accessToken: string) => {
-      console.log('MainPage API called 💕💕💕💕💕💕');
       await axios
         .get(`${process.env.END_POINT_URL}/auth/login-status`, {
           headers: {
@@ -34,8 +33,6 @@ const MainPage = (): ReactElement => {
       }
     }
   }, []);
-
-  console.log('MainPage rendered 🥎');
 
   return <Main />;
 };
