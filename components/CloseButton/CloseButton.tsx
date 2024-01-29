@@ -1,8 +1,7 @@
-import { ReactElement, useContext } from 'react';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
-import UserContext from '../../context/user.context';
 import * as S from './CloseButton.styles';
 
 interface CloseButtonProps {

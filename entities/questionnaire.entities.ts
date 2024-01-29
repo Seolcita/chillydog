@@ -21,13 +21,17 @@ export interface QuestionnaireScreenFields {
   isCompleted: boolean;
 }
 
-export interface QuestionnaireScreen {
-  nameScreen: QuestionnaireScreenFields;
-  dogSizeScreen: QuestionnaireScreenFields;
-  heavyCoatScreen: QuestionnaireScreenFields;
-  coldAdaptScreen: QuestionnaireScreenFields;
-  avatarSelectionScreen: QuestionnaireScreenFields;
-}
+export type ScreenName =
+  | 'nameScreen'
+  | 'dogSizeScreen'
+  | 'heavyCoatScreen'
+  | 'coldAdaptScreen'
+  | 'locationScreen'
+  | 'avatarSelectionScreen';
+
+export type QuestionnaireScreen = {
+  [K in ScreenName]?: QuestionnaireScreenFields;
+};
 
 export type Option = {
   label: string;

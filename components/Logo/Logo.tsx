@@ -13,7 +13,7 @@ export const Logo = (): ReactElement => {
     <Box display='flex' alignItems='center'>
       <Image
         src='/images/logo/logo.svg'
-        alt='An logo image'
+        alt='Logo'
         width={50}
         height={50}
         style={{ border: '0.2rem solid white', borderRadius: '50%' }}

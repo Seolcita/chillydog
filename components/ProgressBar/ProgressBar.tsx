@@ -44,7 +44,7 @@ export const ProgressBar = ({
   currentStep,
 }: ProgressBarProps): ReactElement => {
   return (
-    <S.Container>
+    <S.Container aria-label='progress bar'>
       <ImageStepsProgressBar
         prevImg={poopImage}
         currentImg={dogImage}
