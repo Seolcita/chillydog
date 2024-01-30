@@ -40,7 +40,7 @@ export const DogSizeForm = ({
           />
         </Box>
         <Button
-          ariaLabel={`Dog's submit button`}
+          ariaLabel={`Dog size submit button`}
           size='s'
           bgColor='black'
           textColor='white'
