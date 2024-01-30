@@ -3,8 +3,8 @@ import { NextRouter } from 'next/router';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { ErrorCard } from '../ErrorCard/ErrorCard';
-import { createUser } from './factories/user/createUser.factory';
+import { ErrorCard } from '../../ErrorCard/ErrorCard';
+import { createUser } from '../factories/user/createUser.factory';
 
 const mockRouter: Partial<NextRouter> = {
   push: jest.fn(),

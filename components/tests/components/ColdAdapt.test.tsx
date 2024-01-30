@@ -1,19 +1,21 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { DogSizeForm } from '../Screens/DogSize/DogSizeForm';
-import { DogSize } from '../../entities/dog.entities';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('DogSizeForm', () => {
+import { HeavyCoatForm } from '../../Screens/HeavyCoat/HeavyCoatForm';
+import ColdAdapt from '../../../pages/questionnaires/cold-adapt';
+import { ColdAdaptForm } from '../../Screens/ColdAdapt/ColdAdaptForm';
+
+describe('ColdAdaptForm', () => {
   const props = {
     handleSubmit: jest.fn(),
     setValue: jest.fn(),
-    value: { label: 'Small', value: DogSize.SMALL },
+    value: { label: 'Yes', value: true },
     isSubmitting: false,
   };
 
   it('calls handleSubmit with the correct event when submitted', async () => {
     render(
-      <DogSizeForm
+      <ColdAdaptForm
         handleSubmit={props.handleSubmit}
         setValue={props.setValue}
         value={props.value}
@@ -25,10 +27,12 @@ describe('DogSizeForm', () => {
     userEvent.click(screen.getByLabelText('Select an option'));
 
     // Select an option from the dropdown
-    await userEvent.click(screen.getByLabelText('MEDIUM'));
+    await userEvent.click(screen.getByLabelText('true'));
 
     // Click the submit button
-    fireEvent.click(screen.getByLabelText('Dog size submit button'));
+    fireEvent.click(
+      screen.getByLabelText('Dog cold adaptability submit button')
+    );
 
     // Wait for any asynchronous actions to complete
     await waitFor(() => {
@@ -38,7 +42,7 @@ describe('DogSizeForm', () => {
 
   it('should disabled Continue button when isSubmitting is true', async () => {
     render(
-      <DogSizeForm
+      <ColdAdaptForm
         handleSubmit={props.handleSubmit}
         setValue={props.setValue}
         value={undefined}
@@ -47,14 +51,16 @@ describe('DogSizeForm', () => {
     );
 
     // Click the dropdown
-    userEvent.click(screen.getByLabelText('Dog size submit button'));
+    userEvent.click(screen.getByLabelText('Select an option'));
 
-    expect(screen.getByLabelText('Dog size submit button')).toBeDisabled();
+    expect(
+      screen.getByLabelText('Dog cold adaptability submit button')
+    ).toBeDisabled();
   });
 
   it('should disabled Continue button when value is undefined', async () => {
     render(
-      <DogSizeForm
+      <ColdAdaptForm
         handleSubmit={props.handleSubmit}
         setValue={props.setValue}
         value={props.value}
@@ -62,6 +68,8 @@ describe('DogSizeForm', () => {
       />
     );
 
-    expect(screen.getByLabelText('Dog size submit button')).toBeDisabled();
+    expect(
+      screen.getByLabelText('Dog cold adaptability submit button')
+    ).toBeDisabled();
   });
 });

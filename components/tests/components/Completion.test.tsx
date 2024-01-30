@@ -3,10 +3,10 @@ import { NextRouter } from 'next/router';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { User } from '../../entities/user.entities';
-import UserContext from '../../context/user.context';
-import Completion from '../../pages/questionnaires/completion';
-import { createUser } from './factories/user/createUser.factory';
+import { User } from '../../../entities/user.entities';
+import UserContext from '../../../context/user.context';
+import Completion from '../../../pages/questionnaires/completion';
+import { createUser } from '../factories/user/createUser.factory';
 
 interface RenderWithContext {
   ui: ReactElement;

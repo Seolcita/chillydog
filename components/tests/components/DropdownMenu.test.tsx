@@ -1,8 +1,8 @@
 import { NextRouter } from 'next/router';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
-import { createUser } from './factories/user/createUser.factory';
-import DropdownMenu, { DropdownItem } from '../DropdownMenu/DropdownMenu';
+import { createUser } from '../factories/user/createUser.factory';
+import DropdownMenu, { DropdownItem } from '../../DropdownMenu/DropdownMenu';
 
 jest.mock(
   'next/image',

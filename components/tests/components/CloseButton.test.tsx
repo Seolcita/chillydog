@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { CloseButton } from '../CloseButton/CloseButton';
+import { CloseButton } from '../../CloseButton/CloseButton';
 
 const mockRouter: Partial<NextRouter> = {
   push: jest.fn(),

@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-import { HeavyCoatForm } from '../Screens/HeavyCoat/HeavyCoatForm';
+import { HeavyCoatForm } from '../../Screens/HeavyCoat/HeavyCoatForm';
 
 describe('HeavyCoatForm', () => {
   const props = {

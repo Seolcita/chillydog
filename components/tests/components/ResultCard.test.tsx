@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import ResultCard from '../ResultCard/ResultCard';
-import { DeviceType } from '../../hooks/use-window-resize';
+import ResultCard from '../../ResultCard/ResultCard';
+import { DeviceType } from '../../../hooks/use-window-resize';
 
 describe('ResultCard', () => {
   const props = {

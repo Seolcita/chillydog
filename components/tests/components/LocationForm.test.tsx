@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { LocationForm } from '../Screens/Location/LocationForm';
+import { LocationForm } from '../../Screens/Location/LocationForm';
 
 describe('LocationForm', () => {
   const props = {

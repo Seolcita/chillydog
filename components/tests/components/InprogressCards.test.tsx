@@ -1,15 +1,15 @@
+import { ReactElement } from 'react';
+import { NextRouter } from 'next/router';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { NextRouter, useRouter } from 'next/router';
-import { InprogressCards } from '../InprogressCards/InprogressCards';
-import { createDog } from './factories/dog/createDog.factory';
-import { DeviceType } from '../../hooks/use-window-resize';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
+
+import { InprogressCards } from '../../InprogressCards/InprogressCards';
+import { createDog } from '../factories/dog/createDog.factory';
+import { DeviceType } from '../../../hooks/use-window-resize';
 import {
   QuestionnaireScreenName,
   RegistrationStatus,
-} from '../../entities/questionnaire.entities';
-import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
-import { ReactElement } from 'react';
-import { QuestionnaireScreenMap } from '../../hooks/use-questionnaire-next-screen-url';
+} from '../../../entities/questionnaire.entities';
 
 const mockRouter: Partial<NextRouter> = {
   push: jest.fn(),

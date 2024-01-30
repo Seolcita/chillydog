@@ -1,4 +1,5 @@
 import { User } from '../../../../entities/user.entities';
+import { createDog } from '../dog/createDog.factory';
 
 export function createUser(options: Partial<User> = {}): User {
   return {
@@ -8,7 +9,7 @@ export function createUser(options: Partial<User> = {}): User {
     firstName: options.firstName || 'FirstName',
     photoUrl: options.photoUrl || 'https://test.com/photo.jpg',
     location: options.location || 'Test Location',
-    dogs: options.dogs || [],
+    dogs: options.dogs || [createDog()] || [],
     accessToken: 'accessToken12345',
   };
 }

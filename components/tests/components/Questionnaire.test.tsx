@@ -3,8 +3,8 @@ import { NextRouter } from 'next/router';
 import { render, screen } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { Questionnaire } from '../Questionnaire/Questionnaire';
-import { createDog } from './factories/dog/createDog.factory';
+import { Questionnaire } from '../../Questionnaire/Questionnaire';
+import { createDog } from '../factories/dog/createDog.factory';
 
 const dog = createDog();
 

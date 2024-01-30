@@ -2,8 +2,8 @@ import { ReactElement } from 'react';
 import { NextRouter } from 'next/router';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { DogInfoCard } from '../DogInfoCard/DogInfoCard';
-import { createDog } from './factories/dog/createDog.factory';
+import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
+import { createDog } from '../factories/dog/createDog.factory';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
 jest.mock(

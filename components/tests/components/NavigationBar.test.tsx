@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react';
 import { render, screen } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { User } from '../../entities/user.entities';
-import UserContext from '../../context/user.context';
-import { NavigationBar } from '../NavigationBar/NavigationBar';
-import { createUser } from './factories/user/createUser.factory';
+import { User } from '../../../entities/user.entities';
+import UserContext from '../../../context/user.context';
+import { NavigationBar } from '../../NavigationBar/NavigationBar';
+import { createUser } from '../factories/user/createUser.factory';
 
 interface RenderWithContext {
   ui: ReactElement;

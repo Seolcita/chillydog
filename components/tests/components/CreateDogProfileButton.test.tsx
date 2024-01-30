@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-import { CreateDogProfileButton } from '../CreateDogProfileButton/CreateDogProfileButton';
+import { CreateDogProfileButton } from '../../CreateDogProfileButton/CreateDogProfileButton';
 
 const mockRouter: Partial<NextRouter> = {
   push: jest.fn(),
