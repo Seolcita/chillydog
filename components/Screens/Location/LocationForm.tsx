@@ -79,6 +79,7 @@ export const LocationForm = ({
         onBlur={handleBlur}
         $error={hasError}
         className={titillium.className}
+        role='input'
       />
       {hasError && (
         <S.ErrorText $isVisible={hasError}>
@@ -89,7 +90,7 @@ export const LocationForm = ({
         </S.ErrorText>
       )}
       <Button
-        ariaLabel='Dog name submit button'
+        ariaLabel='city where dog lives submit button'
         size='s'
         bgColor='black'
         textColor='white'

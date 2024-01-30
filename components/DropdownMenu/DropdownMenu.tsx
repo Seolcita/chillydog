@@ -92,7 +92,7 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
                             : 1.8
                         }`,
                       }}
-                      alt='avatar'
+                      alt={item.avatarName}
                       aria-hidden='true'
                     />
                     <Typography variant='textS' fontWeight='bold'>

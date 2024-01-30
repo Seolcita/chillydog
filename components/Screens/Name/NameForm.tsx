@@ -43,7 +43,7 @@ export const NameForm = ({
   const hasError = errors.name && touched.name;
 
   return (
-    <form onSubmit={handleSubmit} autoComplete='off'>
+    <form onSubmit={handleSubmit} autoComplete='off' role='form'>
       <label htmlFor='name'>
         <Typography variant='textS'>Name</Typography>
       </label>

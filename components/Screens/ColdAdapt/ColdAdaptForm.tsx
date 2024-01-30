@@ -38,7 +38,7 @@ export const ColdAdaptForm = ({
           />
         </Box>
         <Button
-          ariaLabel={`Dog's cold adaptability submit button`}
+          ariaLabel={`Dog cold adaptability submit button`}
           size='s'
           bgColor='black'
           textColor='white'

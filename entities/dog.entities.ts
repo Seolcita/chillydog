@@ -1,5 +1,8 @@
 import { SelectedAvatar } from '../components/Screens/AvatarSelection/AvatarSelectionForm';
-import { QuestionnaireScreenName } from './questionnaire.entities';
+import {
+  QuestionnaireScreen,
+  QuestionnaireScreenName,
+} from './questionnaire.entities';
 
 export enum DogSize {
   SMALL = 'SMALL',
@@ -18,6 +21,6 @@ export interface Dog {
   registrationStatus: string;
   completedStep: number;
   totalSteps: number;
-  screens?: Screen[];
+  screens?: QuestionnaireScreen[];
   nextScreen?: QuestionnaireScreenName | null;
 }

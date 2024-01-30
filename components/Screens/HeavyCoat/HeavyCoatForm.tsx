@@ -38,7 +38,7 @@ export const HeavyCoatForm = ({
           />
         </Box>
         <Button
-          ariaLabel={`Dog's coat type submit button`}
+          ariaLabel={`Dog coat type submit button`}
           size='s'
           bgColor='black'
           textColor='white'
