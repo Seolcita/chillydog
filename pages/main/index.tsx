@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement, useContext, useEffect } from 'react';
+import Head from 'next/head';
 import axios from 'axios';
 
 import withAuth from '../../components/HOC/withAuth';
 import UserContext from '../../context/user.context';
 import Main from '../../components/Screens/Main/Main';
+import { Loader } from '../../components/LineLoader/LineLoader';
 
 const MainPage = (): ReactElement => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, isLoading } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserProfile = async (accessToken: string) => {
@@ -34,7 +36,22 @@ const MainPage = (): ReactElement => {
     }
   }, []);
 
-  return <Main />;
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Chilly Dog</title>
+        <meta
+          name='description'
+          content='The application displays the current weather and provides guidance on whether the conditions are too cold for a user&#39;s dog, tailored to the dog&#39;s profile. It also features a display of in-progress dog profiles. This functionality assists dog owners in making informed decisions about their pets&#39; well-being in varying weather conditions, while also managing their pets&#39; profile information.'
+        />
+      </Head>
+      <Main />
+    </>
+  );
 };
 
 export default withAuth(MainPage);

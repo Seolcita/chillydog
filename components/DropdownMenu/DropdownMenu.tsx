@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import {
   KeyboardEvent,
@@ -6,10 +7,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import Image from 'next/image';
 
 import * as S from './DropdownMenu.styles';
 import { Typography } from 'sk-storybook';
+import { ImagePlaceholder } from '../ImagePlaceholder/ImagePlaceholder';
 
 export interface DropdownItem {
   avatarPath: string;
@@ -25,6 +26,9 @@ interface DropdownMenProps {
 
 const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
+  const [loadedImagesCount, setLoadedImagesCount] = useState(0);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
   const menuRef = useRef<HTMLDivElement>(null);
   const noScale = ['corgi', 'husky', 'login', 'logout', 'location', 'logout'];
 
@@ -38,6 +42,16 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [menuRef]);
+
+  const handleImageLoad = () => {
+    setLoadedImagesCount((prevCount) => prevCount + 1);
+  };
+
+  useEffect(() => {
+    if (loadedImagesCount === items.length) {
+      setAllImagesLoaded(true);
+    }
+  }, [loadedImagesCount]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     switch (event.key) {
@@ -77,11 +91,20 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
               {item.url && (
                 <Link href={item.url} onClick={() => setIsOpen(false)}>
                   <S.ListItemContents>
-                    <Image
+                    {!allImagesLoaded && (
+                      <ImagePlaceholder
+                        width={3}
+                        height={3}
+                        borderRadius={50}
+                      />
+                    )}
+                    <img
                       src={item.avatarPath}
                       width={40}
                       height={40}
+                      onLoad={() => handleImageLoad()}
                       style={{
+                        display: allImagesLoaded ? 'block' : 'none',
                         borderRadius: '50%',
                         transform: `scale(${
                           noScale.includes(item.avatarName)
@@ -95,6 +118,7 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
                       alt={item.avatarName}
                       aria-hidden='true'
                     />
+
                     <Typography variant='textS' fontWeight='bold'>
                       {item.label}
                     </Typography>

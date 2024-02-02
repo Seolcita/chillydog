@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode, useContext, useState } from 'react';
-import { Badge, Button, Card, Modal, Typography } from 'sk-storybook';
+import { ReactElement, useContext, useState } from 'react';
+import { Button, Card, Chip, Modal, Typography } from 'sk-storybook';
 import PetsIcon from '@mui/icons-material/Pets';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/material';
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { InProgressDogInfoCard } from '../../InProgressDogInfoCard/InProgressDogInfoCard';
 import { RegistrationStatus } from '../../../entities/questionnaire.entities';
+import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 import { Notification } from '../../Notification/Notification';
 import { UserInfoCard } from '../../UserInfoCard/UserInfoCard';
 import { DogInfoCard } from '../../DogInfoCard/DogInfoCard';
@@ -16,7 +17,6 @@ import { User } from '../../../entities/user.entities';
 import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './UserProfile.styles';
 import * as s from '../../common-styles';
-import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 
 export interface ModalProps {
   dogName: string;
@@ -153,7 +153,7 @@ export const UserProfile = (): ReactElement => {
                   marginTop={'0.2rem'}
                   marginBottom={'0.4rem'}
                 >
-                  <Badge title='None' color='white' bgColor='primary' />
+                  <Chip title='None' />
                 </Box>
               )}
 
@@ -196,7 +196,7 @@ export const UserProfile = (): ReactElement => {
                 })}
               {!hasInProgressProfiles && (
                 <Box display='inline-block' marginTop={'0.2rem'}>
-                  <Badge title='None' color='white' bgColor='primary' />
+                  <Chip title='None' />
                 </Box>
               )}
             </S.Wrapper>

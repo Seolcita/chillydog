@@ -1,9 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { KeyboardEvent, ReactElement, useState } from 'react';
+import { KeyboardEvent, ReactElement, useEffect, useState } from 'react';
 import { Button, Spinner } from 'sk-storybook';
 
 import * as S from './AvartarSelectionForm.styled';
-import { dogAvatars } from './Avatars';
+import { ImagePlaceholder } from '../../ImagePlaceholder/ImagePlaceholder';
 
 interface AvatarSelectionFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
@@ -16,6 +17,15 @@ export interface SelectedAvatar {
   src: string;
 }
 
+const dogsArray = [
+  'borderCollie',
+  'corgi',
+  'golden',
+  'husky',
+  'jack',
+  'pitBull',
+];
+
 export const AvatarSelectionForm = ({
   handleSubmit,
   setValue,
@@ -23,6 +33,18 @@ export const AvatarSelectionForm = ({
   isSubmitting,
 }: AvatarSelectionFormProps): ReactElement => {
   const [highlightIndex, setHighlightIndex] = useState<number>();
+  const [loadedImagesCount, setLoadedImagesCount] = useState(0);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setLoadedImagesCount((prevCount) => prevCount + 1);
+  };
+
+  useEffect(() => {
+    if (loadedImagesCount === dogsArray.length) {
+      setAllImagesLoaded(true);
+    }
+  }, [loadedImagesCount]);
 
   const handleKeyDown = (
     event: KeyboardEvent<HTMLDivElement>,
@@ -48,30 +70,50 @@ export const AvatarSelectionForm = ({
   return (
     <form onSubmit={handleSubmit} autoComplete='off'>
       <S.AvatarsContainer>
-        {dogAvatars.map((avatar, index) => {
+        {dogsArray.map((avatarName, index) => {
+          const scaleImg =
+            avatarName === 'corgi' || avatarName === 'husky' ? 1.5 : 1.8;
           return (
-            <S.AvatarsButton
-              tabIndex={0}
-              key={avatar.name}
-              onClick={(event) => {
-                event.stopPropagation();
-                setValue({
-                  name: avatar.name,
-                  src: `/images/avatars/${avatar.name}.png`,
-                });
-                setHighlightIndex(index);
-              }}
-              onKeyDown={(event) => handleKeyDown(event, avatar.name, index)}
-              role='button'
-              aria-label={`${avatar.name} avatar`}
-            >
-              <S.AvatarBox $highlighted={index === highlightIndex}>
-                {avatar.img}
-              </S.AvatarBox>
-            </S.AvatarsButton>
+            <>
+              <S.AvatarsButton
+                tabIndex={0}
+                key={avatarName}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setValue({
+                    name: avatarName,
+                    src: `/images/avatars/${avatarName}.png`,
+                  });
+                  setHighlightIndex(index);
+                }}
+                onKeyDown={(event) => handleKeyDown(event, avatarName, index)}
+                role='button'
+                aria-label={`${avatarName} avatar`}
+              >
+                <S.AvatarBox $highlighted={index === highlightIndex}>
+                  {!allImagesLoaded && (
+                    <ImagePlaceholder width={8} height={8} borderRadius={50} />
+                  )}
+                  <img
+                    src={`/images/avatars/${avatarName}.png`}
+                    width={80}
+                    height={80}
+                    alt={`${avatarName} avatar`}
+                    style={{
+                      borderRadius: '10rem',
+                      transform: `scale(${scaleImg})`,
+                      display: allImagesLoaded ? 'block' : 'none',
+                    }}
+                    draggable={false}
+                    onLoad={() => handleImageLoad()}
+                  />
+                </S.AvatarBox>
+              </S.AvatarsButton>
+            </>
           );
         })}
       </S.AvatarsContainer>
+
       <Button
         ariaLabel={`${value.name} avatar is selected. Selected avatar submit button`}
         size='s'

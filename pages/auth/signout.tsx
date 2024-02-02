@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ErrorCard } from '../../components/ErrorCard/ErrorCard';
 import UserContext from '../../context/user.context';
 import Login from '../../components/Login/Login';
+import { Notification } from '../../components/Notification/Notification';
 
 export const Signout = (): ReactElement => {
   const [isLogout, setIsLogout] = useState<boolean>(false);
@@ -31,7 +32,16 @@ export const Signout = (): ReactElement => {
     }
   }
 
-  return <>{!isLoading && isLogout && <Login />}</>;
+  return (
+    <>
+      {!isLoading && isLogout && (
+        <>
+          <Login />
+          <Notification message='Logged out successfully.' variant='success' />
+        </>
+      )}
+    </>
+  );
 };
 
 export default Signout;
