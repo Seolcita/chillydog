@@ -82,7 +82,7 @@ export const LocationForm = ({
         role='input'
       />
       {hasError && (
-        <S.ErrorText $isVisible={hasError}>
+        <S.ErrorText $isVisible={hasError} role='alert'>
           <Typography variant='textS' color='error'>
             <FontAwesomeIcon icon={faCircleExclamation} />
             {errors.cityName}

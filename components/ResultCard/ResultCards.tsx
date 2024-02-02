@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ReactElement } from 'react';
-import { Dog } from '../../entities/dog.entities';
 import { WeatherData, WeatherType } from '../../entities/weather.entities';
 import { RegistrationStatus } from '../../entities/questionnaire.entities';
-import { useResult } from '../../hooks/use-result';
-import ResultCard from './ResultCard';
 import { useWindowSize } from '../../hooks/use-window-resize';
+import { useResult } from '../../hooks/use-result';
+import { Dog } from '../../entities/dog.entities';
+import ResultCard from './ResultCard';
 
 interface ResultCardsProps {
   dogs: Dog[];

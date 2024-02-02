@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
@@ -13,6 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <title>Chilly Dog</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <GlobalStyles />
       <UserContextProvider>
         <S.Layout>

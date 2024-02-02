@@ -15,6 +15,7 @@ export const Completion = (): ReactElement => {
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
     user && router.push(`/main?userId=${user.id}`);
   };
 
