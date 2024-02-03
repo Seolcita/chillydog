@@ -15,9 +15,13 @@ import * as S from './main.style';
 
 interface MainProps {
   weatherData: WeatherData | null;
+  isWeatherDataLoading: boolean;
 }
 
-const Main = ({ weatherData }: MainProps): ReactElement => {
+const Main = ({
+  weatherData,
+  isWeatherDataLoading,
+}: MainProps): ReactElement => {
   const { deviceType } = useWindowSize();
   const { user, isLoading, isHidden } = useContext(UserContext);
 
@@ -43,6 +47,7 @@ const Main = ({ weatherData }: MainProps): ReactElement => {
               deviceType={deviceType}
               weatherData={weatherData}
               weatherType={weatherType}
+              isWeatherDataLoading={isWeatherDataLoading}
             />
           </S.WeatherSection>
         )}
@@ -54,6 +59,7 @@ const Main = ({ weatherData }: MainProps): ReactElement => {
                 dogs={user.dogs as Dog[]}
                 weatherData={weatherData}
                 weatherType={weatherType}
+                isWeatherDataLoading={isWeatherDataLoading}
               />
             </S.CardsSection>
           )}

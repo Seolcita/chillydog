@@ -11,12 +11,14 @@ interface ResultCardsProps {
   dogs: Dog[];
   weatherType: WeatherType;
   weatherData: WeatherData;
+  isWeatherDataLoading: boolean;
 }
 
 export const ResultCards = ({
   dogs,
   weatherType,
   weatherData,
+  isWeatherDataLoading,
 }: ResultCardsProps): ReactElement => {
   const { deviceType } = useWindowSize();
 
@@ -42,6 +44,7 @@ export const ResultCards = ({
               result={result}
               avatarName={dog.avatar.name}
               deviceType={deviceType}
+              isWeatherDataLoading={isWeatherDataLoading}
             />
           );
         })}
