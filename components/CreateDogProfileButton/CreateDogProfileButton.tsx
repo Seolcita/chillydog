@@ -1,9 +1,10 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 import { styled } from '@mui/system';
 import { useRouter } from 'next/router';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 import * as S from './CreateDogProfileButton.styles';
+import UserContext from '../../context/user.context';
 
 const StyledIcon = styled(AddCircleRoundedIcon)({
   display: 'flex',
@@ -22,8 +23,10 @@ const StyledIcon = styled(AddCircleRoundedIcon)({
 
 export const CreateDogProfileButton = (): ReactElement => {
   const router = useRouter();
+  const { setIsHidden } = useContext(UserContext);
 
   const handleClick = async () => {
+    setIsHidden(true);
     router.push('/questionnaires/name');
   };
 

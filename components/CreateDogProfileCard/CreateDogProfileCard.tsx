@@ -1,14 +1,18 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 import { Button, Card } from 'sk-storybook';
 import { useRouter } from 'next/router';
 import Lottie from 'lottie-react';
 
 import CreateDogProfileAnimation from '../../assets/createDogProfile/createDogProfile.json';
 import * as S from './CreateDogProfileCard.styles';
+import UserContext from '../../context/user.context';
 
 export const CreateDogProfile = (): ReactElement => {
+  const { setIsHidden } = useContext(UserContext);
   const router = useRouter();
+
   const handleClick = async () => {
+    setIsHidden(true);
     router.push('/questionnaires/name');
   };
 

@@ -14,6 +14,7 @@ export const CloseButton = ({
   ariaLabel,
 }: CloseButtonProps): ReactElement => {
   const router = useRouter();
+
   return (
     <S.CloseButton
       onClick={() => {

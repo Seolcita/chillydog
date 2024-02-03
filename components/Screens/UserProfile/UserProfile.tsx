@@ -33,7 +33,7 @@ export const UserProfile = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
-  const { user, setUser, isLoading } = useContext(UserContext);
+  const { user, setUser, isLoading, setIsHidden } = useContext(UserContext);
   const { deviceType } = useWindowSize();
   const isMobile = deviceType === DeviceType.MOBILE;
 
@@ -164,7 +164,10 @@ export const UserProfile = (): ReactElement => {
                   textColor='black'
                   ariaLabel='Create dog profile button'
                   margin={['md', 'none', 'none']}
-                  onClick={() => router.push('/questionnaires/name')}
+                  onClick={() => {
+                    setIsHidden(true);
+                    router.push('/questionnaires/name');
+                  }}
                 >
                   Create Dog Profile&nbsp;&nbsp;
                   <PetsIcon fontSize='medium' />
