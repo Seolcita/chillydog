@@ -31,6 +31,7 @@ const cityList = cities as City[];
 const schema = yup.object().shape({
   cityName: yup
     .string()
+    .trim()
     .min(2)
     .max(20)
     .required('Required')

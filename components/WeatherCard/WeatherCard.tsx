@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Typography } from 'sk-storybook';
+import { Spinner, Typography } from 'sk-storybook';
 
 import { WeatherImageUrlMap } from '../../hooks/use-weather';
 import { DeviceType } from '../../hooks/use-window-resize';
@@ -16,12 +16,14 @@ interface WeatherCardProps {
   deviceType: DeviceType;
   weatherData: WeatherData;
   weatherType: WeatherType;
+  isWeatherDataLoading?: boolean;
 }
 
 export const WeatherCard = ({
   deviceType,
   weatherData,
   weatherType,
+  isWeatherDataLoading,
 }: WeatherCardProps): ReactElement => {
   const isMobile = deviceType === DeviceType.MOBILE;
 
@@ -57,7 +59,7 @@ export const WeatherCard = ({
           aria-label='city'
           fontWeight='bold'
         >
-          {weatherData.city}
+          {isWeatherDataLoading ? <Spinner size='sm' /> : weatherData.city}
         </Typography>
       </s.Visibility>
       <S.ImageContainer
@@ -74,7 +76,7 @@ export const WeatherCard = ({
             aria-label='city'
             fontWeight='bold'
           >
-            {weatherData.city}
+            {isWeatherDataLoading ? <Spinner /> : weatherData.city}
           </Typography>
         </s.Visibility>
         <S.Temperature>
@@ -86,20 +88,28 @@ export const WeatherCard = ({
             margin={['none', 'lg', 'none', 'none']}
             aria-label='temperature in celsius'
           >
-            {convertTempUnit({
-              temp: weatherData.temperature,
-              unit: 'celsius',
-            })}
+            {isWeatherDataLoading ? (
+              <Spinner size='sm' />
+            ) : (
+              convertTempUnit({
+                temp: weatherData.temperature,
+                unit: 'celsius',
+              })
+            )}
           </Typography>
           <Typography
             variant='headingXS'
             color='white'
             aria-label='temperature in fahrenheit'
           >
-            {convertTempUnit({
-              temp: weatherData.temperature,
-              unit: 'fahrenheit',
-            })}
+            {isWeatherDataLoading ? (
+              <Spinner size='sm' />
+            ) : (
+              convertTempUnit({
+                temp: weatherData.temperature,
+                unit: 'fahrenheit',
+              })
+            )}
           </Typography>
         </S.Temperature>
         <Typography
