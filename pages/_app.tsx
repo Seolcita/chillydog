@@ -24,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Header />
           <S.Container>
             <Component {...pageProps} />
+            <div id='notifications'></div>
           </S.Container>
           {/* <S.Footer>Footer</S.Footer> */}
         </S.Layout>
