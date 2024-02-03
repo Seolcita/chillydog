@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
 import {
   KeyboardEvent,
   ReactElement,
@@ -7,10 +6,28 @@ import {
   useRef,
   useState,
 } from 'react';
+import Link from 'next/link';
+import { styled } from '@mui/system';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import * as S from './DropdownMenu.styles';
 import { Typography } from 'sk-storybook';
 import { ImagePlaceholder } from '../ImagePlaceholder/ImagePlaceholder';
+
+const StyledIcon = styled(AccountCircleIcon)({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'white',
+  width: 40,
+  height: 40,
+  borderRadius: '50%',
+  transition: 'all 0.2s ease-in-out',
+  '&:hover': {
+    color: '#1570EF',
+    backgroundColor: 'white',
+  },
+});
 
 export interface DropdownItem {
   avatarPath: string;
@@ -82,7 +99,7 @@ const DropdownMenu = ({ items }: DropdownMenProps): ReactElement => {
         aria-expanded={isOpen}
         aria-label='User Profile Menu'
       >
-        <S.StyledAccountCircleIcon />
+        <StyledIcon />
       </S.ProfileButton>
       {isOpen && (
         <S.MenuListContainer role='menu' $isOpen={isOpen}>

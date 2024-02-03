@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import ColorMap from '../../styles/Color';
 
@@ -15,22 +14,6 @@ export const ProfileButton = styled.button`
   background-color: transparent;
   border: none;
   border-radius: 50%;
-`;
-
-export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
-  color: ${ColorMap['white'].main};
-  height: 4.5rem;
-  width: 4.5rem;
-  margin: 0;
-  border-radius: 50%;
-  transition: all 0.2s ease-in-out;
-
-  &:hover,
-  &:focus,
-  &:active {
-    color: ${ColorMap['primary'].main};
-    background-color: ${ColorMap['white'].main};
-  }
 `;
 
 export const MenuListContainer = styled.ul<MenuListContainerProps>`
