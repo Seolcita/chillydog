@@ -6,6 +6,7 @@ import { Button, Select, Spinner } from 'sk-storybook';
 import * as S from './DogSizeForm.styles';
 import { DogSize } from '../../../entities/dog.entities';
 import { Option } from '../../../entities/questionnaire.entities';
+import { DeviceType, useWindowSize } from '../../../hooks/use-window-resize';
 
 interface DogSizeFormProps {
   handleSubmit: (event: React.SyntheticEvent) => void;
@@ -26,6 +27,9 @@ export const DogSizeForm = ({
   value,
   isSubmitting,
 }: DogSizeFormProps): ReactElement => {
+  const { deviceType } = useWindowSize();
+  const isMobile = deviceType === DeviceType.MOBILE;
+
   return (
     <S.Container>
       <form onSubmit={(event) => handleSubmit(event)}>
@@ -34,7 +38,7 @@ export const DogSizeForm = ({
             value={value}
             options={options}
             onChange={(opt: Option) => setValue(opt)}
-            height={7}
+            height={isMobile ? 7 : 5}
             fullWidth
             color='primary'
           />

@@ -10,6 +10,8 @@ interface UserContextValue {
   isLoading: boolean;
   isAuthenticated: boolean;
   refreshUser: () => void;
+  setIsHidden: (isHidden: boolean) => void;
+  isHidden: boolean;
 }
 
 const UserContext = createContext<UserContextValue>({
@@ -18,6 +20,8 @@ const UserContext = createContext<UserContextValue>({
   isLoading: true,
   isAuthenticated: false,
   refreshUser: () => {},
+  setIsHidden: (isHidden: boolean) => {},
+  isHidden: false,
 });
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
@@ -25,6 +29,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [trigger, setTrigger] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
 
   const router = useRouter();
 
@@ -38,12 +43,18 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     setTrigger((prevTrigger) => prevTrigger + 1);
   };
 
+  const setCreateDogProfileHidden = (hidden: boolean) => {
+    setIsHidden(hidden);
+  };
+
   const context: UserContextValue = {
     user: userData,
     setUser: setUserHandler,
     isLoading,
     isAuthenticated,
     refreshUser,
+    setIsHidden: setCreateDogProfileHidden,
+    isHidden,
   };
 
   return (

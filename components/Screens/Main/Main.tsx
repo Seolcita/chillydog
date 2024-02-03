@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactElement, useContext, useEffect, useState } from 'react';
+import { ReactElement, useContext } from 'react';
 import { WeatherCard } from '../../WeatherCard/WeatherCard';
-import axios from 'axios';
 
 import { CreateDogProfile } from '../../CreateDogProfileCard/CreateDogProfileCard';
 import { InprogressCards } from '../../InprogressCards/InprogressCards';
@@ -14,84 +13,62 @@ import { Dog } from '../../../entities/dog.entities';
 import { Loader } from '../../LineLoader/LineLoader';
 import * as S from './main.style';
 
-const Main = (): ReactElement => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>();
+interface MainProps {
+  weatherData: WeatherData | null;
+}
 
+const Main = ({ weatherData }: MainProps): ReactElement => {
   const { deviceType } = useWindowSize();
-  const { user, isLoading } = useContext(UserContext);
+  const { user, isLoading, isHidden } = useContext(UserContext);
 
-  const weatherType = weatherData && getWeatherType(weatherData.weatherId);
   const hasDogs = user?.dogs !== undefined && user.dogs.length > 0;
-  const hasWeatherInfo = weatherData && weatherType;
-  const city = user?.location ?? null;
-
-  const loadWeatherData = async () => {
-    if (!city) {
-      return;
-    }
-
-    try {
-      const res = await axios.get(
-        `${process.env.END_POINT_URL}/weather?city=${city}`
-      );
-      const data: WeatherData = res.data;
-      setWeatherData(data);
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    }
-  };
-
-  useEffect(() => {
-    loadWeatherData();
-    const intervalId = setInterval(loadWeatherData, 300000);
-    return () => clearInterval(intervalId);
-  }, [city, weatherData?.city]);
+  const weatherType = weatherData && getWeatherType(weatherData.weatherId);
+  const hasWeatherData = weatherData !== null;
+  const hasWeatherInfo = hasWeatherData && weatherType;
 
   if (isLoading) {
     return <Loader />;
   }
 
+  if (!hasDogs && !isHidden) {
+    return <CreateDogProfile />;
+  }
+
   return (
-    <>
-      {!isLoading && !hasDogs ? (
-        <CreateDogProfile />
-      ) : (
-        <S.Wrapper>
-          <S.MainLayout>
-            <S.WeatherSection>
-              {user?.location && hasWeatherInfo && (
-                <WeatherCard
-                  deviceType={deviceType}
-                  weatherData={weatherData}
-                  weatherType={weatherType}
-                />
-              )}
-            </S.WeatherSection>
+    <S.Wrapper>
+      <S.MainLayout>
+        {hasWeatherInfo && (
+          <S.WeatherSection>
+            <WeatherCard
+              deviceType={deviceType}
+              weatherData={weatherData}
+              weatherType={weatherType}
+            />
+          </S.WeatherSection>
+        )}
 
-            <S.CardsContainer>
-              {hasDogs && hasWeatherInfo && (
-                <S.CardsSection>
-                  <ResultCards
-                    dogs={user.dogs as Dog[]}
-                    weatherData={weatherData}
-                    weatherType={weatherType}
-                  />
-                </S.CardsSection>
-              )}
+        <S.CardsContainer>
+          {hasDogs && hasWeatherInfo && (
+            <S.CardsSection>
+              <ResultCards
+                dogs={user.dogs as Dog[]}
+                weatherData={weatherData}
+                weatherType={weatherType}
+              />
+            </S.CardsSection>
+          )}
 
-              {hasDogs && (
-                <S.CardsSection>
-                  <InprogressCards
-                    dogs={user.dogs as Dog[]}
-                    deviceType={deviceType}
-                  />
-                </S.CardsSection>
-              )}
-            </S.CardsContainer>
-          </S.MainLayout>
-        </S.Wrapper>
-      )}
-    </>
+          {hasDogs && (
+            <S.CardsSection>
+              <InprogressCards
+                dogs={user.dogs as Dog[]}
+                deviceType={deviceType}
+              />
+            </S.CardsSection>
+          )}
+        </S.CardsContainer>
+      </S.MainLayout>
+    </S.Wrapper>
   );
 };
 
