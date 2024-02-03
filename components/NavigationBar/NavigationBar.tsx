@@ -7,11 +7,10 @@ import UserContext from '../../context/user.context';
 import * as S from './NavigationBar.styles';
 
 export const NavigationBar = (): ReactElement => {
-  const { user, isLoading } = useContext(UserContext);
-  const isLoggedIn = user !== null;
+  const { user, isLoading, isAuthenticated } = useContext(UserContext);
 
   const dropdownItems: DropdownItem[] = [];
-  if (!isLoading && isLoggedIn) {
+  if (!isLoading && user) {
     const userProfile = {
       avatarPath: user.photoUrl,
       avatarName: 'login',
@@ -55,7 +54,7 @@ export const NavigationBar = (): ReactElement => {
 
   return (
     <nav>
-      {isLoggedIn && (
+      {!isLoading && isAuthenticated && (
         <S.IconsContainer>
           <CreateDogProfileButton />
           <DropdownMenu items={dropdownItems} />
