@@ -81,36 +81,34 @@ export const WeatherCard = ({
         </s.Visibility>
         <S.Temperature>
           {/* TODO: Set user's preferred temp unit then display with the unit. default is Celsius */}
-          <Typography
-            variant='headingM'
-            fontWeight='bold'
-            color='white'
-            margin={['none', 'lg', 'none', 'none']}
-            aria-label='temperature in celsius'
-          >
-            {isWeatherDataLoading ? (
-              <Spinner size='sm' />
-            ) : (
-              convertTempUnit({
-                temp: weatherData.temperature,
-                unit: 'celsius',
-              })
-            )}
-          </Typography>
-          <Typography
-            variant='headingXS'
-            color='white'
-            aria-label='temperature in fahrenheit'
-          >
-            {isWeatherDataLoading ? (
-              <Spinner size='sm' />
-            ) : (
-              convertTempUnit({
-                temp: weatherData.temperature,
-                unit: 'fahrenheit',
-              })
-            )}
-          </Typography>
+          {isWeatherDataLoading ? (
+            <Spinner size='md' />
+          ) : (
+            <>
+              <Typography
+                variant='headingM'
+                fontWeight='bold'
+                color='white'
+                margin={['none', 'lg', 'none', 'none']}
+                aria-label='temperature in celsius'
+              >
+                {convertTempUnit({
+                  temp: weatherData.temperature,
+                  unit: 'celsius',
+                })}
+              </Typography>
+              <Typography
+                variant='headingXS'
+                color='white'
+                aria-label='temperature in fahrenheit'
+              >
+                {convertTempUnit({
+                  temp: weatherData.temperature,
+                  unit: 'fahrenheit',
+                })}
+              </Typography>
+            </>
+          )}
         </S.Temperature>
         <Typography
           variant='textL'

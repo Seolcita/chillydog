@@ -59,6 +59,7 @@ const Main = ({
                 dogs={user.dogs as Dog[]}
                 weatherData={weatherData}
                 weatherType={weatherType}
+                isWeatherDataLoading={isWeatherDataLoading}
               />
             </S.CardsSection>
           )}
