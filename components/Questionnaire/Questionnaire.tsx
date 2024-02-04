@@ -1,8 +1,15 @@
-import { ReactElement, ReactNode, useContext } from 'react';
+import {
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Card, Typography } from 'sk-storybook';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/material';
 
+import useFetchUserProfile from '../../hooks/use-fetch-user-profile';
 import { Notification } from '../Notification/Notification';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { CloseButton } from '../CloseButton/CloseButton';
@@ -41,6 +48,24 @@ export const Questionnaire = ({
   errorMessage,
   isLoading,
 }: QuestionnaireProps): ReactElement => {
+  const [isReload, setIsReload] = useState(false);
+
+  // Incase user refreshes the page
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('load', () => {
+        setIsReload(true);
+      });
+
+      return () => {
+        window.removeEventListener('load', () => {
+          setIsReload(true);
+        });
+      };
+    }
+  }, []);
+  useFetchUserProfile({ isReload });
+
   const { user } = useContext(UserContext);
   const router = useRouter();
 

@@ -112,8 +112,8 @@ export const useResult = ({
       };
     } else if (point === 4) {
       return {
-        title: 'Dangerous weather developing',
-        description: 'Use cation',
+        title: 'Dangerous weather is developing',
+        description: 'Use caution',
         point,
       };
     } else if (point >= 5) {

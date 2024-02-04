@@ -74,42 +74,40 @@ export const AvatarSelectionForm = ({
           const scaleImg =
             avatarName === 'corgi' || avatarName === 'husky' ? 1.5 : 1.8;
           return (
-            <>
-              <S.AvatarsButton
-                tabIndex={0}
-                key={avatarName}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setValue({
-                    name: avatarName,
-                    src: `/images/avatars/${avatarName}.png`,
-                  });
-                  setHighlightIndex(index);
-                }}
-                onKeyDown={(event) => handleKeyDown(event, avatarName, index)}
-                role='button'
-                aria-label={`${avatarName} avatar`}
-              >
-                <S.AvatarBox $highlighted={index === highlightIndex}>
-                  {!allImagesLoaded && (
-                    <ImagePlaceholder width={8} height={8} borderRadius={50} />
-                  )}
-                  <img
-                    src={`/images/avatars/${avatarName}.png`}
-                    width={80}
-                    height={80}
-                    alt={`${avatarName} avatar`}
-                    style={{
-                      borderRadius: '10rem',
-                      transform: `scale(${scaleImg})`,
-                      display: allImagesLoaded ? 'block' : 'none',
-                    }}
-                    draggable={false}
-                    onLoad={() => handleImageLoad()}
-                  />
-                </S.AvatarBox>
-              </S.AvatarsButton>
-            </>
+            <S.AvatarsButton
+              tabIndex={0}
+              key={avatarName}
+              onClick={(event) => {
+                event.stopPropagation();
+                setValue({
+                  name: avatarName,
+                  src: `/images/avatars/${avatarName}.png`,
+                });
+                setHighlightIndex(index);
+              }}
+              onKeyDown={(event) => handleKeyDown(event, avatarName, index)}
+              role='button'
+              aria-label={`${avatarName} avatar`}
+            >
+              <S.AvatarBox $highlighted={index === highlightIndex}>
+                {!allImagesLoaded && (
+                  <ImagePlaceholder width={8} height={8} borderRadius={50} />
+                )}
+                <img
+                  src={`/images/avatars/${avatarName}.png`}
+                  width={80}
+                  height={80}
+                  alt={`${avatarName} avatar`}
+                  style={{
+                    borderRadius: '10rem',
+                    transform: `scale(${scaleImg})`,
+                    display: allImagesLoaded ? 'block' : 'none',
+                  }}
+                  draggable={false}
+                  onLoad={() => handleImageLoad()}
+                />
+              </S.AvatarBox>
+            </S.AvatarsButton>
           );
         })}
       </S.AvatarsContainer>

@@ -1,6 +1,5 @@
 import { ReactNode, createContext, useState, useEffect, use } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
 import { User } from '../entities/user.entities';
 
