@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import axios from 'axios';
 
 import UserContext from '../context/user.context';
+import { useRouter } from 'next/router';
 
 interface UseFetchUserProfileProps {
   isReload?: boolean;
@@ -10,6 +11,7 @@ interface UseFetchUserProfileProps {
 const useFetchUserProfile = ({
   isReload = true,
 }: UseFetchUserProfileProps = {}) => {
+  const router = useRouter();
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -17,14 +19,25 @@ const useFetchUserProfile = ({
       return;
     }
 
-    const fetchUserProfile = async (accessToken: string) => {
+    const fetchUserProfile = async (accessToken: string, email: string) => {
       await axios
         .get(`${process.env.END_POINT_URL}/auth/login-status`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          params: {
+            email,
+          },
         })
         .then((res) => {
+          // Replace email
+          if (res.data.user.email !== email) {
+            console.log(
+              'Not authorized to view this page. Redirecting to login page'
+            );
+
+            router.push('/auth/signout?authorized=false');
+          }
           setUser(res.data.user);
         })
         .catch((error) => {
@@ -34,9 +47,10 @@ const useFetchUserProfile = ({
 
     if (typeof window !== 'undefined') {
       const accessToken = sessionStorage.getItem('accessToken');
+      const email = sessionStorage.getItem('email');
 
-      if (accessToken) {
-        fetchUserProfile(accessToken);
+      if (accessToken && email) {
+        fetchUserProfile(accessToken, email);
       }
     }
   }, []);

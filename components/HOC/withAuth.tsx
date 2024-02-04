@@ -7,11 +7,12 @@ import UserContext from '../../context/user.context';
 const withAuth = (WrappedComponent: NextPage) => {
   const WithAuth: NextPage = (props) => {
     const router = useRouter();
-    const { isLoading, isAuthenticated } = useContext(UserContext);
-
+    const { user, isLoading, isAuthenticated } = useContext(UserContext);
     useEffect(() => {
-      if (!isLoading && !isAuthenticated) {
-        router.push('/auth/signin');
+      const email = sessionStorage.getItem('email');
+
+      if (!isLoading && (!isAuthenticated || user?.email !== email)) {
+        router.push('/auth/signout?authorized=false');
       }
     }, [isAuthenticated, isLoading, router]);
 
