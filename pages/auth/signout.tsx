@@ -12,7 +12,6 @@ export const Signout = (): ReactElement => {
   const { isLoading, setUser } = useContext(UserContext);
   const router = useRouter();
   const { authorized } = router.query;
-  console.log('authorized:', authorized);
   const isAuthorized = authorized === 'false' ? false : true;
 
   (async () => {

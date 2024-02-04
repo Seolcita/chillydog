@@ -30,12 +30,7 @@ const useFetchUserProfile = ({
           },
         })
         .then((res) => {
-          // Replace email
           if (res.data.user.email !== email) {
-            console.log(
-              'Not authorized to view this page. Redirecting to login page'
-            );
-
             router.push('/auth/signout?authorized=false');
           }
           setUser(res.data.user);
