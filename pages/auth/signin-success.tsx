@@ -17,8 +17,11 @@ export const SigninSuccess = ({
         accessToken,
       })
       .then((res) => {
-        const userId = res.data.id;
-        window.location.href = `/main?userId=${userId}`;
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('email', res.data.email);
+        }
+
+        window.location.href = `/main?userId=${res.data.id}`;
       })
       .catch((error) => {
         console.error('Fail to fetch profile', error);

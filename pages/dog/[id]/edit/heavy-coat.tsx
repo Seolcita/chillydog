@@ -39,14 +39,12 @@ const EditHeavyCoatScreen = (): ReactElement => {
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
           setErrorMessage('Oops! Something went wrong. Please try again.');
-          console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      console.error('heavyCoat or user is undefined');
     }
   };
 

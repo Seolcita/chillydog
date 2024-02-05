@@ -35,7 +35,6 @@ const NameScreen = (): ReactElement => {
         });
     } else {
       setErrorMessage(errMessage);
-      console.error('dog name or user is undefined');
     }
   };
 

@@ -19,7 +19,6 @@ import UserContext from '../../../../context/user.context';
 import { User } from '../../../../entities/user.entities';
 
 const EditAvatarSelectionScreen = (): ReactElement => {
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Choose your dog's avatar`;
   const { user, setUser, isLoading } = useContext(UserContext);
   const router = useRouter();
@@ -64,15 +63,12 @@ const EditAvatarSelectionScreen = (): ReactElement => {
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
-          console.error('An error occurred:', error);
+          setErrorMessage('Oops! Something went wrong. Please try again.');
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
-      console.error('avatar or user is undefined');
     }
   };
 

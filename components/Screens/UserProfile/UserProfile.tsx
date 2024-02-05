@@ -73,17 +73,15 @@ export const UserProfile = (): ReactElement => {
           setUser(user);
           setSuccessMessage(`${dogName} profile is deleted successfully.`);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
           setErrorMessage(
             `Fail to delete ${dogName} profile. Please try again`
           );
-          console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
       setErrorMessage('Oops! Something went wrong. Please try again.');
-      console.error('dogId or user is undefined');
     }
   };
 

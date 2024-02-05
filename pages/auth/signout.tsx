@@ -2,14 +2,17 @@
 import { ReactElement, useContext, useState } from 'react';
 import axios from 'axios';
 
-import { ErrorCard } from '../../components/ErrorCard/ErrorCard';
 import UserContext from '../../context/user.context';
 import Login from '../../components/Login/Login';
 import { Notification } from '../../components/Notification/Notification';
+import { useRouter } from 'next/router';
 
 export const Signout = (): ReactElement => {
   const [isLogout, setIsLogout] = useState<boolean>(false);
   const { isLoading, setUser } = useContext(UserContext);
+  const router = useRouter();
+  const { authorized } = router.query;
+  const isAuthorized = authorized === 'false' ? false : true;
 
   (async () => {
     await axios
@@ -26,9 +29,11 @@ export const Signout = (): ReactElement => {
 
   if (typeof window !== 'undefined' && isLogout) {
     const accessToken = sessionStorage.getItem('accessToken');
+    const email = sessionStorage.getItem('email');
 
-    if (accessToken) {
+    if (accessToken && email) {
       sessionStorage.removeItem('accessToken');
+      sessionStorage.removeItem('email');
     }
   }
 
@@ -37,7 +42,17 @@ export const Signout = (): ReactElement => {
       {!isLoading && isLogout && (
         <>
           <Login />
-          <Notification message='Logged out successfully.' variant='success' />
+          {isAuthorized ? (
+            <Notification
+              message='Logged out successfully.'
+              variant='success'
+            />
+          ) : (
+            <Notification
+              message='Not authorized. Please sign in.'
+              variant='error'
+            />
+          )}
         </>
       )}
     </>

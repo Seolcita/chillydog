@@ -42,11 +42,9 @@ const EditColdAdaptScreen = (): ReactElement => {
         .catch((error) => {
           setIsSubmitting(false);
           setErrorMessage('Oops! Something went wrong. Please try again.');
-          console.error('An error occurred:', error);
         });
     } else {
       setIsSubmitting(false);
-      console.error('coldAdapt or user is undefined');
     }
   };
 
