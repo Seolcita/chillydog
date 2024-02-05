@@ -40,14 +40,9 @@ const ColdAdaptScreen = (): ReactElement => {
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
-
-          if (error.response.status === 401) {
-            router.push('/auth/signout?authorized=false');
-          } else {
-            setErrorMessage('Oops! Something went wrong. Please try again.');
-          }
+          setErrorMessage('Oops! Something went wrong. Please try again.');
         });
     } else {
       setIsSubmitting(false);

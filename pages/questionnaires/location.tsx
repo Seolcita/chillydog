@@ -35,9 +35,8 @@ export const LocationScreen = (): ReactElement => {
           const nextScreenUrl = useQuestionnaireNextScreenURL(dog);
           router.push(nextScreenUrl);
         })
-        .catch((error) => {
+        .catch(() => {
           setErrorMessage(errMessage);
-          console.error('An error occurred:', error);
         });
     } else {
       setErrorMessage(errMessage);

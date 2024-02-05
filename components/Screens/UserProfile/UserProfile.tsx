@@ -73,16 +73,11 @@ export const UserProfile = (): ReactElement => {
           setUser(user);
           setSuccessMessage(`${dogName} profile is deleted successfully.`);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
-
-          if (error.response.status === 401) {
-            router.push('/auth/signout?authorized=false');
-          } else {
-            setErrorMessage(
-              `Fail to delete ${dogName} profile. Please try again`
-            );
-          }
+          setErrorMessage(
+            `Fail to delete ${dogName} profile. Please try again`
+          );
         });
     } else {
       setIsSubmitting(false);

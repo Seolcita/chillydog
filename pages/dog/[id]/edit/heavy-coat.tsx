@@ -39,14 +39,9 @@ const EditHeavyCoatScreen = (): ReactElement => {
           setUser(user);
           router.push(`/dog/${dogId}`);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
-
-          if (error.response.status === 401) {
-            router.push('/auth/signout?authorized=false');
-          } else {
-            setErrorMessage('Oops! Something went wrong. Please try again.');
-          }
+          setErrorMessage('Oops! Something went wrong. Please try again.');
         });
     } else {
       setIsSubmitting(false);

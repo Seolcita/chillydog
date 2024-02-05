@@ -41,12 +41,7 @@ const EditColdAdaptScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-
-          if (error.response.status === 401) {
-            router.push('/auth/signout?authorized=false');
-          } else {
-            setErrorMessage('Oops! Something went wrong. Please try again.');
-          }
+          setErrorMessage('Oops! Something went wrong. Please try again.');
         });
     } else {
       setIsSubmitting(false);
