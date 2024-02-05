@@ -42,12 +42,15 @@ const HeavyCoatScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage('Oops! Something went wrong. Please try again.');
-          console.error('An error occurred:', error);
+
+          if (error.response.status === 401) {
+            router.push('/auth/signout?authorized=false');
+          } else {
+            setErrorMessage('Oops! Something went wrong. Please try again.');
+          }
         });
     } else {
       setIsSubmitting(false);
-      console.error('heavyCoat or user is undefined');
     }
   };
 

@@ -75,15 +75,18 @@ export const UserProfile = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(
-            `Fail to delete ${dogName} profile. Please try again`
-          );
-          console.error('An error occurred:', error);
+
+          if (error.response.status === 401) {
+            router.push('/auth/signout?authorized=false');
+          } else {
+            setErrorMessage(
+              `Fail to delete ${dogName} profile. Please try again`
+            );
+          }
         });
     } else {
       setIsSubmitting(false);
       setErrorMessage('Oops! Something went wrong. Please try again.');
-      console.error('dogId or user is undefined');
     }
   };
 

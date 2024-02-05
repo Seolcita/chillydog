@@ -66,13 +66,15 @@ const EditAvatarSelectionScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
-          console.error('An error occurred:', error);
+
+          if (error.response.status === 401) {
+            router.push('/auth/signout?authorized=false');
+          } else {
+            setErrorMessage(errMessage);
+          }
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
-      console.error('avatar or user is undefined');
     }
   };
 

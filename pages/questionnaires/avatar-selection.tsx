@@ -24,7 +24,6 @@ const AvatarSelectionScreen = (): ReactElement => {
   const { user, isLoading } = useContext(UserContext);
   const router = useRouter();
   const dogId = router.query.dogId;
-  const errMessage = 'Oops! Something went wrong. Please try again.';
   const question = `Choose your dog's avatar`;
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -48,13 +47,14 @@ const AvatarSelectionScreen = (): ReactElement => {
         })
         .catch((error) => {
           setIsSubmitting(false);
-          setErrorMessage(errMessage);
-          console.error('An error occurred:', error);
+          if (error.response.status === 401) {
+            router.push('/auth/signout?authorized=false');
+          } else {
+            setErrorMessage('Oops! Something went wrong. Please try again.');
+          }
         });
     } else {
       setIsSubmitting(false);
-      setErrorMessage(errMessage);
-      console.error('avatar or user is undefined');
     }
   };
 

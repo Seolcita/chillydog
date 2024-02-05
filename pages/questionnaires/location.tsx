@@ -41,7 +41,6 @@ export const LocationScreen = (): ReactElement => {
         });
     } else {
       setErrorMessage(errMessage);
-      console.error('cityName or user is undefined');
     }
   };
 
