@@ -6,7 +6,7 @@ module.exports = (phase) => {
   const env = {
     END_POINT_URL: isDev
       ? 'http://localhost:3001/api'
-      : 'https://withdog.onrender.com/api',
+      : 'https://nice-blue-gosling-kit.cyclic.app/api',
   };
 
   return {
