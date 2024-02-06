@@ -10,7 +10,6 @@ export const Container = styled(Center)`
   width: 55rem;
   @media ${device.xs} {
     width: 33rem;
-    margin-top: 5rem;
   }
 `;
 
@@ -48,7 +47,10 @@ export const TextContainer = styled.div`
 export const LottieContainer = styled.div`
   width: 70%;
   height: 70%;
-  margin-bottom: 2rem;
+
+  @media ${device.xs} {
+    margin-bottom: 2.5rem;
+  }
 `;
 
 export const LoginImage = styled(Center)`

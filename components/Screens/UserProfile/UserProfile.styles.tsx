@@ -53,7 +53,7 @@ export const UserDetail = styled(Center)`
   justify-content: start;
   margin-top: 1rem;
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 1rem 3rem;
   background-color: ${ColorMap['grey'].extraLight}80;
   border-radius: 0.5rem;
 `;
