@@ -93,7 +93,7 @@ export const UserProfile = (): ReactElement => {
   };
 
   return (
-    <Box>
+    <>
       {!isLoading && user ? (
         <S.ProfileContainer>
           <Card
@@ -256,6 +256,6 @@ export const UserProfile = (): ReactElement => {
           </S.ModalContent>
         </Modal>
       )}
-    </Box>
+    </>
   );
 };
