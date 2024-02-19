@@ -47,11 +47,11 @@ export const useResult = ({
       // between -1°C and 6°C
     } else if (temp >= -1 && temp <= 6) {
       weatherAndSizePoint = 3;
-      // between 7°C and 11°C
-    } else if (temp >= 7 && temp <= 11) {
+      // between 7°C and 9°C
+    } else if (temp >= 7 && temp <= 9) {
       weatherAndSizePoint = 2;
-      // 12°C or over
-    } else if (temp >= 12) {
+      // 10°C or over
+    } else if (temp >= 10) {
       weatherAndSizePoint = 1;
     }
   } else if (dogSize === DogSize.MEDIUM) {

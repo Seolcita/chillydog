@@ -9,7 +9,6 @@ export const Layout = styled.div`
   max-width: 144rem;
   display: flex;
   flex-direction: column;
-  // background-color: ${ColorMap['grey'].extraLight};
   background-color: ${ColorMap['grey'].dark};
   margin: auto;
 `;
