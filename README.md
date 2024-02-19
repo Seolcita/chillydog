@@ -31,10 +31,8 @@ Chilly Dog is an intuitive application that presents real-time weather updates a
 
 ## Visit Chilly Dog Wiki for more details
 
-[Chilly Dog Wiki]([https://github.com/Seolcita/chillydog/issues](https://seolhikim-projects.notion.site/seolhikim-projects/8c2bc421a6dc4ffc92203789e1c71c21?v=d4f9eeb6ee7741f58036a7babc2a140f))
-
-
-- Planning, Usecase, Flow chart, Screen reader and etc.
+[Chilly Dog Wiki](https://seolhikim-projects.notion.site/seolhikim-projects/8c2bc421a6dc4ffc92203789e1c71c21?v=d4f9eeb6ee7741f58036a7babc2a140f)
+- Planning, Usecase, Flow chart, Accessibility, etc.
 
 ## Feedback
 
