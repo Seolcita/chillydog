@@ -6,7 +6,8 @@ Chilly Dog
 
 [Live app](https://chillydog.vercel.app)
 
-<img width="1397" alt="Chilly Dog app preview" src="/images/others/mainpage.png">
+<img width="1421" alt="mainpage" src="https://github.com/Seolcita/chillydog/assets/83251839/326a9cbd-56d6-4446-bd90-dd8a416c0cc6">
+
 
 ## Description
 
@@ -30,10 +31,11 @@ Chilly Dog is an intuitive application that presents real-time weather updates a
 
 ## Visit Chilly Dog Wiki for more details
 
-[Chilly Dog Wiki]('https://seolhikim-projects.notion.site/seolhikim-projects/8c2bc421a6dc4ffc92203789e1c71c21?v=d4f9eeb6ee7741f58036a7babc2a140f')
+[Chilly Dog Wiki]([https://github.com/Seolcita/chillydog/issues](https://seolhikim-projects.notion.site/seolhikim-projects/8c2bc421a6dc4ffc92203789e1c71c21?v=d4f9eeb6ee7741f58036a7babc2a140f))
+
 
 - Planning, Usecase, Flow chart, Screen reader and etc.
 
 ## Feedback
 
-Welcome and encourage feedbacks. If you have suggestions for improving components, especially in terms of enhancing accessibility, please feel free to open an issue on GitHub repository [chillydog github](https://github.com/Seolcita/chillydog/issues).
+Welcome and encourage feedback. If you have suggestions for improving components, especially in terms of enhancing accessibility, please feel free to open an issue on the GitHub repository [chillydog github](https://github.com/Seolcita/chillydog/issues).
