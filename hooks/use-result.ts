@@ -31,7 +31,6 @@ export const useResult = ({
     weatherType === WeatherType.SNOW ||
     weatherType === WeatherType.THUNDERSTORM ||
     weatherType === WeatherType.DRIZZLE ||
-    weatherType === WeatherType.OTHERS ||
     humidity > 60;
   const wetWeatherPoint = isWetWeather ? 2 : 0;
 
@@ -39,7 +38,7 @@ export const useResult = ({
 
   // weather & size
   if (dogSize === DogSize.SMALL) {
-    // -5°C or below -5°C
+    // -5°C or below
     if (temp <= -5) {
       weatherAndSizePoint = 5;
       // between -4°C and -2°C
@@ -48,15 +47,15 @@ export const useResult = ({
       // between -1°C and 6°C
     } else if (temp >= -1 && temp <= 6) {
       weatherAndSizePoint = 3;
-      // between 7°C and 11°C
-    } else if (temp >= 7 && temp <= 11) {
+      // between 7°C and 9°C
+    } else if (temp >= 7 && temp <= 9) {
       weatherAndSizePoint = 2;
-      // 12°C or over 12°C
-    } else if (temp >= 12) {
+      // 10°C or over
+    } else if (temp >= 10) {
       weatherAndSizePoint = 1;
     }
   } else if (dogSize === DogSize.MEDIUM) {
-    // -10°C or below -10°C
+    // -10°C or below
     if (temp <= -10) {
       weatherAndSizePoint = 5;
       // between -2°C and -9°C
@@ -68,12 +67,12 @@ export const useResult = ({
       // between 7°C and 9°C
     } else if (temp >= 7 && temp <= 9) {
       weatherAndSizePoint = 2;
-      // 10°C or over 10°C
+      // 10°C or over
     } else if (temp >= 10) {
       weatherAndSizePoint = 1;
     }
   } else if (dogSize === DogSize.LARGE) {
-    // -10°C or below -10°C
+    // -10°C or below
     if (temp <= -10) {
       weatherAndSizePoint = 5;
       // between -9°C and -5°C
@@ -85,7 +84,7 @@ export const useResult = ({
       // between 4°C and 6°C
     } else if (temp >= 4 && temp <= 6) {
       weatherAndSizePoint = 2;
-      // 7°C or over 7°C
+      // 7°C or over
     } else if (temp >= 7) {
       weatherAndSizePoint = 1;
     }
