@@ -6,7 +6,7 @@ module.exports = (phase) => {
   const env = {
     END_POINT_URL: isDev
       ? 'http://localhost:3001/api'
-      : 'https://nice-blue-gosling-kit.cyclic.app/api',
+      : 'https://with-dog.vercel.app//api',
   };
 
   return {
